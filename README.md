@@ -1,2 +1,4 @@
 # Apprendre les MAKEFILES;
-# Finir ce qu'il reste a faire;
+# liste chainee
+# struct
+# pointeur sur fonction
