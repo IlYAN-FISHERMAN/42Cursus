@@ -1,52 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 17:22:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/12 12:06:15 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/10/12 12:13:20 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/10/12 15:45:27 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t		i;
-	char		*d;
-	const char	*s;
+	size_t	i;
 
-	d = (char *)dst;
-	s = (const char *)src;
 	i = 0;
-	if (d > s)
+	if (dstsize <= 1)
 	{
-		while (len > 0)
-		{
-			d[len - 1] = s[len - 1];
-			len--;
-		}
-		return (dst);
+		dst[0] = '\0';
+		return (ft_strlen(src));
 	}
-	else
+	while (dstsize - 1 > 0)
 	{
-		while (i < len)
-		{
-			d[i] = s[i];
-			i++;
-		}
-		return (dst);
+		dst[i] = src[i];
+		i++;
+		dstsize--;
 	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
 /*
+#include <string.h>
 #include <stdio.h>
 int	main()
 {
-	char tab[50] = "mange mon cul ahahaha";
+	char dst[6] = "hello";
+	char src[] = "bonjour";
 
-	ft_memmove(&tab[6], tab, 5);
-	printf("%s", tab);
+	//printf("%zu\n", ft_strlcpy(dst, src, 6));
+	//printf("%s", dst);
+	//printf("%lu\n", strlcpy(dst, src, 6));
+	//printf("%s", dst);
 }
 */
