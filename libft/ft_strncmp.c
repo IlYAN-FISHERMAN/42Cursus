@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/14 17:10:43 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/14 17:38:23 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/10/17 22:33:55 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/10/17 23:19:33 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,29 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	while (*s1 == *s2 && n - 1 > 0)
-	{
-		s1++;
-		s2++;
-		n--;
-	}
-	return ((int)*s1 - (int)*s2);
-}
+	size_t	i;
 
+	i = 0;
+	while ((s1[i] || s2[i]) && n != i)
+	{
+		if (s1[i] != s2[i])
+		{
+			if (s1[i] < 0)
+				return (1);
+			if (s2[i] < 0)
+				return (-1);
+			return (s1[i] - s2[i]);
+		}
+		i++;
+	}
+	return (0);
+}
+/*
 #include <stdio.h>
+#include <string.h>
 int	main()
 {
-	char tab1[] = "hellPD";
-	char tab2[] = "hellP";
-	printf("%d", ft_strncmp(tab1, tab2, 3));
+	printf("%d\n", ft_strncmp("test\200", "test\0", 6));
+	printf("%d\n", strncmp("test\200", "test\0", 6));
 }
-
+*/

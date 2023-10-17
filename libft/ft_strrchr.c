@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:40:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/13 21:06:27 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/10/18 01:55:17 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ char	*ft_strrchr(const char *s, int c)
 		return (0);
 	return (p);
 }
-/*
+
 #include <stdio.h>
 int	main(void)
 {
-	char tab[] = "helleep";
-	printf("%s", ft_strrchr(tab, 'p'));
+	char *tab = "electric_alloc";
+
+	printf("M_FONCTION : %s", ft_strrchr(tab, 10));
+	printf("V_FONCTION : %s", strrchr(tab, 10));
 }
-*/

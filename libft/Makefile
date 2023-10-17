@@ -1,20 +1,71 @@
-.PHONY : clean, fclean, all, re
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
+#    Updated: 2023/10/18 01:04:27 by ilyanar          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I.
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -rf
 NAME = libft.a
-CFILE = %.c
-OFILE = %.o
+CFILES = $(FILES:%=%.c)
+OFILES = $(FILES:%=%.o)
+
+FILES = ft_strlen \
+	ft_memmove \
+	ft_memcpy \
+	ft_strlcpy \
+	ft_strlcat \
+	ft_isalpha \
+	ft_isdigit \
+	ft_isalnum \
+	ft_isascii \
+	ft_isprint \
+	ft_memset \
+	ft_bzero \
+	ft_toupper \
+	ft_tolower \
+	ft_strchr \
+	ft_strrchr \
+	ft_strncmp \
+	ft_memchr \
+#	ft_memcmp \#
+#	ft_strnstr \
+	ft_atoi \
+	ft_calloc \
+	ft_strdup \
+	ft_substr \
+	ft_strjoin \
+	ft_strtrim \
+	ft_split \
+	ft_itoa \
+	ft_strmapi \
+	ft_striteri \
+	ft_putchar_fd \
+	ft_putstr_fd \
+	ft_putendl_fd \
+	ft_putnbr_fd \#
 
 all : $(NAME)
 
-$(NAME) : $(OFILE)
-	ar -rc $(NAME) $(OFILE)
+COMPIL : $(CFILES)
+	$(CC) $(CFLAGS) -c $(CFILES) -I.
+
+$(NAME) : $(OFILES)
+	ar -rc $@ $(OFILES)
 
 clean :
-	rm -rf *.o
+	$(RM) $(OFILES)
 
 fclean : clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 
-re : clean fclean
+re : fclean all
+
+.PHONY : clean fclean all re

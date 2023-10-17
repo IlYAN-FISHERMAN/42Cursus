@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:13:20 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/12 15:45:27 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/10/18 01:48:06 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,30 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t	i;
 
 	i = 0;
-	if (dstsize <= 1)
+	if (dstsize > 0)
 	{
-		dst[0] = '\0';
-		return (ft_strlen(src));
+		while (--dstsize && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
 	}
-	while (dstsize - 1 > 0)
-	{
-		dst[i] = src[i];
+	while (src[i])
 		i++;
-		dstsize--;
-	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
+	return (i);
 }
 /*
 #include <string.h>
 #include <stdio.h>
-int	main()
-{
-	char dst[6] = "hello";
-	char src[] = "bonjour";
 
-	//printf("%zu\n", ft_strlcpy(dst, src, 6));
-	//printf("%s", dst);
-	//printf("%lu\n", strlcpy(dst, src, 6));
+int	main(void)
+{
+	char dst[] = "";
+
+	printf("%zu\n", ft_strlcpy(dst, "lorem ipsum dolor sit amet", 0));
+	printf("%s", dst);
+	//printf("%lu\n", strlcpy(dst, "lorem ipsum dolor sit amet", 0));
 	//printf("%s", dst);
 }
 */
