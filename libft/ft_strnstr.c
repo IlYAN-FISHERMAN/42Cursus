@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 22:35:42 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/19 03:18:30 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/10/19 15:20:25 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	i = 0;
 	if (ft_strlen(needle) == 0)
 		return ((char *)haystack);
-	while (len > 0)
+	while (*haystack && len > 0)
 	{
 		if (*haystack == *needle)
 		{
-			while (*(haystack + i) == *(needle + i) && i < len - 1)
+			while (*(haystack + i) == *(needle + i) && haystack[i] && i < len)
 				i++;
-			if (*(needle + i) == '\0')
+			if (i == ft_strlen(needle))
 				return ((char *)haystack);
 			i = 0;
 		}
@@ -40,9 +40,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 int	main()
 {
 	char tab[] = "A";
-	//char tab2[] = "coucou";
 
-	printf(" M_fonction : %s\n", ft_strnstr(tab, tab, 2));
-	printf("V_fonction : %s\n", strnstr(tab, tab, 2));
+	printf(" M_fonction : %s\n", ft_strnstr(tab, "hello", 39));
+	printf("V_fonction : %s\n", strnstr(tab, "hello", 39));
 }
 */

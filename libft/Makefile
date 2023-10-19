@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/10/18 20:12:17 by ilyanar          ###   ########.fr        #
+#    Updated: 2023/10/19 18:56:39 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,11 @@ FILES = ft_strlen \
 	ft_memchr \
 	ft_memcmp \
 	ft_strnstr \
-#	ft_atoi \
+	ft_atoi \
 	ft_calloc \
 	ft_strdup \
 	ft_substr \
-	ft_strjoin \
+#	ft_strjoin \
 	ft_strtrim \
 	ft_split \
 	ft_itoa \
