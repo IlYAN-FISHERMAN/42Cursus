@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 17:39:22 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/18 01:23:49 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/10/18 16:44:01 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,25 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	i;
-	char	*str;
+	size_t				i;
 
-	str = (char *)s;
 	i = 0;
 	while ((i < n))
 	{
-		if (str[i] == c)
-			return (str + i);
+		if (*(unsigned char *)(s + i) == (unsigned char)c)
+			return ((void *)s + i);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 /*
 #include <stdio.h>
 
 int	main()
 {
-	int tab[] = {-49, 49, 1, -1, 0, -2, 2};
+	char s[] = {0, 1, 2 ,3 ,4 ,5};
 
-	printf("M_fonction : %s\n", (char *)ft_memchr(tab, -1, 7));
-	printf("V_fonction : %s\n", (char *)memchr(tab, -1, 7));
+	printf("M_fonction : %d\n", (char *)ft_memchr(s, 2 + 256, 3) == s + 2);
+	printf("V_fonction : %d\n", (char *)memchr(s, 2 + 256, 3) == s + 2);
 }
 */
