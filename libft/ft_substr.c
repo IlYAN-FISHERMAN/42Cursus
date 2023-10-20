@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 18:57:45 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/19 19:12:19 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/10/20 03:33:09 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*tab;
 
-	tab = ft_calloc((len) + 1, sizeof(char));
+	if (start >= ft_strlen(s))
+		len = 0;
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	tab = (char *)ft_calloc((len + 1), sizeof(char));
 	if (!tab)
-		return (0);
+		return (NULL);
 	ft_memcpy(tab, (s + start), len);
 	return (tab);
 }
@@ -26,7 +30,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 #include <stdio.h>
 int	main()
 {
-	char	tab[] = "";
-	printf("%s", ft_substr(tab, 6, 0));
+	char	tab[] = "FULL DAWDSAWDS";
+	printf("%s", ft_substr(tab, 400, 20));
 }
 */

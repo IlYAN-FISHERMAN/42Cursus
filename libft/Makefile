@@ -41,9 +41,9 @@ FILES = ft_strlen \
 	ft_calloc \
 	ft_strdup \
 	ft_substr \
-#	ft_strjoin \
+	ft_strjoin \
 	ft_strtrim \
-	ft_split \
+#	ft_split \
 	ft_itoa \
 	ft_strmapi \
 	ft_striteri \

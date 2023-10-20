@@ -16,11 +16,9 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	void	*tab;
 
-	if (count * size > 2147483647)
-		return (0);
 	tab = malloc(count * size);
 	if (!tab)
-		return (0);
+		return (NULL);
 	ft_bzero(tab, count * size);
 	return (tab);
 }
