@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/10/21 20:21:37 by ilyanar          ###   ########.fr        #
+#    Updated: 2023/10/22 19:05:10 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,11 @@ ALLOFILES = $(ALLFILES:%=%.o)
 ALLFILES = $(FILES) $(BONUSFILES)
 
 BONUSFILES = ft_lstnew \
-	     #ft_lstadd_front \
+	     ft_lstadd_front \
 	     ft_lstsize \
 	     ft_lstlast \
 	     ft_lstadd_back \
-	     ft_lstdelone \
+		 #ft_lstdelone \
 	     ft_lstclear \
 	     ft_lstiter \
 	     ft_lstmap \#
