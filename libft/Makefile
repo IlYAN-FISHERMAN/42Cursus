@@ -34,10 +34,10 @@ BONUSFILES = ft_lstnew \
 	     ft_lstsize \
 	     ft_lstlast \
 	     ft_lstadd_back \
-		 #ft_lstdelone \
-	     ft_lstclear \
+			 ft_lstdelone \
+			 ft_lstclear \
 	     ft_lstiter \
-	     ft_lstmap \#
+	     ft_lstmap \
 
 FILES = ft_strlen \
 	ft_memmove \
