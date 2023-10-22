@@ -1,3 +1,1 @@
-# liste chainee
-# struct
-# pointeur sur fonction
+# Point faible trop fort
