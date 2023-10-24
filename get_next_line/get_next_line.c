@@ -6,8 +6,18 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/23 14:56:57 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/10/24 00:46:22 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 
+char	*get_next_line(int fd)
+{
+	read(int, void *, size_t);
+}
+
+int	main()
+{
+
+}
