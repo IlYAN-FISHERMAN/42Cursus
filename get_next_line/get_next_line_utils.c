@@ -6,45 +6,20 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:14 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/23 14:57:16 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/02 17:12:22 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	len(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s[i] && s[i] != '\n')
 		i++;
 	return (i);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	size_t		i;
-	char		*tab;
-
-	i = 0;
-	tab = (char *)s;
-	while (i != n)
-	{
-		tab[i] = '\0';
-		i++;
-	}
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*tab;
-
-	tab = malloc(count * size);
-	if (!tab)
-		return (NULL);
-	ft_bzero(tab, count * size);
-	return (tab);
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
@@ -63,13 +38,33 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-char	*ft_strdup(const char *s)
+t_list	*ft_lstlast(t_list *lst)
 {
-	char	*tab;
+	t_list	*tmp;
 
-	tab = ft_calloc(ft_strlen(s) + 1, sizeof(char));
-	if (!tab)
-		return (0);
-	ft_memcpy(tab, s, ft_strlen(s));
-	return (tab);
+	if (!lst)
+		return (NULL);
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->next == NULL)
+			return (tmp);
+		else
+			tmp = tmp->next;
+	}
+	return (tmp);
+}
+
+int	have_n(char *tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
