@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:07 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/02 17:07:04 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/03 01:57:01 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,18 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
+
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_cpy_node(t_list **lst, char *tab);
+void	clear_all_node(t_list **lst);
+void	cpy_all_node(t_list **lst, char *buffer);
+void	all_node(t_list **lst, char *buffer);
+void	stack_buffet(char *tab, int byte);
+
 t_list	*ft_lstlast(t_list *lst);
+
 size_t	len(const char *s);
+
+int		have_n(char *tab);
 
 #endif

@@ -1,1 +1,2 @@
-# Point faible trop fort
+# finir gnl
+#	joint sur joint
