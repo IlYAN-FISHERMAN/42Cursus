@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:14 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/07 21:37:41 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 01:21:39 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	ft_memcpy(s3, s1, ft_strlen(s1));
 	ft_memcpy((s3 + ft_strlen(s1)), s2, ft_strlen(s2));
 	free((char *)s1);
-	s1 = NULL;
 	return (s3);
 }
 

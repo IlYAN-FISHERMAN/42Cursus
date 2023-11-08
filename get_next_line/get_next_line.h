@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:07 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/07 09:04:19 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/07 23:08:24 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strchr(const char *s, int c);
-char		*ft_gnljoin(char *buffer);
+char		*ft_gnljoin(char *s2);
 char		*get_next_line(int fd);
 
 void		*ft_calloc(size_t count, size_t size);

@@ -6,11 +6,12 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/07 21:58:38 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 02:03:00 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdlib.h>
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -25,30 +26,30 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)s);
 }
 
-char	*ft_gnljoin(char *buffer)
+char	*ft_gnljoin(char *s2)
 {
-	char	*tmp;
+	char	*s3;
 	int		i;
 
 	i = 0;
-	if (!buffer)
-		buffer = ft_calloc(1, sizeof(char));
-	if (!buffer)
+	if (!s2)
+		s2 = ft_calloc(1, sizeof(char));
+	if (!s2)
 		return (NULL);
-	while (buffer[i])
+	while (s2[i])
 	{
-		if (buffer[i] == '\n')
+		if (s2[i] == '\n')
 		{
 			i++;
 			break ;
 		}
 		i++;
 	}
-	tmp = (char *)ft_calloc(i + 1, sizeof(char));
-	if (!tmp)
+	s3 = (char *)ft_calloc(i + 1, sizeof(char));
+	if (!s3)
 		return (NULL);
-	ft_memcpy(tmp, buffer, i);
-	return (tmp);
+	ft_memcpy(s3, s2, i);
+	return (s3);
 }
 
 char	*next_funct(char *next_line)
@@ -74,7 +75,6 @@ char	*next_funct(char *next_line)
 		j++;
 	}
 	free(next_line);
-	next_line = NULL;
 	return (buffer);
 }
 
@@ -103,7 +103,6 @@ char	*get_line(char *buffer, char *next_line, int fd)
 			break ;
 	}
 	free(next_line);
-	next_line = NULL;
 	return (buffer);
 }
 
@@ -111,49 +110,49 @@ char	*get_next_line(int fd)
 {
 	static char		*buffer;
 	char			*next_line;
-	char			*tmp;
 
-	tmp = NULL;
-	if (fd < 0 || BUFFER_SIZE < 0 || !fd)
+	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0))
 		return (NULL);
 	next_line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!next_line)
 		return (NULL);
 	buffer = get_line(buffer, next_line, fd);
-	tmp = ft_gnljoin(buffer);
+	next_line = ft_gnljoin(buffer);
 	if (ft_strchr(buffer, '\n'))
 		buffer = next_funct(buffer);
-	else if (buffer && buffer[0] != '\0')
-	{
+	else if (!buffer)
 		free(buffer);
-		buffer = NULL;
-	}
-	if (ft_strlen(tmp) <= 0)
+	if (ft_strlen(next_line) <= 0)
 	{
-		free(tmp);
+		if (next_line)
+			free(next_line);
 		return (NULL);
 	}
-	return (tmp);
+	return (next_line);
 }
-
+/*
 int	main(void)
 {
 	int	fd;
 	int	i;
 	int	j;
+	char	*tmp;
 
 	j = 1;
 	i = 0;
-	fd = open("41_no_nl", O_RDONLY);
+	fd = open("empty", O_RDONLY);
 	while (i < 1)
 	{
+		tmp = get_next_line(fd);
 		printf("  -------------------\n");
 		printf("|  FONCTION NUMBER %d  |\n", j);
 		printf("  -------------------\n");
-		printf("\n\nFINAL LINE %d ->_%s\n\n------\n\n", j, get_next_line(fd));
+		printf("\n\nFINAL LINE %d ->_%s\n\n------\n\n", j, tmp);
+		free(tmp);
 		i++;
 		j++;
 	}
 	printf("\n\nEND OF THE PROGRAM !\n\n");
 	return (0);
 }
+*/
