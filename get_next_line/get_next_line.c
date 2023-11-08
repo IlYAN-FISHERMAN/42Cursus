@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/08 02:03:00 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 03:08:21 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*next_funct(char *next_line)
 
 char	*get_line(char *buffer, char *next_line, int fd)
 {
-	int	byte;
+	int		byte;
 
 	byte = 1;
 	if (!buffer)
@@ -91,10 +91,7 @@ char	*get_line(char *buffer, char *next_line, int fd)
 	{
 		byte = read(fd, next_line, BUFFER_SIZE);
 		if (byte == -1)
-		{
-			free(next_line);
 			return (NULL);
-		}
 		else if (byte == 0)
 			break ;
 		next_line[byte] = '\0';
@@ -120,8 +117,11 @@ char	*get_next_line(int fd)
 	next_line = ft_gnljoin(buffer);
 	if (ft_strchr(buffer, '\n'))
 		buffer = next_funct(buffer);
-	else if (!buffer)
+	else if (buffer)
+	{
 		free(buffer);
+		buffer = 0;
+	}
 	if (ft_strlen(next_line) <= 0)
 	{
 		if (next_line)
