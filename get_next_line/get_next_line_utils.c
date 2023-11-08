@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:14 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/08 21:41:02 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 21:57:11 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,24 +56,24 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*tab;
 	size_t	i;
 
-	i = 0;
+	i = -1;
 	tab = malloc(count * size);
 	if (!tab)
 		return (NULL);
-	while (i != size)
-	{
+	while (i++, i < count * size)
 		((char *)tab)[i] = '\0';
-	}
 	return (tab);
 }
 
-int	ft_invalid(char **buffer, int fd)
+char	*ft_strchr(const char *s, int c)
 {
-	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) == -1)
-	{
-		free(*buffer);
-		*buffer = 0;
-		return (1);
-	}
-	return (0);
+	if (!s)
+		return (NULL);
+	if (!(unsigned char)c)
+		return ((char *)s + ft_strlen(s));
+	while (*s && *s != (unsigned char)c)
+		s++;
+	if (*s == '\0')
+		return (0);
+	return ((char *)s);
 }

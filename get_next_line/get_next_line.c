@@ -6,24 +6,21 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/08 21:42:59 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 21:58:29 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
 
-char	*ft_strchr(const char *s, int c)
+int	ft_invalid(char **buffer, int fd)
 {
-	if (!s)
-		return (NULL);
-	if (!(unsigned char)c)
-		return ((char *)s + ft_strlen(s));
-	while (*s && *s != (unsigned char)c)
-		s++;
-	if (*s == '\0')
-		return (0);
-	return ((char *)s);
+	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) == -1)
+	{
+		free(*buffer);
+		*buffer = 0;
+		return (1);
+	}
+	return (0);
 }
 
 char	*ft_gnljoin(char *s2)
