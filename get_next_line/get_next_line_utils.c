@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:14 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/08 03:05:22 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 21:41:02 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,26 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*tab;
+	size_t	i;
 
+	i = 0;
 	tab = malloc(count * size);
 	if (!tab)
 		return (NULL);
-	ft_bzero(tab, count * size);
+	while (i != size)
+	{
+		((char *)tab)[i] = '\0';
+	}
 	return (tab);
 }
 
-void	ft_bzero(void *s, size_t n)
+int	ft_invalid(char **buffer, int fd)
 {
-	size_t	i;
-	char	*tab;
-
-	i = 0;
-	tab = (char *)s;
-	while (i != n)
+	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) == -1)
 	{
-		tab[i] = '\0';
-		i++;
+		free(*buffer);
+		*buffer = 0;
+		return (1);
 	}
+	return (0);
 }

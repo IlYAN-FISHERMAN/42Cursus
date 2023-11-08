@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/08 21:11:32 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 21:42:59 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,8 @@ char	*get_next_line(int fd)
 	static char		*buffer;
 	char			*next_line;
 
-	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) == -1)
-	{
-		free(buffer);
-		buffer = 0;
+	if (ft_invalid(&buffer, fd) != 0)
 		return (NULL);
-	}
 	next_line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!next_line)
 		return (NULL);

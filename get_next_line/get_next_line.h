@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:07 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/07 23:08:24 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 21:37:47 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		ft_bzero(void *s, size_t n);
 
 size_t		ft_strlen(const char *s);
+
+int			ft_invalid(char **buffer, int fd);
 
 #endif
