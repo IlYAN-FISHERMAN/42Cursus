@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/08 03:08:21 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/08 21:11:32 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*next_funct(char *next_line)
 	return (buffer);
 }
 
-char	*get_line(char *buffer, char *next_line, int fd)
+char	*get_nline(char *buffer, char *next_line, int *fd)
 {
 	int		byte;
 
@@ -89,9 +89,12 @@ char	*get_line(char *buffer, char *next_line, int fd)
 		return (NULL);
 	while (byte != 0)
 	{
-		byte = read(fd, next_line, BUFFER_SIZE);
+		byte = read(*fd, next_line, BUFFER_SIZE);
 		if (byte == -1)
+		{
+			*fd = -1;
 			return (NULL);
+		}
 		else if (byte == 0)
 			break ;
 		next_line[byte] = '\0';
@@ -108,12 +111,16 @@ char	*get_next_line(int fd)
 	static char		*buffer;
 	char			*next_line;
 
-	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0))
+	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) == -1)
+	{
+		free(buffer);
+		buffer = 0;
 		return (NULL);
+	}
 	next_line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!next_line)
 		return (NULL);
-	buffer = get_line(buffer, next_line, fd);
+	buffer = get_nline(buffer, next_line, &fd);
 	next_line = ft_gnljoin(buffer);
 	if (ft_strchr(buffer, '\n'))
 		buffer = next_funct(buffer);
@@ -138,12 +145,13 @@ int	main(void)
 	int	j;
 	char	*tmp;
 
+	(void)fd;
 	j = 1;
 	i = 0;
-	fd = open("empty", O_RDONLY);
+	fd = open("read_error.txt", O_RDONLY);
 	while (i < 1)
 	{
-		tmp = get_next_line(fd);
+		tmp = get_next_line(-1);
 		printf("  -------------------\n");
 		printf("|  FONCTION NUMBER %d  |\n", j);
 		printf("  -------------------\n");
