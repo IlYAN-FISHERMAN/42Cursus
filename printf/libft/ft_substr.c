@@ -1,48 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 15:39:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/09 17:58:40 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/10/19 18:57:45 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/10/20 03:33:09 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int	i;
-	int	nb;
+	char	*tab;
 
-	nb = 0;
-	i = 1;
-	while ((*str >= 9 && *str <= 13) || (*str == 32))
-		str++;
-	if (*str == '-')
-	{
-		i = -1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		nb = nb * 10 + (*str - 48);
-		str++;
-	}
-	return (nb * i);
+	if (start >= ft_strlen(s))
+		len = 0;
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	tab = (char *)ft_calloc((len + 1), sizeof(char));
+	if (!tab)
+		return (NULL);
+	ft_memcpy(tab, (s + start), len);
+	return (tab);
 }
 /*
 #include <stdio.h>
-#include <stdlib.h>
 int	main()
 {
-	char tab[] = "-152";
-
-	printf("M_fonction : %d\n", ft_atoi(tab));
-	printf("V_fonction : %d\n", atoi(tab));
+	char	tab[] = "FULL DAWDSAWDS";
+	printf("%s", ft_substr(tab, 400, 20));
 }
 */

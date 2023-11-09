@@ -1,48 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 15:39:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/09 17:58:40 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/10/10 17:33:16 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/10/11 15:35:03 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdlib.h>
 
-int	ft_atoi(const char *str)
+size_t	ft_strlen(const char *s)
 {
-	int	i;
-	int	nb;
+	size_t	i;
 
-	nb = 0;
-	i = 1;
-	while ((*str >= 9 && *str <= 13) || (*str == 32))
-		str++;
-	if (*str == '-')
-	{
-		i = -1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		nb = nb * 10 + (*str - 48);
-		str++;
-	}
-	return (nb * i);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 /*
 #include <stdio.h>
-#include <stdlib.h>
 int	main()
 {
-	char tab[] = "-152";
-
-	printf("M_fonction : %d\n", ft_atoi(tab));
-	printf("V_fonction : %d\n", atoi(tab));
+	char tab[] = "jhbefvbj jem";
+	printf("%zu", ft_strlen(tab));
 }
 */

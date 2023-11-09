@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/02 23:33:30 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/11/08 22:57:04 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/11/08 22:59:28 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	ft_cpy_node(t_list **lst, char *tab)
 	if (!*lst)
 		*lst = new;
 	else
+	{
 		ft_lstlast(*lst)->next = new;
-	ft_lstlast(*lst)->content = calloc(len(tab) + 1, sizeof(char));
+		ft_lstlast(*lst)->content = calloc(len(tab) + 1, sizeof(char));
+	}
 	if (!ft_lstlast(*lst)->content)
 		return ;
 	ft_memcpy(ft_lstlast(*lst)->content, tab, len(tab) + 1);
@@ -105,8 +107,7 @@ char	*get_next_line(int fd)
 	int			byte_nb;
 	t_list		*lst;
 
-	lst = NULL;
-	buffer = NULL;
+	buffer = 0;
 	byte_nb = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -129,15 +130,27 @@ char	*get_next_line(int fd)
 	return (buffer);
 }
 
-int	main(int ac, char **argv)
+int main(void)
 {
-	int	fd;
-	char	*path = argv[1];
+    int fd;
+    int i;
+    int j;
+    char    *tmp;
 
-	(void)ac;
-	printf("%s\n", path);
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		perror("error");
-	printf("%s", get_next_line(fd));
+    j = 1;
+    i = 0;
+    fd = open("test.txt", O_RDONLY);
+    while (i < 1)
+    {
+        tmp = get_next_line(fd);
+        printf("  -------------------\n");
+        printf("|  FONCTION NUMBER %d  |\n", j);
+        printf("  -------------------\n");
+        printf("\n\nFINAL LINE %d ->_%s\n\n------\n\n", j, tmp);
+        free(tmp);
+        i++;
+        j++;
+    }
+    printf("\n\nEND OF THE PROGRAM !\n\n");
+    return (0);
 }

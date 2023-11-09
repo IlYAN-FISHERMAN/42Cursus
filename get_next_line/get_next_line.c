@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/08 21:58:29 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/09 16:31:50 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,12 @@ int	main(void)
 	int	j;
 	char	*tmp;
 
-	(void)fd;
 	j = 1;
 	i = 0;
-	fd = open("read_error.txt", O_RDONLY);
-	while (i < 1)
+	fd = open("test.txt", O_RDONLY);
+	while (i < 4)
 	{
-		tmp = get_next_line(-1);
+		tmp = get_next_line(fd);
 		printf("  -------------------\n");
 		printf("|  FONCTION NUMBER %d  |\n", j);
 		printf("  -------------------\n");
