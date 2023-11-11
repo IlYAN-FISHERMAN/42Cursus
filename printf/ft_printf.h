@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 17:33:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/11 15:35:03 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/11/11 02:16:42 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/11/11 02:43:35 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include	"libft.h" 
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
+# include <unistd.h>
+# include <stdarg.h>
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-/*
-#include <stdio.h>
-int	main()
-{
-	char tab[] = "jhbefvbj jem";
-	printf("%zu", ft_strlen(tab));
-}
-*/
+void	ft_putchar(char c);
+void	ft_putnbr(int nb);
+int		t_printf(const char *str, ...);
+
+#endif
