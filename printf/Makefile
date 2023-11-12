@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/11/11 02:43:11 by ilyanar          ###   ########.fr        #
+#    Updated: 2023/11/12 09:26:55 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,25 +18,29 @@ RM = rm -rf
 
 NAME = libftprintf.a
 
+LIBFT_PATH = ./libft/
+
+LIBFT_FILES = ft_strlen \
+			  ft_strchr
+
+LIBFT_OFILES = $(LIBFT_FILES:%=$(LIBFT_PATH)%.o)
 
 CFILES = $(FILES:%=%.c)
 
 OFILES = $(FILES:%=%.o)
-
 
 FILES = ft_printf \
 	ft_printf_utils
 
 all : $(NAME)
 
-COMPIL : $(CFILES)
-	$(CC) $(CFLAGS) -c $(CFILES) -I.
-
-$(NAME) : $(OFILES)
-	ar -rc $@ $(OFILES)
+$(NAME) : $(OFILES) $(LIBFT_PATH)Makefile
+	make -C $(LIBFT_PATH) all
+	ar -rc $@ $(OFILES) $(LIBFT_OFILES)
 
 clean :
 	$(RM) $(OFILES)
+	make -C $(LIBFT_PATH) fclean
 
 fclean : clean
 	$(RM) $(NAME)

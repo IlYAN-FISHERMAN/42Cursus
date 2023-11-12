@@ -6,50 +6,74 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:47:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/11 05:41:18 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/12 08:52:32 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	test(char *tab)
+void	stlen(char *tab, int *nb)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (i < 5)
+	i = -1;
+	j = ft_strlen(tab);
+	while (++i <= j)
 	{
-		write(1, &(*tab), 1);
-		tab++;
-		i++;
+		write(1, &tab[i], 1);
+		*nb += 1;
 	}
-	return (i);
 }
 
-void	str_nbr(const char *str, va_list args)
+int	check(const char *str)
+{
+	while (*(str++))
+		if (*(str - 1) == '%')
+			if (!ft_strchr("cspdiuxX%", *(str)))
+				return (0);
+	return (1);
+}
+
+int	str_nbr(const char *str, va_list args, int *nb)
 {
 	char	c;
 
+	if (check(str) == 0)
+		return (0);
 	if ((*str == 'd') || (*str == 'i') || (*str == 'u'))
-		ft_putnbr(va_arg(args, int));
+		ft_putnbr(va_arg(args, size_t), nb);
 	else if (*str == 's')
-		test(va_arg(args, char *));
+		stlen(va_arg(args, char *), nb);
 	else if (*str == 'c')
 	{
-		va_arg(args, int);
+		c = va_arg(args, int);
 		write(1, &c, 1);
+		*nb += 1;
 	}
-	return ;
+	return (1);
 }
 
-void	printt(const char *str, va_list args)
+int	who_is_char(const char *str, va_list args, int *nb)
 {
-	if ((*str == 'c') || (*str == 's') || (*str == 'd') || (*str == 'i') || \
-		(*str == 'u'))
-		str_nbr(str, args);
-	//else if ((*str == 'p'))
-	return ;
+	if (!check(str))
+		return (0);
+	if ((*str == 'c') || (*str == 's') || (*str == 'd') || (*str == 'i')
+		|| (*str == 'u'))
+		str_nbr(str, args, nb);
+	else if ((*str == 'x'))
+		putnbr_base(va_arg(args, size_t), "0123456789abcdef", nb);
+	else if ((*str == 'X'))
+		putnbr_base(va_arg(args, size_t), "0123456789ABCDEF", nb);
+	else if ((*str == 'p'))
+		print_0x(va_arg(args, long long int), "0123456789abcdef", nb);
+	else if (*str == '%')
+	{
+		write(1, "%", 1);
+		*nb += 1;
+	}
+	return (1);
 }
 
 int	ft_printf(const char *str, ...)
@@ -59,22 +83,24 @@ int	ft_printf(const char *str, ...)
 
 	nb = 0;
 	va_start(args, str);
-	while (*str)
+	while (*str++)
 	{
-		if (*str == '%')
+		if (*(str - 1) == '%')
 		{
-			printt((str + 1), args);
-			str++;
-			nb++;
+			if (!who_is_char((str++), args, &nb))
+				break ;
 		}
 		else
-			write(1, &(*str), 1);
-		str++;
+		{
+			write(1, (str - 1), 1);
+			nb++;
+		}
 	}
 	va_end(args);
 	return (nb);
 }
-
+/*
+#include <stdio.h>
 int	main(void)
 {
 	char c = 'd';
@@ -83,5 +109,6 @@ int	main(void)
 	int i = 2;
 	int u = 42;
 
-	ft_printf("j'ai %d %s %cans mon cul %i %u\n", d, str, c, i, u);
+	printf("%d\n", ft_printf("j'ai %d %s %cans mon cul %p %x\n", d, str, c, &i, u));
 }
+*/

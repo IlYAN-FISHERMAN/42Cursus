@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/22 19:04:27 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/12 08:04:58 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_bzero(void *s, size_t n);
+void	putnbr_base(size_t nb, char *base, int *n);
 
 int		ft_atoi(const char *str);
 int		ft_isalpha(int c);

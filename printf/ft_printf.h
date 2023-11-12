@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:16:42 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/11 02:43:35 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/12 09:36:31 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 # define FT_PRINTF_H
 
 # include <unistd.h>
+# include "libft/libft.h"
 # include <stdarg.h>
 
-void	ft_putchar(char c);
-void	ft_putnbr(int nb);
-int		t_printf(const char *str, ...);
+void	stlen(char *tab, int *nb);
+void	ft_putchar(char c, int *nb);
+void	ft_putnbr(long nb, int *n);
+void	putnbr_base(size_t nb, char *base, int *n);
+void	print_0x(unsigned long long int nb, char *base, int *n);
+void	printf_addr(unsigned long long int nb, char *base, int *n);
+
+int		check(const char *str);
+int		who_is_char(const char *str, va_list args, int *nb);
+int		ft_printf(const char *str, ...);
 
 #endif

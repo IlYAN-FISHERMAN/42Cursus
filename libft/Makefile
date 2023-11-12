@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/10/22 19:05:10 by ilyanar          ###   ########.fr        #
+#    Updated: 2023/11/12 08:04:44 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ FILES = ft_strlen \
 	ft_putstr_fd \
 	ft_putendl_fd \
 	ft_putnbr_fd \
+	ft_putnbr_base \
 
 all : $(NAME)
 
