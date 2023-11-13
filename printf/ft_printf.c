@@ -96,6 +96,6 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%s\n\n", "bonjour"));
-	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%s\n\n", "bonjour"));
+	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%s\n\n", "bontestjour"));
+	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%s\n\n", "bontestjour"));
 }
