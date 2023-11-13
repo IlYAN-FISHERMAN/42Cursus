@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/12 09:36:22 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/13 22:09:52 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,21 @@
 
 void	ft_putchar(char c, int *nb)
 {
-	write(1, &c, 1);
-	*nb += 1;
+	*nb += write(1, &c, 1);
 }
 
-void	ft_putnbr(long nb, int *n)
+void	ft_putnbr(int nbr, int *n)
 {
+	long	nb;
+
+	nb = nbr;
 	if (nb < 0)
 	{
 		write(1, "-", 1);
-		ft_putnbr(-nb, n);
+		*n += 1;
+		nb = nb * -1;
 	}
-	else if (nb > 9)
+	if (nb > 9)
 	{
 		ft_putnbr(nb / 10, n);
 		ft_putnbr(nb % 10, n);
@@ -35,15 +38,12 @@ void	ft_putnbr(long nb, int *n)
 		ft_putchar(nb + '0', n);
 }
 
-void	putnbr_base(size_t nb, char *base, int *n)
+void	putnbr_base(long nb, char *base, int *n)
 {
-	size_t	len;
-
-	len = ft_strlen(base);
-	if (nb > len)
+	if (nb > 16)
 	{
-		putnbr_base(nb / len, base, n);
-		putnbr_base(nb % len, base, n);
+		putnbr_base(nb / 16, base, n);
+		putnbr_base(nb % 16, base, n);
 	}
 	else
 		ft_putchar(base[nb], n);
@@ -58,13 +58,10 @@ void	print_0x(unsigned long long int nb, char *base, int *n)
 
 void	printf_addr(unsigned long long int nb, char *base, int *n)
 {
-	unsigned long long int	len;
-
-	len = ft_strlen(base);
-	if (nb > len)
+	if (nb >= 16)
 	{
-		printf_addr(nb / len, base, n);
-		printf_addr(nb % len, base, n);
+		printf_addr(nb / 16, base, n);
+		printf_addr(nb % 16, base, n);
 	}
 	else
 		ft_putchar(base[nb], n);

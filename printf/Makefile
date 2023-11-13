@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/11/12 09:26:55 by ilyanar          ###   ########.fr        #
+#    Updated: 2023/11/13 22:16:30 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)
 
 FILES = ft_printf \
-	ft_printf_utils
+	ft_printf_utils \
+	ft_printf_utils2
 
 all : $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:47:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/13 13:46:35 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/13 22:37:14 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 
 void	stlen(char *tab, int *nb)
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	j = ft_strlen(tab);
-	while (++i <= j)
+	if (!tab)
 	{
-		write(1, &tab[i], 1);
+		*nb += write(1, "(null)", 6);
+		return ;
+	}
+	while (*tab)
+	{
+		write(1, &(*tab), 1);
+		tab++;
 		*nb += 1;
 	}
 }
@@ -47,11 +48,11 @@ void	who_is_char(const char *str, va_list *args, int *nb)
 	if (*str == 'c')
 		printf_c(va_arg(*args, int), nb);
 	if ((*str == 'i') || (*str == 'd'))
-		ft_putnbr(va_arg(*args, long), nb);
+		ft_putnbr(va_arg(*args, int), nb);
 	if ((*str == 's'))
 		stlen(va_arg(*args, char *), nb);
 	if ((*str == 'u'))
-		putnbr_base(va_arg(*args, unsigned long), "0123456780", nb);
+		putnbr_u(va_arg(*args, unsigned int), nb);
 	if ((*str == 'x'))
 		putnbr_base(va_arg(*args, long), "0123456789abcdef", nb);
 	if ((*str == 'X'))
@@ -92,10 +93,10 @@ int	ft_printf(const char *str, ...)
 	return (nb);
 }
 
+#include <limits.h>
 #include <stdio.h>
-
 int	main(void)
 {
-	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%s\n\n", "bontestjour"));
-	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%s\n\n", "bontestjour"));
+	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%u\n\n", 0));	
+	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%u\n\n", LONG_MAX));
 }
