@@ -24,7 +24,7 @@ void	print_0x(unsigned long long int nb, char *base, int *n);
 void	printf_addr(unsigned long long int nb, char *base, int *n);
 
 int		check(const char *str);
-void	who_is_char(const char *str, va_list args, int *nb);
+void	who_is_char(const char *str, va_list *args, int *nb);
 int		ft_printf(const char *str, ...);
 
 #endif

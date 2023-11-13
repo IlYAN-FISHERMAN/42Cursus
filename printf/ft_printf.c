@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:47:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/12 21:25:54 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/13 13:46:35 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,22 @@ void	printf_c(char c, int *nb)
 		*nb += 1;
 }
 
-void	who_is_char(const char *str, va_list args, int *nb)
+void	who_is_char(const char *str, va_list *args, int *nb)
 {
 	if (*str == 'c')
-		printf_c(va_arg(args, int), nb);
+		printf_c(va_arg(*args, int), nb);
 	if ((*str == 'i') || (*str == 'd'))
-		ft_putnbr(va_arg(args, long), nb);
+		ft_putnbr(va_arg(*args, long), nb);
 	if ((*str == 's'))
-		stlen(va_arg(args, char *), nb);
+		stlen(va_arg(*args, char *), nb);
 	if ((*str == 'u'))
-		putnbr_base(va_arg(args, unsigned long), "0123456780", nb);
+		putnbr_base(va_arg(*args, unsigned long), "0123456780", nb);
 	if ((*str == 'x'))
-		putnbr_base(va_arg(args, long), "0123456789abcdef", nb);
+		putnbr_base(va_arg(*args, long), "0123456789abcdef", nb);
 	if ((*str == 'X'))
-		putnbr_base(va_arg(args, long), "0123456789ABCDEF", nb);
+		putnbr_base(va_arg(*args, long), "0123456789ABCDEF", nb);
 	if ((*str == 'p'))
-		print_0x(va_arg(args, long long int), "0123456789abcdef", nb);
+		print_0x(va_arg(*args, long long int), "0123456789abcdef", nb);
 	if (*str == '%')
 	{
 		write(1, "%", 1);
@@ -78,7 +78,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (*str == '%')
 		{
-			who_is_char((str + 1), args, &nb);
+			who_is_char((str + 1), &args, &nb);
 			str += 2;
 		}
 		else
@@ -96,8 +96,6 @@ int	ft_printf(const char *str, ...)
 
 int	main(void)
 {
-	char b = 'b';
-	char a = 'a';
-
-	printf("%d\n", ft_printf("%c %c bo %d %d njour %c %c\n", a, b, 42, 54, 'c', 'd'));
+	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%s\n\n", "bonjour"));
+	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%s\n\n", "bonjour"));
 }
