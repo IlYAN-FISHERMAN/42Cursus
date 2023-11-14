@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/13 22:09:52 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/14 05:24:53 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	ft_putnbr(int nbr, int *n)
 		ft_putchar(nb + '0', n);
 }
 
-void	putnbr_base(long nb, char *base, int *n)
+void	putnbr_base(unsigned int nb, char *base, int *n)
 {
-	if (nb > 16)
+	if (nb >= 16)
 	{
 		putnbr_base(nb / 16, base, n);
 		putnbr_base(nb % 16, base, n);

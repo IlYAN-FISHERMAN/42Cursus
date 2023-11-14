@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:47:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/13 22:37:14 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/14 06:29:58 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,16 @@ void	stlen(char *tab, int *nb)
 
 int	check(const char *str)
 {
-	while (*(str++))
-		if (*(str - 1) == '%')
+	while (*str)
+	{
+		if (*(str) == '%')
+		{
+			str++;
 			if (!ft_strchr("cspdiuxX%", *(str)))
 				return (0);
+		}
+		str++;
+	}
 	return (1);
 }
 
@@ -54,9 +60,9 @@ void	who_is_char(const char *str, va_list *args, int *nb)
 	if ((*str == 'u'))
 		putnbr_u(va_arg(*args, unsigned int), nb);
 	if ((*str == 'x'))
-		putnbr_base(va_arg(*args, long), "0123456789abcdef", nb);
+		putnbr_base(va_arg(*args, unsigned int), "0123456789abcdef", nb);
 	if ((*str == 'X'))
-		putnbr_base(va_arg(*args, long), "0123456789ABCDEF", nb);
+		putnbr_base(va_arg(*args, unsigned int), "0123456789ABCDEF", nb);
 	if ((*str == 'p'))
 		print_0x(va_arg(*args, long long int), "0123456789abcdef", nb);
 	if (*str == '%')
@@ -92,11 +98,11 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (nb);
 }
-
-#include <limits.h>
+/*
 #include <stdio.h>
 int	main(void)
 {
-	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%u\n\n", 0));	
-	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%u\n\n", LONG_MAX));
+	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_\f\r\n\n"));	
+	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_\f\r\n\n"));
 }
+*/
