@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:47:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/14 06:29:58 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/14 07:12:22 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ int	ft_printf(const char *str, ...)
 #include <stdio.h>
 int	main(void)
 {
-	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_\f\r\n\n"));	
-	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_\f\r\n\n"));
+	int nb = 4200;
+	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%-6dtest\n\n", nb));	
+	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%2d\n\n", nb));
 }
 */
