@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_putchar_ncount.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 05:28:03 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/15 05:30:44 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/11/15 05:25:24 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/11/15 05:26:19 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_base(unsigned int nb, char *base)
+void	ft_putchar_ncount(char *tab, int *nb)
 {
-	if (nb >= 16)
+	if (!tab)
 	{
-		ft_putnbr_base(nb / 16, base);
-		ft_putnbr_base(nb % 16, base);
+		*nb += write(1, "(null)", 6);
+		return ;
 	}
-	else
-		ft_putchar_fd(base[nb], 1);
+	while (*tab)
+	{
+		write(1, &(*tab), 1);
+		tab++;
+		*nb += 1;
+	}
 }

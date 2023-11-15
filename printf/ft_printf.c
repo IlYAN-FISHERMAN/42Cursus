@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:47:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/14 07:12:22 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/15 05:31:33 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check(const char *str)
 		if (*(str) == '%')
 		{
 			str++;
-			if (!ft_strchr("cspdiuxX%", *(str)))
+			if (!ft_strchr("fcspdiuxX%", *(str)))
 				return (0);
 		}
 		str++;
@@ -53,19 +53,19 @@ void	who_is_char(const char *str, va_list *args, int *nb)
 {
 	if (*str == 'c')
 		printf_c(va_arg(*args, int), nb);
-	if ((*str == 'i') || (*str == 'd'))
+	else if ((*str == 'i') || (*str == 'd'))
 		ft_putnbr(va_arg(*args, int), nb);
-	if ((*str == 's'))
+	else if ((*str == 's'))
 		stlen(va_arg(*args, char *), nb);
-	if ((*str == 'u'))
+	else if ((*str == 'u'))
 		putnbr_u(va_arg(*args, unsigned int), nb);
-	if ((*str == 'x'))
-		putnbr_base(va_arg(*args, unsigned int), "0123456789abcdef", nb);
-	if ((*str == 'X'))
-		putnbr_base(va_arg(*args, unsigned int), "0123456789ABCDEF", nb);
-	if ((*str == 'p'))
+	else if ((*str == 'x'))
+		ft_putnbr_base(va_arg(*args, unsigned int), "0123456789abcdef", nb);
+	else if ((*str == 'X'))
+		ft_putnbr_base(va_arg(*args, unsigned int), "0123456789ABCDEF", nb);
+	else if ((*str == 'p'))
 		print_0x(va_arg(*args, long long int), "0123456789abcdef", nb);
-	if (*str == '%')
+	else if (*str == '%')
 	{
 		write(1, "%", 1);
 		*nb += 1;
@@ -102,8 +102,9 @@ int	ft_printf(const char *str, ...)
 #include <stdio.h>
 int	main(void)
 {
-	int nb = 4200;
-	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%-6dtest\n\n", nb));	
-	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%2d\n\n", nb));
+	int nb = 42;
+
+	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%9d\n\n", nb));	
+	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%9d\n\n", nb));
 }
 */
