@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:47:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/15 05:31:33 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/18 20:41:30 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,12 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (nb);
 }
-/*
+
 #include <stdio.h>
 int	main(void)
 {
 	int nb = 42;
 
-	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%9d\n\n", nb));	
-	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%9d\n\n", nb));
+	printf("byte_read ->_%d\n\n\n", printf("V-STRING ->_%d\n\n", nb));	
+	printf("byte_read ->_%d\n\n", ft_printf("F-STRING ->_%d\n\n", nb));
 }
-*/
