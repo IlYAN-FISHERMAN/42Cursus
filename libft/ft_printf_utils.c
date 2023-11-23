@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_ncount.c                                :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 05:25:24 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/15 05:26:19 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/11/22 17:54:22 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_ncount(char *tab, int *nb)
+void	ft_putnbr(int nbr, int *n)
 {
-	if (!tab)
+	long	nb;
+
+	nb = nbr;
+	if (nb < 0)
 	{
-		*nb += write(1, "(null)", 6);
-		return ;
+		write(1, "-", 1);
+		*n += 1;
+		nb = nb * -1;
 	}
-	while (*tab)
+	if (nb > 9)
 	{
-		write(1, &(*tab), 1);
-		tab++;
-		*nb += 1;
+		ft_putnbr(nb / 10, n);
+		ft_putnbr(nb % 10, n);
 	}
+	else
+		ft_putchar(nb + '0', n);
 }

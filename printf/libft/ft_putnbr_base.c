@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 12:21:35 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/21 12:39:11 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/11/15 05:28:03 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/11/22 13:27:52 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
-{
-	int	i;
+#include "libft.h"
 
-	i = 0;
-	if (!s || !f)
-		return ;
-	while (s[i])
+void	ft_putnbr_base(unsigned int nb, char *base)
+{
+	unsigned int	len;
+
+	len = ft_strlen(base);
+	if (nb >= len)
 	{
-		(*f)(i, &s[i]);
-		i++;
+		ft_putnbr_base(nb / len, base);
+		ft_putnbr_base(nb % len, base);
 	}
-	return ;
+	else
+		ft_putchar_fd(base[nb], 1);
 }

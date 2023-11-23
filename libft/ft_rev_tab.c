@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_rev_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/22 18:20:24 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/22 18:53:27 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/11/22 13:21:32 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/11/22 13:22:00 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	ft_rev_tab(char *tab)
 {
-	t_list	*tmp;
+	size_t	i;
+	size_t	j;
+	char	temp;
 
-	if (!lst)
-		return (NULL);
-	tmp = lst;
-	while (tmp)
+	j = 0;
+	i = ft_strlen(tab) - 1;
+	while (j <= i && i > 0)
 	{
-		if (tmp->next == NULL)
-			return (tmp);
-		else
-			tmp = tmp->next;
+		temp = tab[j];
+		tab[j] = tab[i];
+		tab[i] = temp;
+		j++;
+		i--;
 	}
-	return (tmp);
 }

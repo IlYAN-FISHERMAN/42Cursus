@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/15 05:33:21 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/22 17:55:24 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h> 
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -31,13 +32,12 @@ void	*ft_calloc(size_t count, size_t size);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_bzero(void *s, size_t n);
-void	putnbr_base(size_t nb, char *base, int *n);
-void	ft_putchar_ncount(char *tab, int *nb);
+void	ft_rev_tab(char *tab);
 void	ft_putnbr_base(unsigned int nb, char *base);
 
+int		ft_putchar_fd(char c, int fd);
 int		ft_atoi(const char *str);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -74,5 +74,14 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+//printf.h
+void	printf_base_addr(unsigned long long int nb, char *base, int *n);
+void	stlen(char *tab, int *nb, char c, const char *str);
+void	ft_putchar(char c, int *nb);
+void	ft_putnbr(int nb, int *n);
+
+int		who_is_char(const char *str, va_list *args, int *nb);
+int		ft_printf(const char *str, ...);
 
 #endif

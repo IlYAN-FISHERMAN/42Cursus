@@ -74,6 +74,9 @@ FILES = ft_strlen \
 	ft_putendl_fd \
 	ft_putnbr_fd \
 	ft_putnbr_base \
+	ft_printf \
+	ft_print_utils \
+	ft_rev_tab
 
 all : $(NAME)
 

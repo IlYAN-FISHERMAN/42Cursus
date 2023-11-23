@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 05:28:03 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/15 05:30:44 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/22 13:27:52 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	ft_putnbr_base(unsigned int nb, char *base)
 {
-	if (nb >= 16)
+	unsigned int	len;
+
+	len = ft_strlen(base);
+	if (nb >= len)
 	{
-		ft_putnbr_base(nb / 16, base);
-		ft_putnbr_base(nb % 16, base);
+		ft_putnbr_base(nb / len, base);
+		ft_putnbr_base(nb % len, base);
 	}
 	else
 		ft_putchar_fd(base[nb], 1);

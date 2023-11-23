@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:23:44 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/21 00:05:20 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/22 17:55:53 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,6 @@ static int	ft_size(int n)
 		i++;
 	}
 	return (i);
-}
-
-static void	ft_rev_tab(char *tab)
-{
-	size_t	i;
-	size_t	j;
-	char	temp;
-
-	j = 0;
-	i = ft_strlen(tab) - 1;
-	while (j <= i && i > 0)
-	{
-		temp = tab[j];
-		tab[j] = tab[i];
-		tab[i] = temp;
-		j++;
-		i--;
-	}
 }
 
 static void	ft_negnb(char *tab, int *n, int *i)

@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/11/13 22:16:30 by ilyanar          ###   ########.fr        #
+#    Updated: 2023/11/22 12:20:23 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME = libftprintf.a
 LIBFT_PATH = ./libft/
 
 LIBFT_FILES = ft_strlen \
-			  ft_strchr
+	      ft_strchr
 
 LIBFT_OFILES = $(LIBFT_FILES:%=$(LIBFT_PATH)%.o)
 
@@ -30,8 +30,7 @@ CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)
 
 FILES = ft_printf \
-	ft_printf_utils \
-	ft_printf_utils2
+	ft_printf_utils
 
 all : $(NAME)
 
