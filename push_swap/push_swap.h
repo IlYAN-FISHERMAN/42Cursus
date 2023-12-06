@@ -6,17 +6,21 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:56:47 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/05 14:21:06 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/06 17:07:07 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-typedef struct s_list
+typedef struct s_listp
 {
-	int	nb;
-	struct s_list *next;
-}	t_list;
+	int				i;
+	int				nb;
+	int				check;
+	int				content;
+	struct s_listp	*next;
+	struct s_listp	*previous;
+}	t_listp;
 
 #endif

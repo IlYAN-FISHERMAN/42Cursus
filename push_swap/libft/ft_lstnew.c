@@ -6,18 +6,18 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:00:17 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/21 19:21:06 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:27:27 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+#include "../push_swap.h"
 
-t_list	*ft_lstnew(void *content)
+t_listp	*ft_lstnew(int content)
 {
-	t_list	*body;
+	t_listp	*body;
 
-	body = malloc(sizeof(t_list));
+	body = malloc(sizeof(t_listp));
 	if (!body)
 		return (NULL);
 	body->content = content;

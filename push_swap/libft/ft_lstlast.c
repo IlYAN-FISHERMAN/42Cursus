@@ -6,15 +6,16 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 18:20:24 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/22 18:53:27 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:19:55 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../push_swap.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_listp	*ft_lstlast(t_listp *lst)
 {
-	t_list	*tmp;
+	t_listp	*tmp;
 
 	if (!lst)
 		return (NULL);

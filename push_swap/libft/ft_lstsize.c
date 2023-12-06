@@ -6,16 +6,16 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 23:10:28 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/22 23:10:30 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:37:14 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_listp *lst)
 {
 	int		i;
-	t_list	*tmp;
+	t_listp	*tmp;
 
 	i = 1;
 	if (!lst)

@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/22 17:55:24 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:42:33 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string.h>
 # include <unistd.h> 
 # include <stdarg.h>
+# include "../push_swap.h"
 
 typedef struct s_list
 {
@@ -38,7 +39,7 @@ void	ft_rev_tab(char *tab);
 void	ft_putnbr_base(unsigned int nb, char *base);
 
 int		ft_putchar_fd(char c, int fd);
-int		ft_atoi(const char *str);
+int		ft_atoi(const char *str, int *check);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
@@ -65,15 +66,15 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int c);
 
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstdelone(t_list *lst, void (*del)(void*));
-void	ft_lstclear(t_list **lst, void (*del)(void*));
-void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_listp	*ft_lstnew(int content);
+void	ft_lstadd_front(t_listp **lst, t_listp *new);
+int		ft_lstsize(t_listp *lst);
+t_listp	*ft_lstlast(t_listp *lst);
+void	ft_lstadd_back(t_listp **lst, t_listp *new);
+void	ft_lstdelone(t_listp *lst, void (*del)(void*));
+void	ft_lstclear(t_listp **lst, void (*del)(void*));
+void	ft_lstiter(t_listp *lst, void (*f)(void *));
+t_listp	*ft_lstmap(t_listp *lst, void *(*f)(void *), void (*del)(void *));
 
 //printf.h
 void	printf_base_addr(unsigned long long int nb, char *base, int *n);
