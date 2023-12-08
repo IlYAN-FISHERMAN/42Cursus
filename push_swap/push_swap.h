@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:56:47 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/06 17:07:07 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/07 17:02:54 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@ typedef struct s_listp
 	struct s_listp	*next;
 	struct s_listp	*previous;
 }	t_listp;
+
+void	ft_sa_sb(t_listp **stacks, int nb);
+void	ft_ss(t_listp **a_stack, t_listp **b_stack);
+void	ft_pa_pb(t_listp **a_stack, t_listp **b_stack, int nb);
 
 #endif
