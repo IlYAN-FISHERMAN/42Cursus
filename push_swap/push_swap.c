@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:16:46 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/08 16:31:27 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/12 14:24:05 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	push_swap(char **av, int ac)
 		return (-1);
 	if ((sort_pars(&a_stack, &b_stack, av, ac)) == -1)
 		return (-1);
-	ft_ra_rb(&a_stack, &b_stack, 1);
+	ft_rra_rrb(&a_stack, 1);
 	print_test(&a_stack, &b_stack, a_stack->check);
 	return ((ft_clear(&a_stack, &b_stack)) + 1);
 }

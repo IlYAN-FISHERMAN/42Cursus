@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_set1.c                                        :+:      :+:    :+:   */
+/*   move_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:41:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/08 16:30:08 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/12 13:13:06 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,48 +35,39 @@ void	ft_ss(t_listp **a_stack, t_listp **b_stack)
 	ft_printf("ss\n");
 }
 
-void	ft_pa_pb(t_listp **a_stack, t_listp **b_stack, int nb)
+void	ft_pa_pb(t_listp **stack_recep, t_listp **stack_give, int nb)
 {
 	t_listp	*tmp;
 
+	tmp = (*stack_give)->next;
+	(*stack_give)->next = 0;
+	ft_lstadd_front(stack_recep, *stack_give);
+	*stack_give = tmp;
 	if (nb == 1)
-	{
-		if (!b_stack)
-			return ;
-		tmp = (*b_stack)->next;
-		(*b_stack)->next = 0;
-		ft_lstadd_front(a_stack, *b_stack);
-		*b_stack = tmp;
 		ft_printf("pa\n");
-	}
-	else if (nb == 2)
-	{
-		if (!a_stack)
-			return ;
-		tmp = (*a_stack)->next;
-		(*a_stack)->next = 0;
-		ft_lstadd_front(b_stack, *a_stack);
-		*a_stack = tmp;
+	if (nb == 2)
 		ft_printf("pb\n");
-	}
 }
 
-void	ft_ra_rb(t_listp **a_stack, t_listp **b_stack, int check)
+void	ft_ra_rb(t_listp **stack, int check)
 {
+	t_listp	*tmp;
+
+	if ((*stack)->next == NULL)
+		return ;
+	ft_lstadd_back(stack, (*stack));
+	tmp = (*stack)->next;
+	(*stack)->next = 0;
+	(*stack) = tmp;
 	if (check == 1)
-	{
-		if ((*a_stack)->next == NULL)
-			return ;
-		(ft_lstlast(*a_stack))->next = *a_stack;
-		(*a_stack)->next = 0;
 		ft_printf("ra\n");
-	}
 	if (check == 2)
-	{
-		if ((*b_stack)->next == NULL)
-			return ;
-		(ft_lstlast(*b_stack))->next = *b_stack;
-		(*b_stack)->next = 0;
 		ft_printf("rb\n");
-	}
+}
+
+void	ft_rr(t_listp **a_stack, t_listp **b_stack)
+{
+	ft_ra_rb(a_stack, 0);
+	ft_ra_rb(b_stack, 0);
+	ft_printf("rr\n");
 }
