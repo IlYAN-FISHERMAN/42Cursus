@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_set.c                                         :+:      :+:    :+:   */
+/*   move_set1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:41:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/12 13:13:06 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/12 19:37:32 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_sa_sb(t_listp **stacks, int nb)
 {
 	int	i;
 
-	if (!*stacks)
+	if (!*stacks || (*stacks)->next == NULL)
 		return ;
 	i = (*stacks)->content;
 	(*stacks)->content = (*stacks)->next->content;
@@ -39,6 +39,8 @@ void	ft_pa_pb(t_listp **stack_recep, t_listp **stack_give, int nb)
 {
 	t_listp	*tmp;
 
+	if (!*stack_give)
+		return ;
 	tmp = (*stack_give)->next;
 	(*stack_give)->next = 0;
 	ft_lstadd_front(stack_recep, *stack_give);

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:45:01 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/12 14:16:51 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/12 22:01:45 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,25 @@ void	ft_rra_rrb(t_listp **stack, int check)
 		ft_printf("rra\n");
 	if (check == 2)
 		ft_printf("rrb\n");
+}
+
+void	ft_rrr(t_listp **a_stack, t_listp **b_stack)
+{
+	ft_rra_rrb(a_stack, 0);
+	ft_rra_rrb(b_stack, 0);
+	ft_printf("rrr\n");
+}
+
+void	ft_algo(t_listp **a_stack, t_listp **b_stack)
+{
+	(void)b_stack;
+	while (*a_stack)
+	{
+		if ((*a_stack)->next == NULL)
+			break ;
+		if ((*a_stack)->content > (*a_stack)->next->content)
+			ft_sa_sb(a_stack, 1);
+		else
+			ft_pa_pb(b_stack, a_stack, 2);
+	}
 }

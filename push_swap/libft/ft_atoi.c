@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:39:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/08 13:51:24 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/12 17:54:43 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *str, int *check)
 {
-	int	i;
-	int	nb;
+	int				i;
+	long long int	nb;
 
 	nb = 0;
 	i = 1;
@@ -28,15 +28,14 @@ int	ft_atoi(const char *str, int *check)
 	while (*str)
 	{
 		if (*str >= '0' && *str <= '9')
-		{
 			nb = nb * 10 + (*str - 48);
-			str++;
-		}
-		else
+		if (!(*str >= '0' && *str <= '9')
+			|| (i * nb) > 2147483647 || (i * nb) < -2147483648)
 		{
 			*check = -1;
 			break ;
 		}
+		str++;
 	}
 	return (nb * i);
 }

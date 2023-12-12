@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 18:20:24 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/06 16:19:55 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/12 20:42:40 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ t_listp	*ft_lstlast(t_listp *lst)
 	tmp = lst;
 	while (tmp)
 	{
-		if (tmp->next == NULL)
+		if (tmp->next == 0)
 			return (tmp);
 		else
+		{
 			tmp = tmp->next;
+		}
 	}
 	return (tmp);
 }

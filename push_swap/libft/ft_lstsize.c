@@ -6,11 +6,12 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 23:10:28 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/06 16:37:14 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/12 19:26:54 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../push_swap.h"
 
 int	ft_lstsize(t_listp *lst)
 {
