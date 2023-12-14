@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 13:45:01 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/12 22:01:45 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/14 01:47:27 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,69 @@ void	ft_rrr(t_listp **a_stack, t_listp **b_stack)
 	ft_printf("rrr\n");
 }
 
-void	ft_algo(t_listp **a_stack, t_listp **b_stack)
+void	ft_algo1(t_listp **a_stack, t_listp **b_stack)
 {
-	(void)b_stack;
-	while (*a_stack)
+	if (ft_lstsize(*a_stack) > 3)
+		ft_pa_pb(b_stack, a_stack, 2);
+	if (ft_lstsize(*a_stack) > 3)
 	{
-		if ((*a_stack)->next == NULL)
-			break ;
-		if ((*a_stack)->content > (*a_stack)->next->content)
-			ft_sa_sb(a_stack, 1);
-		else
-			ft_pa_pb(b_stack, a_stack, 2);
+		ft_pa_pb(b_stack, a_stack, 2);
+		if ((*b_stack)->content != ft_max(b_stack))
+			ft_ra_rb(b_stack, 2);
 	}
+	while (ft_lstsize(*a_stack) > 3)
+	{
+		if ((*b_stack)->content != ft_max(b_stack))
+			ft_ra_rb(b_stack, 2);
+		else if ((*a_stack)->content < ft_lstlast(*b_stack)->content)
+		{
+			ft_pa_pb(b_stack, a_stack, 2);
+			ft_ra_rb(b_stack, 2);
+		}
+		else if ((*a_stack)->content > ft_max(b_stack))
+			ft_pa_pb(b_stack, a_stack, 2);
+		else if ((*a_stack)->content > ft_lstlast(*b_stack)->content)
+		{
+			while ((*a_stack)->content > ft_lstlast(*b_stack)->content)
+				ft_rra_rrb(b_stack, 2);
+			ft_pa_pb(b_stack, a_stack, 2);
+			while ((*b_stack)->content != ft_max(b_stack))
+				ft_ra_rb(b_stack, 2);
+		}
+	}
+	ft_algo2(a_stack, b_stack);
+}
+
+int	ft_min(t_listp **stack)
+{
+	t_listp	*tmp;
+	int		i;
+
+	tmp = *stack;
+	i = tmp->content;
+	while (tmp)
+	{
+		if (tmp->next == NULL)
+			return (i);
+		if (tmp->content < i)
+			i = tmp->content;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+int	ft_max(t_listp **stack)
+{
+	t_listp	*tmp;
+	int		i;
+
+	tmp = *stack;
+	i = tmp->content;
+	while (tmp)
+	{
+		if (tmp->content > i)
+			i = tmp->content;
+		tmp = tmp->next;
+	}
+	return (i);
 }

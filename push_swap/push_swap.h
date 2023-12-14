@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:56:47 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/12 21:18:32 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/13 22:00:03 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ void	ft_ra_rb(t_listp **stack, int check);
 void	ft_rr(t_listp **a_stack, t_listp **b_stack);
 void	ft_rra_rrb(t_listp **stack, int check);
 void	ft_rrr(t_listp **a_stack, t_listp **b_stack);
-void	ft_algo(t_listp **a_stack, t_listp **b_stack);
+void	ft_algo1(t_listp **a_stack, t_listp **b_stack);
+void	ft_algo2(t_listp **a_stack, t_listp **b_stack);
 
 int		ft_clear(t_listp **a_stack, t_listp **b_stack);
+int		ft_min(t_listp **stack);
+int		ft_max(t_listp **stack);
 
 #endif
