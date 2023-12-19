@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 19:41:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/12 19:37:32 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/18 16:49:46 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ void	ft_sa_sb(t_listp **stacks, int nb)
 		ft_printf("sb\n");
 }
 
-void	ft_ss(t_listp **a_stack, t_listp **b_stack)
+void	ft_ss(t_listp **a_stack, t_listp **b_stack, int check)
 {
 	ft_sa_sb(a_stack, 0);
 	ft_sa_sb(b_stack, 0);
-	ft_printf("ss\n");
+	if (check == 1)
+		ft_printf("ss\n");
 }
 
 void	ft_pa_pb(t_listp **stack_recep, t_listp **stack_give, int nb)
@@ -67,9 +68,10 @@ void	ft_ra_rb(t_listp **stack, int check)
 		ft_printf("rb\n");
 }
 
-void	ft_rr(t_listp **a_stack, t_listp **b_stack)
+void	ft_rr(t_listp **a_stack, t_listp **b_stack, int check)
 {
 	ft_ra_rb(a_stack, 0);
 	ft_ra_rb(b_stack, 0);
-	ft_printf("rr\n");
+	if (check == 1)
+		ft_printf("rr\n");
 }
