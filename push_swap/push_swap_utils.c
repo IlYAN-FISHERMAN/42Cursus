@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo.c                                             :+:      :+:    :+:   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 18:50:10 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/18 20:37:56 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/12/21 10:54:15 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/12/23 19:34:35 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	ft_algo1(t_listp **a, t_listp **b)
-{
-	if (ft_lstcount(a) == 1)
-		ft_pa_pb(b, a, 2);
-	if (ft_lstcount(a) == 1)
-		ft_pa_pb(b, a, 2);
-	if (ft_lstcount(a) == 1)
-		ft_algo2(a, b);
-	if (ft_lstcount(a) == 0)
-		ft_sort_a(a, b);
-	if (*b)
-		ft_repuch(a, b);
-}
-
-int	ft_lstcount(t_listp **stack)
+int	more_than3(t_listp **stack)
 {
 	int		i;
 	t_listp	*tmp;
@@ -44,27 +30,6 @@ int	ft_lstcount(t_listp **stack)
 		tmp = tmp->next;
 	}
 	return (0);
-}
-
-int	check_rr(t_listp **b, int nb)
-{
-	int	pos;
-
-	pos = ft_check_pos(b, nb);
-	if (nb > ft_max(b))
-	{
-		if ((*b)->content == ft_max(b))
-			return (0);
-	}
-	if (nb < ft_min(b))
-	{
-		if (ft_lstlast(*b)->content == ft_min(b))
-			return (0);
-	}
-	if (more_or_less(b, pos) == 0)
-		return (1);
-	else
-		return (0);
 }
 
 int	more_or_less(t_listp **a, int nb)
@@ -89,6 +54,31 @@ int	more_or_less(t_listp **a, int nb)
 
 int	the_lowest(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2)
 {
+	(void)a2;
+	(void)b2;
+	t_listp	*tmp1;
+	int		nb;
+	int		nbr;
+	int		lowest;
+
+	tmp1 = *a;
+	nbr = 0;
+	lowest = 0;
+	while (tmp1 != NULL)
+	{
+		nb = count_stack(a, b, tmp1->content);
+		if (nb < nbr || nbr == 0)
+		{
+			nbr = nb;
+			lowest = tmp1->content;
+		}
+		tmp1 = tmp1->next;
+	}
+	return (lowest);
+}
+/*
+int	the_lowest(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2)
+{
 	t_listp	*tmp1;
 	int		nb;
 	int		nbr;
@@ -100,7 +90,7 @@ int	the_lowest(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2)
 	while (tmp1 != NULL)
 	{
 		ft_lstcpy(a, b, a2, b2);
-		nb = ft_sort_b1(a2, b2, tmp1->content, 0);
+		nb = organize_stacks(a2, b2, tmp1->content, 0);
 		if (nb < nbr || nbr == 0)
 		{
 			nbr = nb;
@@ -110,4 +100,41 @@ int	the_lowest(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2)
 		tmp1 = tmp1->next;
 	}
 	return (lowest);
+}
+*/
+int	ft_clear(t_listp **a_stack, t_listp **b_stack)
+{
+	if (a_stack)
+		ft_lstclear(a_stack, free);
+	if (b_stack)
+		ft_lstclear(b_stack, free);
+	return (-1);
+}
+
+int	ft_atoi_swap(const char *str, int *check)
+{
+	int				i;
+	long long int	nb;
+
+	nb = 0;
+	i = 1;
+	if (*str == '-')
+		i = -1;
+	if (*str == '-')
+		str++;
+	else if (*str == '+')
+		str++;
+	while (*str)
+	{
+		if (*str >= '0' && *str <= '9')
+			nb = nb * 10 + (*str - 48);
+		if (!(*str >= '0' && *str <= '9')
+			|| (i * nb) > 2147483647 || (i * nb) < -2147483648)
+		{
+			*check = -1;
+			break ;
+		}
+		str++;
+	}
+	return (nb * i);
 }

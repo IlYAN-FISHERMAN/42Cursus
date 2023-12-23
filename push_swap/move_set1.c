@@ -5,20 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/06 19:41:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/18 16:49:46 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/12/21 11:35:18 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/12/21 16:03:03 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	ft_sa_sb(t_listp **stacks, int nb)
+int	ft_sa_sb(t_listp **stacks, int nb)
 {
 	int	i;
 
 	if (!*stacks || (*stacks)->next == NULL)
-		return ;
+		return (0);
 	i = (*stacks)->content;
 	(*stacks)->content = (*stacks)->next->content;
 	(*stacks)->next->content = i;
@@ -26,22 +26,24 @@ void	ft_sa_sb(t_listp **stacks, int nb)
 		ft_printf("sa\n");
 	else if (nb == 2)
 		ft_printf("sb\n");
+	return (1);
 }
 
-void	ft_ss(t_listp **a_stack, t_listp **b_stack, int check)
+int	ft_ss(t_listp **a_stack, t_listp **b_stack, int check)
 {
 	ft_sa_sb(a_stack, 0);
 	ft_sa_sb(b_stack, 0);
 	if (check == 1)
 		ft_printf("ss\n");
+	return (1);
 }
 
-void	ft_pa_pb(t_listp **stack_recep, t_listp **stack_give, int nb)
+int	ft_pa_pb(t_listp **stack_recep, t_listp **stack_give, int nb)
 {
 	t_listp	*tmp;
 
 	if (!*stack_give)
-		return ;
+		return (0);
 	tmp = (*stack_give)->next;
 	(*stack_give)->next = 0;
 	ft_lstadd_front(stack_recep, *stack_give);
@@ -50,14 +52,15 @@ void	ft_pa_pb(t_listp **stack_recep, t_listp **stack_give, int nb)
 		ft_printf("pa\n");
 	if (nb == 2)
 		ft_printf("pb\n");
+	return (1);
 }
 
-void	ft_ra_rb(t_listp **stack, int check)
+int	ft_ra_rb(t_listp **stack, int check)
 {
 	t_listp	*tmp;
 
 	if ((*stack)->next == NULL)
-		return ;
+		return (0);
 	ft_lstadd_back(stack, (*stack));
 	tmp = (*stack)->next;
 	(*stack)->next = 0;
@@ -66,12 +69,14 @@ void	ft_ra_rb(t_listp **stack, int check)
 		ft_printf("ra\n");
 	if (check == 2)
 		ft_printf("rb\n");
+	return (1);
 }
 
-void	ft_rr(t_listp **a_stack, t_listp **b_stack, int check)
+int	ft_rr(t_listp **a_stack, t_listp **b_stack, int check)
 {
 	ft_ra_rb(a_stack, 0);
 	ft_ra_rb(b_stack, 0);
 	if (check == 1)
 		ft_printf("rr\n");
+	return (1);
 }

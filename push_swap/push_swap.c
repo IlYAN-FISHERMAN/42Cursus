@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:16:46 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/15 20:37:29 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/23 19:32:35 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,51 +33,45 @@ int	ft_sort_a(t_listp **a_stack, t_listp **b_stack)
 	return (0);
 }
 
-int	check_double(t_listp **stack)
+void	ft_free_tab(char **tab)
 {
-	t_listp	*tmp1;
-	t_listp	*tmp2;
-	int		i;
-	int		j;
+	int	i;
 
-	j = 0;
-	tmp1 = *stack;
-	tmp2 = *stack;
-	while (tmp1)
+	i = 0;
+	while (*(tab + i))
+		i++;
+	while (i >= 0)
 	{
-		i = tmp1->content;
-		while (tmp2)
-		{
-			if (i == tmp2->content)
-				j++;
-			if (j > 1)
-				return (1);
-			tmp2 = tmp2->next;
-		}
-		j = 0;
-		tmp1 = tmp1->next;
-		tmp2 = *stack;
+		free(*(tab + i));
+		i--;
 	}
-	return (0);
+	free(tab);
 }
 
-int	sort_pars(t_listp **a_stack, t_listp **b_stack, char **av, int ac)
+int	sort_pars(t_listp **a, t_listp **b, char **av, int ac)
 {
-	(*a_stack)->i = 1;
-	(*a_stack)->check = 0;
-	(*a_stack)->next = NULL;
-	while ((*a_stack)->i < ac)
+	char	**tab;
+	int		i;
+	int		li;
+	int		nb;
+	int		check;
+
+	check = 0;
+	i = 0;
+	li = 0;
+	check = 0;
+	while (++i < ac)
 	{
-		(*a_stack)->nb = ft_atoi(av[(*a_stack)->i], &(*a_stack)->check);
-		if ((*a_stack)->check == -1)
-			return (ft_clear(a_stack, b_stack));
-		if ((*a_stack)->i == 1)
-			(*a_stack)->content = (*a_stack)->nb;
-		else
-			ft_lstadd_back(a_stack, ft_lstnew((*a_stack)->nb));
-		if (check_double(a_stack) == 1)
-			return (ft_clear(a_stack, b_stack));
-		(*a_stack)->i++;
+		tab = ft_split(av[i], ' ');
+		while (*(tab + li))
+		{
+			nb = ft_atoi_swap(tab[li++], &check);
+			ft_lstadd_back(a, ft_lstnew(nb));
+			if (check == -1 || check_double(a) == 1)
+				return (ft_clear(a, b));
+		}
+		li = 0;
+		ft_free_tab(tab);
 	}
 	return (0);
 }
@@ -88,21 +82,21 @@ int	push_swap(char **av, int ac)
 	t_listp	*b_stack;
 
 	b_stack = 0;
-	a_stack = malloc(sizeof(t_listp));
-	if (!a_stack)
-		return (-1);
+	a_stack = 0;
 	if ((sort_pars(&a_stack, &b_stack, av, ac)) == -1)
 		return (-1);
+	if (pre_sort_check(&a_stack) == 0)
+		return (0);
 	if (ft_lstsize(a_stack) == 2)
 	{
 		if (a_stack->content > a_stack->next->content)
 			ft_sa_sb(&a_stack, 1);
 	}
-	else if ((a_stack->i - 1) == 3)
+	else if (ft_lstsize(a_stack) == 3)
 		ft_sort_a(&a_stack, &b_stack);
-	else if ((a_stack->i - 1) > 3)
-		ft_algo1(&a_stack, &b_stack);
-	print_test(&a_stack, &b_stack, 1);
+	else if ((ft_lstsize(a_stack)) > 3)
+		beginning_algo(&a_stack, &b_stack);
+	//print_test(&a_stack, &b_stack, 1);
 	return ((ft_clear(&a_stack, &b_stack)) + 1);
 }
 

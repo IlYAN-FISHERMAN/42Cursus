@@ -6,13 +6,13 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:39:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/12 17:54:43 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/21 00:17:47 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-int	ft_atoi(const char *str, int *check)
+int	ft_atoi(const char *str)
 {
 	int				i;
 	long long int	nb;
@@ -29,12 +29,6 @@ int	ft_atoi(const char *str, int *check)
 	{
 		if (*str >= '0' && *str <= '9')
 			nb = nb * 10 + (*str - 48);
-		if (!(*str >= '0' && *str <= '9')
-			|| (i * nb) > 2147483647 || (i * nb) < -2147483648)
-		{
-			*check = -1;
-			break ;
-		}
 		str++;
 	}
 	return (nb * i);

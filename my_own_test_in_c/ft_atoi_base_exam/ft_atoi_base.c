@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:39:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/19 18:10:11 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/19 20:18:13 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdio.h>
 
 int	ft_check(char c, int base)
 {
@@ -55,9 +55,20 @@ int	ft_atoi_base(const char *str, int base)
 	return (nb * i);
 }
 
-#include <stdio.h>
-
-int	main()
+int	main(int ac, char **av)
 {
-	printf("M_fonction : %d\n", ft_atoi_base("-1d5", 16));
+	int	nb;
+	int	i;
+
+	i = 0;
+	nb = 0;
+	if (ac == 3)
+	{
+		while (av[2][i] >= '0' && av[2][i] <= '9')
+		{
+			nb = nb * 10 + (av[2][i] - 48);
+			i++;
+		}
+		printf("M_fonction : %d\n", ft_atoi_base(av[1], nb));
+	}
 }

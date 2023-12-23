@@ -5,22 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 13:45:01 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/18 20:30:36 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/12/21 11:35:25 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/12/23 08:12:58 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
-void	ft_rra_rrb(t_listp **stack, int check)
+int	ft_rra_rrb(t_listp **stack, int check)
 {
 	t_listp	*tmp1;
 	t_listp	*tmp2;
 
 	tmp1 = *stack;
 	if ((*stack)->next == NULL)
-		return ;
+		return (0);
 	while (tmp1)
 	{
 		if (tmp1->next->next == NULL)
@@ -36,53 +36,50 @@ void	ft_rra_rrb(t_listp **stack, int check)
 		ft_printf("rra\n");
 	if (check == 2)
 		ft_printf("rrb\n");
+	return (1);
 }
 
-void	ft_rrr(t_listp **a_stack, t_listp **b_stack, int check)
+int	ft_rrr(t_listp **a_stack, t_listp **b_stack, int check)
 {
 	ft_rra_rrb(a_stack, 0);
 	ft_rra_rrb(b_stack, 0);
 	if (check == 1)
 		ft_printf("rrr\n");
+	return (1);
 }
 
-int	ft_clear(t_listp **a_stack, t_listp **b_stack)
+int	check_rrr(t_listp **b, int nb)
 {
-	if (a_stack)
-		ft_lstclear(a_stack, free);
-	if (b_stack)
-		ft_lstclear(b_stack, free);
-	return (-1);
-}
+	int	pos;
 
-int	ft_max(t_listp **stack)
-{
-	t_listp	*tmp;
-	int		i;
-
-	tmp = *stack;
-	i = tmp->content;
-	while (tmp)
+	pos = ft_check_pos(b, nb);
+	if (more_or_less(b, pos) == 1 && ft_max(b) > nb)
 	{
-		if (tmp->content > i)
-			i = tmp->content;
-		tmp = tmp->next;
+		if (ft_lstlast(*b)->content != pos)
+			return (1);
 	}
-	return (i);
+	else if (more_or_less(b, pos) == 1 && ft_max(b) < nb)
+	{
+		if ((*b)->content != pos)
+			return (1);
+	}
+	return (0);
 }
 
-int	ft_min(t_listp **stack)
+int	check_rr(t_listp **b, int nb)
 {
-	t_listp	*tmp;
-	int		i;
+	int	pos;
 
-	tmp = *stack;
-	i = tmp->content;
-	while (tmp)
+	pos = ft_check_pos(b, nb);
+	if (more_or_less(b, pos) == 0 && ft_max(b) > nb)
 	{
-		if (tmp->content < i)
-			i = tmp->content;
-		tmp = tmp->next;
+		if (ft_lstlast(*b)->content != pos)
+			return (1);
 	}
-	return (i);
+	else if (more_or_less(b, pos) == 0 && ft_max(b) < nb)
+	{
+		if ((*b)->content != pos)
+			return (1);
+	}
+	return (0);
 }

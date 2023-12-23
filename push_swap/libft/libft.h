@@ -6,24 +6,24 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/12 19:28:16 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/22 13:46:33 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 64
+# endif
+
 # include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
 # include <string.h>
 # include <unistd.h> 
 # include <stdarg.h>
 # include "../push_swap.h"
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
@@ -84,5 +84,18 @@ void	ft_putnbr(int nb, int *n);
 
 int		who_is_char(const char *str, va_list *args, int *nb);
 int		ft_printf(const char *str, ...);
+
+//GNL
+int		ft_invalid(char **buffer, int fd);
+char	*ft_gnljoin(char *s2);
+char	*ft_gnljoin(char *s2);
+char	*get_next_line(int fd);
+char	*next_funct(char *next_line);
+char	*get_nline(char *buffer, char *next_line, int *fd);
+size_t	strlen_gnl(const char *s);
+char	*strjoin_gnl(char const *s1, char const *s2);
+void	*memcpy_gnl(void *dst, const void *src, size_t n);
+void	*calloc_gnl(size_t count, size_t size);
+char	*strchr_gnl(const char *s, int c);
 
 #endif
