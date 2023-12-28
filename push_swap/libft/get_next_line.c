@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/22 13:46:49 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/27 17:41:49 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,31 +130,3 @@ char	*get_next_line(int fd)
 	}
 	return (next_line);
 }
-/*
-int	main(void)
-{
-	int	fd;
-	int	i;
-	int	j;
-	char	*tmp;
-
-	j = 1;
-	i = 0;
-	fd = open("test.txt", O_RDONLY);
-	while (i < 4)
-	{
-		tmp = get_next_line(fd);
-		printf("  -------------------\n");
-		printf("|  FONCTION NUMBER %d  |\n", j);
-		printf("  -------------------\n");
-		printf("\n\nFINAL LINE %d ->_%s\n\n------\n\n", j, tmp);
-		free(tmp);
-		i++;
-		j++;
-	}
-	printf("\n\nEND OF THE PROGRAM !\n\n");
-	return (0);
-}
-*/
-
-

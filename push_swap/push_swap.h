@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:56:47 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/23 09:41:27 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/28 17:19:39 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	check_and_push(t_listp **a, t_listp **b);
 void	ft_lstcpy(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2);
 void	ft_repuch_to_a(t_listp **a, t_listp **b);
 void	ft_pass_atoi(char **av, t_listp **a);
-void	ft_finish_b(t_listp **b, int check);
 void	ft_sort_finish_a(t_listp **a);
 void	print_test(t_listp **a_stack, t_listp **b_stack, int check);
 
@@ -46,7 +45,7 @@ int		more_or_less(t_listp **a, int nb);
 int		ft_atoi_swap(const char *str, int *check);
 int		check_double(t_listp **stack);
 int		ft_check_pos(t_listp **stack, int nb);
-int		the_lowest(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2);
+int		the_lowest(t_listp **a, t_listp **b);
 int		ft_clear(t_listp **a_stack, t_listp **b_stack);
 int		ft_min(t_listp **stack);
 int		ft_max(t_listp **stack);

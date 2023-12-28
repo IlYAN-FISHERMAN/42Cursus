@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:35:07 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/23 11:46:59 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/28 17:19:25 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,39 +30,12 @@ void	beginning_algo(t_listp **a, t_listp **b)
 
 void	check_and_push(t_listp **a, t_listp **b)
 {
-	t_listp	*a2;
-	t_listp	*b2;
 	int		nb;
 
-	a2 = 0;
-	b2 = 0;
 	while (more_than3(a) != 0)
 	{
-		nb = the_lowest(a, b, &a2, &b2);
-		//ft_printf("\n");
-		//print_test(a, b, 1);
-		//ft_printf("\n\nthe lowest : %d\n\n", nb);
-		//ft_printf("MOVES\n");
+		nb = the_lowest(a, b);
 		organize_stacks(a, b, nb, 1);
-	}
-	//ft_printf("\nFIN\n\n");
-	ft_finish_b(b, 1);
-}
-
-void	ft_finish_b(t_listp **b, int check)
-{
-	int	max;
-
-	max = ft_max(b);
-	if (more_or_less(b, max) == 0)
-	{
-		while (((*b)->content) != max)
-			ft_ra_rb(b, 2 * check);
-	}
-	else
-	{
-		while (((*b)->content) != max)
-			ft_rra_rrb(b, 2 * check);
 	}
 }
 
@@ -81,4 +54,28 @@ void	ft_sort_finish_a(t_listp **a)
 		while ((ft_lstlast(*a)->content) != max)
 			ft_rra_rrb(a, 1);
 	}
+}
+
+int	count_stack(t_listp **a, t_listp **b, int nb)
+{
+	int		count_a;
+	int		count_b;
+	int		pos;
+
+	pos = ft_check_pos(b, nb);
+	if (more_or_less(a, nb) == 0)
+	{
+		count_a = count_a_rr(a, nb);
+		if (more_or_less(b, pos) == 0)
+		{
+			count_b = count_b_rr(b, nb, pos);
+			if (count_b > count_a)
+				count_a = count_b;
+		}
+		else
+			count_a += count_b_rrr(b, nb, pos);
+	}
+	else
+		count_a = count_stack_for_rrr(a, b, nb, pos);
+	return (count_a + 1);
 }

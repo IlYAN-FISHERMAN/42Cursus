@@ -6,39 +6,12 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 20:01:06 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/23 11:47:09 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/25 03:01:07 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
-
-int	count_stack(t_listp **a, t_listp **b, int nb)
-{
-	int		count_a;
-	int		count_b;
-	int		pos;
-
-	pos = ft_check_pos(b, nb);
-	if (more_or_less(a, nb) == 0)
-	{
-		count_a = count_a_rr(a, nb);
-		if (more_or_less(b, pos) == 0)
-		{
-			count_b = count_b_rr(b, nb, pos);
-			if (count_b > count_a)
-				count_a = count_b;
-		}
-		else
-			count_a += count_b_rrr(b, nb, pos);
-	}
-	else
-		count_a = count_stack_for_rrr(a, b, nb, pos);
-	//ft_printf("\nFOR nb : %d\n", nb);
-	//ft_printf("POS : %d\n", pos);
-	//ft_printf("COUNT MOVE : %d\n", count_a + 1);
-	return (count_a + 1);
-}
 
 int	count_stack_for_rrr(t_listp **a, t_listp **b, int nb, int pos)
 {

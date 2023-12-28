@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 10:54:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/23 19:34:35 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/25 02:55:17 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ int	more_or_less(t_listp **a, int nb)
 		return (1);
 }
 
-int	the_lowest(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2)
+int	the_lowest(t_listp **a, t_listp **b)
 {
-	(void)a2;
-	(void)b2;
 	t_listp	*tmp1;
 	int		nb;
 	int		nbr;
@@ -76,32 +74,7 @@ int	the_lowest(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2)
 	}
 	return (lowest);
 }
-/*
-int	the_lowest(t_listp **a, t_listp **b, t_listp **a2, t_listp **b2)
-{
-	t_listp	*tmp1;
-	int		nb;
-	int		nbr;
-	int		lowest;
 
-	tmp1 = *a;
-	nbr = 0;
-	lowest = 0;
-	while (tmp1 != NULL)
-	{
-		ft_lstcpy(a, b, a2, b2);
-		nb = organize_stacks(a2, b2, tmp1->content, 0);
-		if (nb < nbr || nbr == 0)
-		{
-			nbr = nb;
-			lowest = tmp1->content;
-		}
-		ft_clear(a2, b2);
-		tmp1 = tmp1->next;
-	}
-	return (lowest);
-}
-*/
 int	ft_clear(t_listp **a_stack, t_listp **b_stack)
 {
 	if (a_stack)

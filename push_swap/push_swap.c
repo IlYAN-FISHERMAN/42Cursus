@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:16:46 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/23 19:32:35 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/28 19:55:47 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,9 @@ int	push_swap(char **av, int ac)
 		ft_sort_a(&a_stack, &b_stack);
 	else if ((ft_lstsize(a_stack)) > 3)
 		beginning_algo(&a_stack, &b_stack);
-	//print_test(&a_stack, &b_stack, 1);
 	return ((ft_clear(&a_stack, &b_stack)) + 1);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	if (ac >= 2)
@@ -112,3 +111,4 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:35:18 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/21 16:03:03 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/12/28 19:46:56 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_ra_rb(t_listp **stack, int check)
 {
 	t_listp	*tmp;
 
-	if ((*stack)->next == NULL)
+	if ((!*stack) || ((*stack)->next == NULL))
 		return (0);
 	ft_lstadd_back(stack, (*stack));
 	tmp = (*stack)->next;
