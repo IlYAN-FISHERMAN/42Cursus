@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:01:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/28 19:55:13 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/01 11:39:28 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ int	ft_instruction(t_listp **a, t_listp **b, char *tab)
 	return (-1);
 }
 
+void	ft_ok_ko(t_listp **a)
+{
+	if (pre_sort_check(a) == 0)
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
+}
+
 int	main(int ac, char **av)
 {
 	char	*tab;
@@ -64,16 +72,12 @@ int	main(int ac, char **av)
 	while (tab != NULL)
 	{
 		if (ft_instruction(&a, &b, tab) == -1)
-		{
-			free(tab);
 			break ;
-		}
 		free(tab);
 		tab = get_next_line(0);
 	}
-	if (pre_sort_check(&a) == 0)
-		ft_printf("OK\n");
-	else
-		ft_printf("KO\n");
+	if (tab)
+		free(tab);
+	ft_ok_ko(&a);
 	return (ft_clear(&a, &b) + 1);
 }

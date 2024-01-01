@@ -6,10 +6,10 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 13:18:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/27 22:34:51 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/01 11:09:10 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+/*
 #include "push_swap.h"
 #include "libft/libft.h"
 
@@ -46,4 +46,4 @@ void	print_test(t_listp **a_stack, t_listp **b_stack, int check)
 				tmp1 = tmp1->next;
 		}
 	}
-}
+}*/

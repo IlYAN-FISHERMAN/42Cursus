@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 11:35:07 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/28 17:19:25 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/01 11:17:16 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	check_and_push(t_listp **a, t_listp **b)
 		nb = the_lowest(a, b);
 		organize_stacks(a, b, nb, 1);
 	}
+	if (more_or_less(b, ft_min(b)) == 0)
+		while ((*b)->content != ft_min(b))
+			ft_ra_rb(b, 2);
+	else
+		while ((*b)->content != ft_min(b))
+			ft_rra_rrb(b, 2);
 }
 
 void	ft_sort_finish_a(t_listp **a)

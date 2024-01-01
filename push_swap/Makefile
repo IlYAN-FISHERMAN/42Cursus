@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/26 00:47:42 by ilyanar           #+#    #+#              #
-#    Updated: 2023/12/28 22:14:44 by ilyanar          ###   ########.fr        #
+#    Updated: 2023/12/28 23:00:20 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,30 @@ NAME = push_swap
 
 LIBFT_PATH = ./libft/
 
-LIBFT_FILES = ft_strlen \
-			  ft_lstadd_back
+LIBFT_FILES = ft_lstadd_back \
+			  ft_lstadd_front \
+			  ft_lstclear \
+			  ft_lstlast \
+			  ft_lstnew \
+			  ft_lstsize \
+			  ft_printf \
+			  ft_atoi \
+			  ft_bzero \
+			  ft_printf_utils \
+			  ft_split \
+			  ft_strlen \
+			  ft_calloc \
+			  ft_memcpy
 
-LIBFT_OFILES = $(LIBFT_FILES:%=$(LIBFT_PATH)%.o)
+
+LIBFT_CFILES = $(LIBFT_FILES:%=$(LIBFT_PATH)%.c)
 
 FILES = count \
 		ft_algo \
 		ft_algo2 \
 		ft_algo_repuch_to_a \
 		move_set1 \
-		moves_set2 \
+		move_set2 \
 		push_swap \
 		push_swap_utils \
 		push_swap_utils_2
@@ -41,9 +54,8 @@ OFILES = $(FILES:%=%.o)
 
 all : $(NAME)
 
-$(NAME) : $(OFILES) $(LIBFT_PATH)Makefile
-	make -C $(LIBFT_PATH) all
-	$(CC) $(CFLAGS) $(CFILES) -o push_swap
+$(NAME) : $(CFILES) $(LIBFT_CFILES)
+	 $(CC) $(CFLAGS) $(CFILES) $(LIBFT_CFILES) -o push_swap
 
 clean :
 	$(RM) $(OFILES)
