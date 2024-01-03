@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/12/28 22:43:17 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/03 22:01:04 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,7 @@ ALLOFILES = $(ALLFILES:%=%.o)
 
 ALLFILES = $(FILES) $(BONUSFILES)
 
-BONUSFILES = ft_lstnew \
-	     ft_lstadd_front \
-	     ft_lstsize \
-	     ft_lstlast \
-	     ft_lstadd_back \
-		 ft_lstdelone \
-		 ft_lstclear \
-	     ft_lstiter \
-	     ft_lstmap \
-
+		 
 FILES = ft_strlen \
 	ft_memmove \
 	ft_memcpy \
@@ -70,7 +61,16 @@ FILES = ft_strlen \
 	ft_putnbr_base \
 	ft_printf \
 	ft_printf_utils \
-	ft_rev_tab
+	ft_rev_tab \
+	ft_lstnew \
+	ft_lstadd_front \
+	ft_lstsize \
+	ft_lstlast \
+	ft_lstadd_back \
+	ft_lstclear \
+	get_next_line \
+	get_next_line_utils
+
 
 all : $(NAME)
 

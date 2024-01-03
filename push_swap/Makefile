@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/26 00:47:42 by ilyanar           #+#    #+#              #
-#    Updated: 2023/12/28 23:00:20 by ilyanar          ###   ########.fr        #
+#    Created: 2024/01/03 21:23:03 by ilyanar           #+#    #+#              #
+#    Updated: 2024/01/03 22:10:28 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,53 +17,52 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
 NAME = push_swap
+BONUS_NAME= checker
 
 LIBFT_PATH = ./libft/
+BONUS_PATH = ./bonus/
 
-LIBFT_FILES = ft_lstadd_back \
-			  ft_lstadd_front \
-			  ft_lstclear \
-			  ft_lstlast \
-			  ft_lstnew \
-			  ft_lstsize \
-			  ft_printf \
-			  ft_atoi \
-			  ft_bzero \
-			  ft_printf_utils \
-			  ft_split \
-			  ft_strlen \
-			  ft_calloc \
-			  ft_memcpy
+LIBFT_LIB = $(LIBFT_PATH:%=%libft.a)
 
+BONUS_FILES = $(BONUS_PATH)checker $(FILES)
 
-LIBFT_CFILES = $(LIBFT_FILES:%=$(LIBFT_PATH)%.c)
+CBONUS_FILES = $(BONUS_FILES:%=%.c)
 
 FILES = count \
-		ft_algo \
-		ft_algo2 \
-		ft_algo_repuch_to_a \
-		move_set1 \
-		move_set2 \
-		push_swap \
-		push_swap_utils \
-		push_swap_utils_2
+        ft_algo \
+        ft_algo2 \
+        ft_algo_repuch_to_a \
+        move_set1 \
+        move_set2 \
+        push_swap \
+        push_swap_utils \
+        push_swap_utils_2
 
 CFILES = $(FILES:%=%.c)
 
-OFILES = $(FILES:%=%.o)
-
 all : $(NAME)
 
-$(NAME) : $(CFILES) $(LIBFT_CFILES)
-	 $(CC) $(CFLAGS) $(CFILES) $(LIBFT_CFILES) -o push_swap
-
 clean :
-	$(RM) $(OFILES)
-	make -C $(LIBFT_PATH) fclean
+	$(MAKE) -C $(LIBFT_PATH) fclean
 
 fclean : clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
+	rm -f $(BONUS_NAME)
 
 re : fclean all
+
+bonus: $(BONUS_NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(CFILES) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(CFILES) $(LIBFT_LIB) -o $(NAME)
+
+$(LIBFT_LIB): $(LIBFT_PATH)Makefile
+	make -C $(LIBFT_PATH) all
+
+$(BONUS_NAME): $(CBONUS_FILES) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) $(CBONUS_FILES) $(LIBFT_LIB) -o $(BONUS_NAME)
 
 .PHONY : clean fclean all re

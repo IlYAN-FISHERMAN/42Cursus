@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:01:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/01 11:39:28 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/04 00:01:16 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ int	ft_instruction(t_listp **a, t_listp **b, char *tab)
 	return (-1);
 }
 
-void	ft_ok_ko(t_listp **a)
+void	ft_ok_ko(t_listp **a, t_listp **b)
 {
-	if (pre_sort_check(a) == 0)
+	if (pre_sort_check(a) == 0 && !*b)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
 }
-
+/*
 int	main(int ac, char **av)
 {
 	char	*tab;
@@ -78,6 +78,42 @@ int	main(int ac, char **av)
 	}
 	if (tab)
 		free(tab);
-	ft_ok_ko(&a);
+	ft_ok_ko(&a, &b);
 	return (ft_clear(&a, &b) + 1);
 }
+
+void	print_test(t_listp **a_stack, t_listp **b_stack, int check)
+{
+	t_listp	*tmp;
+	t_listp	*tmp1;
+
+	if (*a_stack)
+	{
+		if (check != -1)
+			ft_printf("A_STACK\n");
+		tmp = (*a_stack);
+		while (tmp && check != -1)
+		{
+			ft_printf("%d\n", tmp->content);
+			if (tmp->next == NULL)
+				break ;
+			else
+				tmp = tmp->next;
+		}
+	}
+	if (*b_stack)
+	{
+		if (check != -1)
+			ft_printf("\nB_STACK\n");
+		tmp1 = (*b_stack);
+		while (tmp1 && check != -1)
+		{
+			ft_printf("%d\n", tmp1->content);
+			if (tmp1->next == NULL)
+				break ;
+			else
+				tmp1 = tmp1->next;
+		}
+	}
+}
+*/
