@@ -1,4 +1,15 @@
 #!/bin/bash
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    scypt.sh                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/04 01:04:16 by ilyanar           #+#    #+#              #
+#    Updated: 2024/01/04 01:04:16 by ilyanar          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 numbers=""
 
@@ -38,12 +49,11 @@ else
 	exit
 fi
 
-if [ "$check" == "1" ]
+if [ "$check" == "2" ]
 then
+	CHECK=$(./push_swap $numbers | ./checker $numbers)
+else
 	CHECK=$(./push_swap $numbers | ./other/checker_Mac $numbers)
-elif [ "$check" == "2" ]
-then
-	CHECK=$(./push_swap $numbers | ./bonus/checker $numbers)
 fi
 
 echo "\nNumber of line : "$LINE
@@ -64,6 +74,14 @@ read -p "Do you want print the stack A and B ? <y/n> : " prints
 if [ "$prints" == "y" ]
 then
 	./push_swap $numbers | ./other/print_stack $numbers
+fi
+
+echo "\n"
+read -p "Want to see the instruction ? <y/n> : " intr
+
+if [ "$intr" == "y" ]
+then
+	./push_swap $numbers
 fi
 
 echo "\nEND"
