@@ -87,10 +87,15 @@ echo ""
 # print the stacks
 echo "------------------------"
 read -p "Do you want print the stack A and B ? <y/n> : " prints
-
+ARCH=$(sysctl -a | grep Intel)
 if [ "$prints" == "y" ]
 then
-	./push_swap $numbers | ./other/print_stack $numbers
+	if [ ! "$ARCH" ]
+	then
+		./push_swap $numbers | ./other/print_stack $numbers
+	else
+		./push_swap $numbers | ./other/print_mac_intel $numbers
+	fi
 fi
 
 # print the instructions
