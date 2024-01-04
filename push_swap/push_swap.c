@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:16:46 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/04 00:49:57 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/05 00:58:30 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,16 +98,3 @@ int	push_swap(char **av, int ac)
 		beginning_algo(&a_stack, &b_stack);
 	return ((ft_clear(&a_stack, &b_stack)) + 1);
 }
-/*
-int	main(int ac, char **av)
-{
-	if (ac >= 2)
-	{
-		if ((push_swap(av, ac)) == -1)
-		{
-			ft_printf("Error");
-			return (-1);
-		}
-	}
-	return (0);
-}*/
