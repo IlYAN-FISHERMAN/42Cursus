@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 21:23:03 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/05 00:59:28 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/05 04:01:34 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,26 +43,30 @@ CFILES = $(FILES:%=%.c)
 all : $(NAME)
 
 clean :
-	$(MAKE) -C $(LIBFT_PATH) fclean
+	@echo "\n [$(NAME)] - Nettoyage fichier residuels... ♻️ "
+	@$(MAKE) -C $(LIBFT_PATH) fclean
 
 fclean : clean
-	rm -f $(NAME)
-	rm -f $(BONUS_NAME)
+	@echo "\n [$(NAME)] - Supressions du reste... 🗑️"
+	@rm -f $(NAME)
+	@rm -f $(BONUS_NAME)
 
 re : fclean all
 
 bonus: $(BONUS_NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\33[2K"
 
 $(NAME): $(CFILES) $(LIBFT_LIB)
-	$(CC) $(CFLAGS) $(CFILES) main.c $(LIBFT_LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(CFILES) main.c $(LIBFT_LIB) -o $(NAME)
+	@echo "\n\nBest push_swap with more than 12 numbers, and less than 2000\nThis one is the opposite : (https://github.com/rpdjf/42-pushswap)"
 
 $(LIBFT_LIB): $(LIBFT_PATH)Makefile
-	make -C $(LIBFT_PATH) all
+	@make -C $(LIBFT_PATH) all
 
 $(BONUS_NAME): $(CBONUS_FILES) $(LIBFT_LIB)
-	$(CC) $(CFLAGS) $(CBONUS_FILES) $(LIBFT_LIB) -o $(BONUS_NAME)
+	@$(CC) $(CFLAGS) $(CBONUS_FILES) $(LIBFT_LIB) -o $(BONUS_NAME)
 
 .PHONY : clean fclean all re

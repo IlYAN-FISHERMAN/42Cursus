@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/11/12 08:04:44 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/05 04:03:40 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,7 @@ ALLOFILES = $(ALLFILES:%=%.o)
 
 ALLFILES = $(FILES) $(BONUSFILES)
 
-BONUSFILES = ft_lstnew \
-	     ft_lstadd_front \
-	     ft_lstsize \
-	     ft_lstlast \
-	     ft_lstadd_back \
-			 ft_lstdelone \
-			 ft_lstclear \
-	     ft_lstiter \
-	     ft_lstmap \
+
 
 FILES = ft_strlen \
 	ft_memmove \
@@ -77,23 +69,40 @@ FILES = ft_strlen \
 	ft_printf \
 	ft_print_utils \
 	ft_rev_tab
+	get_next_line \
+	get_next_line_utils \
+	ft_printf \
+	ft_printf_utils \
+	ft_lstnew \
+    ft_lstadd_front \
+	ft_lstsize \
+	ft_lstlast \
+	ft_lstadd_back \
+	ft_lstdelone \
+	ft_lstclear \
+	ft_lstiter \
+	ft_lstmap
 
 all : $(NAME)
 
-COMPIL : $(CFILES)
-	$(CC) $(CFLAGS) -c $(CFILES) -I.
+%.o : %.c
+	@printf "\t⏳Compiling :3 $<...⌛️\r"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\33[2K"
 
 $(NAME) : $(OFILES)
-	ar -rc $@ $(OFILES)
-
-bonus : $(ALLOFILES)
-	ar -rcs $(NAME) $(ALLOFILES)
+	@printf "\tcompiling...\r"
+	@ar -rc $@ $(OFILES)
+	@printf "\33[2K"
+	@echo "\t$(NAME) compiled ✅"
 
 clean :
-	$(RM) $(OFILES)
+	@echo "\n [$(NAME)] - Nettoyage fichier residuels... ♻️ "
+	@$(RM) $(OFILES)
 
 fclean : clean
-	$(RM) $(NAME)
+	@echo "\n [$(NAME)] - supressions du reste... 🗑️"
+	@$(RM) $(NAME)
 
 re : fclean all
 

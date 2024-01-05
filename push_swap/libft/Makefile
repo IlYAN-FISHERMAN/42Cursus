@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/03 22:01:04 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/05 04:03:38 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,20 +74,27 @@ FILES = ft_strlen \
 
 all : $(NAME)
 
-COMPIL : $(CFILES)
-	$(CC) $(CFLAGS) -c $(CFILES) -I.
+%.o : %.c
+	@printf "\t⏳Compiling :3 $<...⌛️\r"
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\33[2K"
 
 $(NAME) : $(OFILES)
-	ar -rc $@ $(OFILES)
+	@printf "\tcompiling...\r"
+	@ar -rc $@ $(OFILES)
+	@printf "\33[2K"
+	@echo "\t$(NAME) compiled ✅"
 
 bonus : $(ALLOFILES)
-	ar -rcs $(NAME) $(ALLOFILES)
+	@ar -rcs $(NAME) $(ALLOFILES)
 
 clean :
-	$(RM) $(OFILES)
+	@echo "\n [$(NAME)] - Nettoyage fichier residuels... ♻️ "
+	@$(RM) $(OFILES)
 
 fclean : clean
-	$(RM) $(NAME)
+	@echo "\n [$(NAME)] - supressions du reste... 🗑️"
+	@$(RM) $(NAME)
 
 re : fclean all
 
