@@ -18,7 +18,6 @@ numbers=""
 read -p "Do you want random numbers? <y/n> : " random
 echo "------------------------"
 read -p "which checker do you want to use? < 1 = original, 2 = bonus > : " check
-echo "------------------------"
 
 #fonction to generate the numbers
 
@@ -45,10 +44,13 @@ generate()
 
 if [ "$random" == "n" ]
 then
+	echo "---------ARGUMENTS-------------"
 	read -p "ARG = " numbers
+	echo "-----------TIME-------------"
 	LINE=$(time ./push_swap $numbers | wc -l)
 elif [ "$random" == "y" ]
 then
+	echo "------------------------"
 	read -p "How many numbers you want : " count
 	echo "\n-----------TIME-------------"
 	generate

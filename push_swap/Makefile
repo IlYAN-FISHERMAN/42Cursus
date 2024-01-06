@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 21:23:03 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/05 04:01:34 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/05 09:38:50 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,9 @@ $(LIBFT_LIB): $(LIBFT_PATH)Makefile
 	@make -C $(LIBFT_PATH) all
 
 $(BONUS_NAME): $(CBONUS_FILES) $(LIBFT_LIB)
+	@printf "\t⏳Compiling bonus :3 $<...⌛️\r"
 	@$(CC) $(CFLAGS) $(CBONUS_FILES) $(LIBFT_LIB) -o $(BONUS_NAME)
+	@printf "\33[2K"
+	@echo "\t$(BONUS_NAME) compiled ✅"
 
 .PHONY : clean fclean all re
