@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:56:47 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/28 17:19:39 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/06 20:24:03 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		sort_a_rrr(t_listp **a, t_listp **b, int nb, int check);
 int		organize_b(t_listp **a, t_listp **b, int nb, int check);
 int		ft_sort_a(t_listp **a_stack, t_listp **b_stack);
 int		more_than3(t_listp **stack);
-int		sort_pars(t_listp **a, t_listp **b, char **av, int ac);
+int		sort_pars(t_listp **a, char **av, int ac);
 int		push_swap(char **av, int ac);
 
 int		count_stack(t_listp **a, t_listp **b, int nb);

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:01:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/05 02:00:52 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/07 00:09:34 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int ac, char **av)
 	if (ac <= 1)
 		return (ft_clear(&a, &b));
 	tab = get_next_line(0);
-	if ((sort_pars(&a, &b, av, ac)) == -1)
+	if ((sort_pars(&a, av, ac)) == -1)
 	{
 		ft_printf("Error\n");
 		return (ft_clear(&a, &b));

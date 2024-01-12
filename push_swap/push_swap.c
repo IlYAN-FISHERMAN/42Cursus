@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:16:46 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/05 00:58:30 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/06 20:24:11 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_sort_a(t_listp **a_stack, t_listp **b_stack)
 	return (0);
 }
 
-void	ft_free_tab(char **tab)
+int	ft_free_tab(char **tab)
 {
 	int	i;
 
@@ -46,9 +46,10 @@ void	ft_free_tab(char **tab)
 		i--;
 	}
 	free(tab);
+	return (0);
 }
 
-int	sort_pars(t_listp **a, t_listp **b, char **av, int ac)
+int	sort_pars(t_listp **a, char **av, int ac)
 {
 	char	**tab;
 	int		i;
@@ -68,7 +69,7 @@ int	sort_pars(t_listp **a, t_listp **b, char **av, int ac)
 			nb = ft_atoi_swap(tab[li++], &check);
 			ft_lstadd_back(a, ft_lstnew(nb));
 			if (check == -1 || check_double(a) == 1)
-				return (ft_clear(a, b));
+				return (ft_free_tab(tab) - 1);
 		}
 		li = 0;
 		ft_free_tab(tab);
@@ -83,8 +84,8 @@ int	push_swap(char **av, int ac)
 
 	b_stack = 0;
 	a_stack = 0;
-	if ((sort_pars(&a_stack, &b_stack, av, ac)) == -1)
-		return (-1);
+	if ((sort_pars(&a_stack, av, ac)) == -1)
+		return (ft_clear(&a_stack, &b_stack));
 	if (pre_sort_check(&a_stack) == 0)
 		return (0);
 	if (ft_lstsize(a_stack) == 2)

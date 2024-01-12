@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/03 21:23:03 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/12 17:25:01 by ilyanar          ###   ########.fr        #
+#    Created: 2024/01/10 12:16:20 by ilyanar           #+#    #+#              #
+#    Updated: 2024/01/10 12:20:04 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CFLAGS = -Wall -Werror -Wextra
 
 RM = rm -rf
 
-NAME = push_swap
-BONUS_NAME= checker
+NAME = pipex
+BONUS_NAME= pipex_bonus
 
 LIBFT_PATH = ./libft/
 BONUS_PATH = ./bonus/
@@ -28,15 +28,7 @@ BONUS_FILES = $(BONUS_PATH)checker $(FILES)
 
 CBONUS_FILES = $(BONUS_FILES:%=%.c)
 
-FILES = count \
-        ft_algo \
-        ft_algo2 \
-        ft_algo_repuch_to_a \
-        move_set1 \
-        move_set2 \
-        push_swap \
-        push_swap_utils \
-        push_swap_utils_2
+FILES = pipex \
 
 CFILES = $(FILES:%=%.c)
 
@@ -61,8 +53,7 @@ bonus: $(BONUS_NAME)
 
 $(NAME): $(CFILES) $(LIBFT_LIB)
 	@$(CC) $(CFLAGS) $(CFILES) main.c $(LIBFT_LIB) -o $(NAME)
-	@echo "\t$(NAME) created ✅"
-	@echo "\n\nBest push_swap with more than 12 numbers, and less than 2000\nThis one is the opposite : (https://github.com/rpdjf/42-pushswap)"
+	@echo ""
 
 $(LIBFT_LIB): $(LIBFT_PATH)Makefile
 	@make -C $(LIBFT_PATH) all
