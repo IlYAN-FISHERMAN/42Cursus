@@ -14,7 +14,6 @@
 numbers=""
 spinner="⠋⠙⠹⠼⠴⠦⠧⠏"
 delay=0.1
-iterations=30
 
 echo "\033[94m╔════════════════════════════════════════════════════════════════════════╗\033[0m"
 echo "\033[94m║\033[0m               \033[95mWelcome to \033[0m\033[32;4mpush_swap\033[0m \033[95mtester, by ilyanar!\033[0m  \033[94m	       	 ║\033[0m"
@@ -27,7 +26,7 @@ read random
 printf "\033[3;1;95mwhich checker do you want to use?\033[0m \033[32m<1=original/2=bonus>\033[0m \033[95;1m: \033[0m"
 read check
 
-#fonction to generate the numbers
+#fonctions
 
 generate_unique_random()
 {
@@ -48,6 +47,17 @@ generate()
 	done
 }
 
+loading_animation() {
+    for i in $(seq 1 $iterations); do
+        for char in $(echo -n "$spinner" | grep -o .); do
+	    printf "\r\033[96m${spinner:$i:1}\033[0m \033[33msorting numbers...\033[0m"
+            sleep $delay
+        done
+    done
+    printf "\r\033[K"  # Effacer la ligne après la fin du texte
+    echo "Chargement terminé. Continuation du script..."
+}
+
 # grep the random numbers
 # printf "\r\033[96m${spinner:$i:1}\033[0m \033[33msorting numbers...\033[0m"
 
@@ -61,9 +71,12 @@ elif [ "$random" == "y" ]
 then
 	printf "\033[3;1;95mHow many numbers you want : \033[0m"
 	read count
+	loading_animation &
+	loading_pid=$!
 	echo "\n-----------TIME-------------"
-	generate
 	LINE=$(time ./push_swap $numbers | wc -l)
+	trap "kill 0" EXIT
+	wait "$loading_pid"
 else
 	echo "Error bad format."
 	exit
@@ -74,7 +87,7 @@ if [ "$check" == "2" ]
 then
 	CHECK=$(./push_swap $numbers | ./checker $numbers)
 else
-	CHECK=$(./push_swap $numbers | ./other/checker_Mac $numbers)
+	CHECK=$(./push_swap $numbers | ./srcs/checker_Mac $numbers)
 fi
 # grep the time
 echo "\n----------OPERATIONS--------------"
@@ -106,9 +119,9 @@ if [ "$prints" == "y" ]
 then
 	if [ ! "$ARCH" ]
 	then
-		./push_swap $numbers | ./other/print_stack $numbers
+		./push_swap $numbers | ./srcs/print_stack $numbers
 	else
-		./push_swap $numbers | ./other/print_mac_intel $numbers
+		./push_swap $numbers | ./srcs/print_mac_intel $numbers
 	fi
 fi
 
