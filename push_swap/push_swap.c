@@ -6,7 +6,11 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 18:16:46 by ilyanar           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/01/12 23:04:28 by ilyanar          ###   ########.fr       */
+=======
+/*   Updated: 2024/01/13 20:57:23 by ilyanar          ###   ########.fr       */
+>>>>>>> 263218d6fbe226826eb7f6a190d6ef552cd4251c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +91,7 @@ int	push_swap(char **av, int ac)
 	if ((sort_pars(&a_stack, av, ac)) == -1)
 		return (ft_clear(&a_stack, &b_stack));
 	if (pre_sort_check(&a_stack) == 0)
-		return (0);
+		return (ft_clear(&a_stack, &b_stack) + 1);
 	if (ft_lstsize(a_stack) == 2)
 	{
 		if (a_stack->content > a_stack->next->content)
