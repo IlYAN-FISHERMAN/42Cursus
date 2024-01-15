@@ -6,6 +6,12 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:03:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/12 17:26:41 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/15 18:44:51 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft/libft.h"
+
+int	main(int ac, char **av)
+{
+}
