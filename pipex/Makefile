@@ -28,7 +28,7 @@ BONUS_FILES = $(BONUS_PATH)checker $(FILES)
 
 CBONUS_FILES = $(BONUS_FILES:%=%.c)
 
-FILES = pipex \
+FILES = pipex
 
 CFILES = $(FILES:%=%.c)
 

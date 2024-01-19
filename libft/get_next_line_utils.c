@@ -6,13 +6,13 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:14 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/10 12:11:39 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/19 19:56:55 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	size_t	i;
 
@@ -22,20 +22,20 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gnl_strjoin(char const *s1, char const *s2)
 {
 	char	*s3;
 
-	s3 = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	s3 = (char *)gnl_calloc(gnl_strlen(s1) + gnl_strlen(s2) + 1, sizeof(char));
 	if (!s3)
 		return (NULL);
-	ft_memcpy(s3, s1, ft_strlen(s1));
-	ft_memcpy((s3 + ft_strlen(s1)), s2, ft_strlen(s2));
+	gnl_memcpy(s3, s1, gnl_strlen(s1));
+	gnl_memcpy((s3 + gnl_strlen(s1)), s2, gnl_strlen(s2));
 	free((char *)s1);
 	return (s3);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*gnl_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t		i;
 	char		*d;
@@ -51,7 +51,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void	*gnl_calloc(size_t count, size_t size)
 {
 	void	*tab;
 	size_t	i;
@@ -65,12 +65,12 @@ void	*ft_calloc(size_t count, size_t size)
 	return (tab);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_strchr(const char *s, int c)
 {
 	if (!s)
 		return (NULL);
 	if (!(unsigned char)c)
-		return ((char *)s + ft_strlen(s));
+		return ((char *)s + gnl_strlen(s));
 	while (*s && *s != (unsigned char)c)
 		s++;
 	if (*s == '\0')

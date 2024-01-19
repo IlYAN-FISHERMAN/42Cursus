@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/10 12:11:16 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/19 19:54:40 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,15 @@ int		who_is_char(const char *str, va_list *args, int *nb);
 int		ft_printf(const char *str, ...);
 
 //GNL
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *s, int c);
+char	*gnl_strjoin(char const *s1, char const *s2);
+char	*gnl_strchr(const char *s, int c);
 char	*ft_gnljoin(char *s2);
 char	*get_next_line(int fd);
 
-void	*ft_calloc(size_t count, size_t size);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	ft_bzero(void *s, size_t n);
+void	*gnl_calloc(size_t count, size_t size);
+void	*gnl_memcpy(void *dst, const void *src, size_t n);
 
-size_t	ft_strlen(const char *s);
-
+size_t	gnl_strlen(const char *s);
 int		ft_invalid(char **buffer, int fd);
 
 #endif

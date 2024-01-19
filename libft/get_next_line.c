@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/10 12:11:28 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/19 19:53:14 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_gnljoin(char *s2)
 
 	i = 0;
 	if (!s2)
-		s2 = ft_calloc(1, sizeof(char));
+		s2 = gnl_calloc(1, sizeof(char));
 	if (!s2)
 		return (NULL);
 	while (s2[i])
@@ -42,10 +42,10 @@ char	*ft_gnljoin(char *s2)
 		}
 		i++;
 	}
-	s3 = (char *)ft_calloc(i + 1, sizeof(char));
+	s3 = (char *)gnl_calloc(i + 1, sizeof(char));
 	if (!s3)
 		return (NULL);
-	ft_memcpy(s3, s2, i);
+	gnl_memcpy(s3, s2, i);
 	return (s3);
 }
 
@@ -62,8 +62,8 @@ char	*next_funct(char *next_line)
 	while (next_line[k] != '\n')
 		k++;
 	k++;
-	i = ft_strlen(next_line + k);
-	buffer = ft_calloc(i + 1, sizeof(char));
+	i = gnl_strlen(next_line + k);
+	buffer = gnl_calloc(i + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
 	while (next_line[j + k])
@@ -81,7 +81,7 @@ char	*get_nline(char *buffer, char *next_line, int *fd)
 
 	byte = 1;
 	if (!buffer)
-		buffer = ft_calloc(1, sizeof(char));
+		buffer = gnl_calloc(1, sizeof(char));
 	if (!buffer)
 		return (NULL);
 	while (byte != 0)
@@ -95,8 +95,8 @@ char	*get_nline(char *buffer, char *next_line, int *fd)
 		else if (byte == 0)
 			break ;
 		next_line[byte] = '\0';
-		buffer = ft_strjoin(buffer, next_line);
-		if (ft_strchr(buffer, '\n'))
+		buffer = gnl_strjoin(buffer, next_line);
+		if (gnl_strchr(buffer, '\n'))
 			break ;
 	}
 	free(next_line);
@@ -110,12 +110,12 @@ char	*get_next_line(int fd)
 
 	if (ft_invalid(&buffer, fd) != 0)
 		return (NULL);
-	next_line = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	next_line = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!next_line)
 		return (NULL);
 	buffer = get_nline(buffer, next_line, &fd);
 	next_line = ft_gnljoin(buffer);
-	if (ft_strchr(buffer, '\n'))
+	if (gnl_strchr(buffer, '\n'))
 		buffer = next_funct(buffer);
 	else if (buffer)
 	{
