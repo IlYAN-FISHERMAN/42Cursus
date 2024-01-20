@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:16:20 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/10 12:20:04 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/19 20:30:53 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,8 @@ bonus: $(BONUS_NAME)
 	@printf "\33[2K"
 
 $(NAME): $(CFILES) $(LIBFT_LIB)
-	@$(CC) $(CFLAGS) $(CFILES) main.c $(LIBFT_LIB) -o $(NAME)
-	@echo ""
+	@$(CC) $(CFLAGS) $(CFILES) $(LIBFT_LIB) -o $(NAME)
+	@echo " \t$(NAME) compiled ✅"
 
 $(LIBFT_LIB): $(LIBFT_PATH)Makefile
 	@make -C $(LIBFT_PATH) all

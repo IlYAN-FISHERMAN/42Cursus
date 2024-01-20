@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/05 04:03:40 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/19 20:29:00 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,8 +67,8 @@ FILES = ft_strlen \
 	ft_putnbr_fd \
 	ft_putnbr_base \
 	ft_printf \
-	ft_print_utils \
-	ft_rev_tab
+	ft_printf_utils \
+	ft_rev_tab \
 	get_next_line \
 	get_next_line_utils \
 	ft_printf \
@@ -81,7 +81,7 @@ FILES = ft_strlen \
 	ft_lstdelone \
 	ft_lstclear \
 	ft_lstiter \
-	ft_lstmap
+	ft_lstmap \
 
 all : $(NAME)
 
