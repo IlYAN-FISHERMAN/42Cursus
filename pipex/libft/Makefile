@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/22 13:52:32 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/22 16:53:36 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ FILES = ft_strlen \
 	ft_lstclear \
 	ft_lstiter \
 	ft_lstmap \
+	ft_free_tab
 
 all : $(NAME)
 
