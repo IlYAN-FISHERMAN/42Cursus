@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:16:20 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/22 13:51:32 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/24 14:29:52 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,16 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
 NAME = pipex
-BONUS_NAME= pipex_bonus
+#BONUS_NAME= pipex_bonus
 
 LIBFT_PATH = ./libft/
-BONUS_PATH = ./bonus/
+#BONUS_PATH = ./bonus/
 
 LIBFT_LIB = $(LIBFT_PATH:%=%libft.a)
 
-BONUS_FILES = $(BONUS_PATH)checker $(FILES)
+#BONUS_FILES = $(BONUS_PATH)checker $(FILES)
 
-CBONUS_FILES = $(BONUS_FILES:%=%.c)
+#CBONUS_FILES = $(BONUS_FILES:%=%.c)
 
 FILES = pipex
 
@@ -45,7 +45,7 @@ fclean : clean
 
 re : fclean all
 
-bonus: $(BONUS_NAME)
+#bonus: $(BONUS_NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
