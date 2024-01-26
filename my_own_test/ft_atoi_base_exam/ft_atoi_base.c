@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:39:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/12/19 20:18:13 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/25 13:26:19 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,6 @@ int	ft_atoi_base(const char *str, int base)
 
 int	main(int ac, char **av)
 {
-	int	nb;
-	int	i;
-
-	i = 0;
-	nb = 0;
-	if (ac == 3)
-	{
-		while (av[2][i] >= '0' && av[2][i] <= '9')
-		{
-			nb = nb * 10 + (av[2][i] - 48);
-			i++;
-		}
-		printf("M_fonction : %d\n", ft_atoi_base(av[1], nb));
-	}
+	if (ac == 2)
+		printf("%d\n", ft_atoi_base(av[1], 16));
 }

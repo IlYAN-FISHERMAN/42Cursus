@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:03:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/24 14:36:14 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:58:54 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,29 @@ int	check_path(char **tab, char **env)
 {
 	char	*path;
 	int		i;
+	char tabl[] = "hello";
 
 	i = -1;
-	path = path_line(env, "PATH\0");
+	path = path_line(env, "PATH");
 	tab = ft_split(path, ':');
+	free(tab[0]);
+	tab[0] = tabl;
 	if (tab)
 		while (tab[++i])
-			ft_printf("\033[31m%s\033[0m\n", tab[i]);
+			ft_printf("\033[38;5;208m%s\033[0m\n", tab[i]);
 	if (!tab)
 		return (0);
 	return (1);
 }
 
-int	main(int ac, char **av, char *envp[])
+int	pipex(char **av, char **envp, int ac)
 {
 	int		pid;
-	char	*arg[] = {av[2], NULL, NULL};
 	char	**tab;
+	char	**arg;
 
 	tab = 0;
-	if (ac < 5)
-		exit(EXIT_FAILURE);
+	arg = 0;
 	pid = fork();
 	if (pid == -1)
 	{
@@ -81,14 +83,25 @@ int	main(int ac, char **av, char *envp[])
 			perror("\033[31mError path\033[0m");
 			exit(EXIT_FAILURE);
 		}
-		execve("/usr/bin/ls", arg, NULL);
+		execve("/bin/ls", arg, NULL);
 		perror("\033[31mError child\033[0m");
 		exit(EXIT_FAILURE);
 	}
 	else if (waitpid(pid, NULL, 0))
 	{
-		open("fdp.txt", O_CREAT | O_WRONLY, 0644);
+		open(av[ac], O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		ft_printf("end\n");
 	}
 	return (0);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	if (((ac < 5) || (access(av[1], R_OK) != 0)))
+	{
+		perror("Error");
+		exit(EXIT_FAILURE);
+	}
+	else
+		pipex(av, envp, ac);
 }
