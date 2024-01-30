@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:16:20 by ilyanar           #+#    #+#              #
-#    Updated: 2024/01/24 14:29:52 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/01/30 13:21:59 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ LIBFT_LIB = $(LIBFT_PATH:%=%libft.a)
 
 #CBONUS_FILES = $(BONUS_FILES:%=%.c)
 
-FILES = pipex
+FILES = pipex \
+		pipex_utils
 
 CFILES = $(FILES:%=%.c)
 
