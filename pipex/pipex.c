@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:03:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/26 19:53:46 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/30 08:44:02 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,52 +47,55 @@ int	check_path(char **tab, char **env)
 	i = -1;
 	path = path_line(env, "PATH");
 	tab = ft_split(path, ':');
-	if (tab)
-		while (tab[++i])
-			ft_printf("\033[38;5;208m%s\033[0m\n", tab[i]);
 	if (!tab)
+	{
+		ft_free_tab(tab);
 		return (0);
+	}
+	path = ft_strdup(ft_strchr(tab[0], '=') + 1);
+	free(tab[0]);
+	tab[0] = path;
+	while (++i, tab[i])
+		ft_printf("%s\n", tab[i]);
 	return (1);
 }
 
-int	check_command(char **tab, char *arg)
+int	true_command(char **tab)
 {
+	return (0);
+}
+
+int	exec_command(void)
+{
+	int	pid;
+	if (waitpid(pid, NULL, 0))
+	{
+		open(av[ac], O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		ft_printf("end\n");
+	}
+	return (0);
 }
 
 int	pipex(char **av, char **envp, int ac)
 {
 	int		i;
-	int		pid;
 	char	**tab;
 	char	**arg;
 
-	i = 0;
 	tab = 0;
 	arg = 0;
-	if (check_path(tab, envp) == 0)
+	i = -1;
+	while (++i < ac)
 	{
-		perror("\033[31mError path\033[0m");
-		exit(EXIT_FAILURE);
+		if (check_path(tab, envp) == 0)
+		{
+			perror("\033[31mError path\033[0m");
+			exit(EXIT_FAILURE);
+		}
+		if (true_command(tab) == 1)
+			exec_command();
 	}
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("\033[31mError\033[0m");
-		exit(EXIT_FAILURE);
-	}
-	if (pid == 0)
-	{
-		execve("/bin/ls", arg, envp);
-		perror("\033[31mError child\033[0m");
-		exit(EXIT_FAILURE);
-	}
-	else if (waitpid(pid, NULL, 0))
-	{
-		open(av[ac], O_CREAT | O_TRUNC | O_WRONLY, 0644);
-		ft_printf("end\n");
-	}
-	ft_free_tab(tab);
-	return (0);
+	return (ft_free_tab(tab) + 1);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -104,4 +107,5 @@ int	main(int ac, char **av, char **envp)
 	}
 	else
 		pipex(av, envp, ac);
+	ft_printf("test\n");
 }
