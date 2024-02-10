@@ -6,101 +6,105 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:03:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/30 13:22:33 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:24:59 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "pipex.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/_types/_null.h>
+#include <sys/_types/_pid_t.h>
+#include <sys/fcntl.h>
+#include <unistd.h>
 
-char	*path_line(char **env, char *path)
+void	ft_first_child(char *path, char **env, char **cmd, int *pipes)
 {
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (*env[++i] != '\0')
-	{
-		while (env[i][j] == path[j])
-		{
-			j++;
-			if (path[j] == '\0')
-				return (env[i]);
-		}
-		j = 0;
-	}
-	return (0);
+	if (dup2(pipes[1], STDOUT_FILENO) == -1)
+		ft_strerror("dup2 1", 0, NULL, NULL);
+	close(pipes[0]);
+	execve(path, cmd, env);
+	ft_strerror("execve", 0, NULL, NULL);
 }
 
-int	check_path(char **tab, char **env)
+void	ft_first_exec(t_pipe *t_pip, int *pipes, int fd)
 {
-	char	*path;
-	int		i;
-
-	i = -1;
-	tab = ft_split(path_line(env, "PATH"), ':');
-	if (!tab)
-	{
-		ft_free_tab(tab);
-		return (0);
-	}
-	path = ft_strdup(ft_strchr(tab[0], '=') + 1);
-	free(tab[0]);
-	tab[0] = path;
-	while (++i, tab[i])
-		ft_printf("%s\n", tab[i]);
-	return (1);
+	if (dup2(fd, STDIN_FILENO) == -1)
+		ft_strerror("dup2 1", 0, NULL, NULL);
+	close(fd);
+	if (dup2(pipes[1], STDOUT_FILENO) == -1)
+		ft_strerror("dup2 1", 0, NULL, NULL);
+	close(pipes[0]);
+	execve(t_pip->path, t_pip->arg, t_pip->env);
+	ft_strerror("execve", 0, NULL, NULL);
 }
 
-int	true_command(char **tab)
+void	fabien(char **env, t_pipe *t_main, int *pipes)
 {
-	(void)tab;
-	return (0);
+	if (pipe(pipes) == -1)
+		ft_strerror("pipe", 0, NULL, t_main);
+	t_main->f_pid = fork();
+	if (t_main->f_pid == -1)
+		ft_strerror("pid", 0, NULL, t_main);
+	if (t_main->f_pid == 0 && t_main->in_fd != -1)
+		ft_first_exec(t_main, pipes, t_main->in_fd);
+	else if (t_main->f_pid == 0 && t_main->in_fd == 0)
+		ft_first_child(t_main->path, env, t_main->arg, pipes);
+	else
+	{
+		if (dup2(pipes[0], STDIN_FILENO) == -1)
+			ft_strerror("dup2 2", 0, NULL, t_main);
+		close(pipes[1]);
+		waitpid(t_main->f_pid, NULL, 0);
+	}
 }
 
-int	exec_command(char **av)
+void	pipex(char **av, char **envp, int fd)
 {
-	(void)av;
-	return (0);
+	t_pipe	t_main;
+
+	init_path(&t_main, envp);
+	t_main.in_fd = fd;
+	t_main.out_fd = STDOUT_FILENO;
+	av += 2;
+	for (int d = 0; t_main.env[d]; d++)
+		ft_printf("env[%d] : %s\n", d, t_main.env[d]);
+	while (*av)
+	{
+		path_command(*av, &t_main);
+		ft_printf("\npath : %s\n", t_main.path);
+		found_cmd_alone(&t_main, *av);
+		ft_printf("\ncmd_alone : %s\n\n", t_main.cmd_alone);
+		parse_arg(&t_main, *av);
+		if (t_main.arg)
+			for (int d = 0; t_main.env[d]; d++)
+				ft_printf("arg[%d] : %s\n", d, t_main.arg[d]);
+//		fabien(envp, &t_main, t_main.pipes1);
+//		fabien(envp, &t_main, t_main.pipes2);
+		ft_free_char(&t_main, 0);
+		av++;
+	}
+	return (ft_free_char(&t_main, 1));
 }
-
-int	pipex(char **av, char **envp, int ac)
-{
-	int		i;
-	char	**tab;
-
-	tab = 0;
-	i = -1;
-	if (check_path(tab, envp) == 0)
-	{
-		perror("\033[31mError path\033[0m");
-		exit(EXIT_FAILURE);
-	}
-	while (++i < ac)
-	{
-		if (true_command(tab) == 1)
-			exec_command(av);
-	}
-	return (free_tab(tab) + 1);
-}
-
-/*	if (waitpid(pid, NULL, 0))
-	{
-		open(av[ac], O_CREAT | O_TRUNC | O_WRONLY, 0644);
-		ft_printf("end\n");
-	}
-*/
 
 int	main(int ac, char **av, char **envp)
 {
+	int		fd;
+
 	if (((ac < 5) || (access(av[1], R_OK) != 0)))
 	{
-		perror("Error");
+		if (ac < 5)
+			ft_printf("less arg than 5");
+		else
+			ft_printf("'%s' dosen't exist\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 	else
-		pipex(av, envp, ac);
-	ft_printf("test\n");
+	{
+		fd = open(av[1], O_RDONLY);
+		pipex(av, envp, fd);
+		close(fd);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 04:45:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/08 16:02:03 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/02 04:34:50 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static size_t	ft_count_words(char const *s, char c)
 		else if (s[i] != c)
 		{
 			while (s[i] != c && s[i] != '\0')
-				i++;
+			i++;
 			nb++;
 		}
 	}
