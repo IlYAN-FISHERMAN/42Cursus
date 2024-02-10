@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:01:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/10 16:25:42 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/10 17:04:17 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,18 @@ void	ft_free_char(t_pipe *t_main, int cmd)
 	t_main->path = NULL;
 	if (t_main->cmd_alone)
 		free(t_main->cmd_alone);
+	t_main->cmd_alone = NULL;
 	if (t_main->arg)
 		ft_free_tab(t_main->arg);
+	t_main->arg = NULL;
 	if (cmd > 0)
+	{
 		if (t_main->env)
+		{
 			ft_free_tab(t_main->env);
+			t_main->env = NULL;
+		}
+	}
 }
 
 void	parse_arg(t_pipe *t_main, char *av)
@@ -60,6 +67,7 @@ void	path_command(char *av, t_pipe *t_main)
 		if (access(t_main->path, F_OK) != -1)
 			return ;
 		free(t_main->path);
+		t_main->path = NULL;
 		i++;
 	}
 	return (ft_strerror(NULL, 1, av, t_main));

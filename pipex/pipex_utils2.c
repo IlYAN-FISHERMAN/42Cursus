@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:53:02 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/10 16:24:39 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/10 17:05:37 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int	last_exec(char *path, char **env, char **cmd, char *file)
 
 void	ft_strerror(char *tab, int cmd, char *av, t_pipe *t_main)
 {
-	ft_printf("cmd_alone error : %s\n", t_main->cmd_alone);
-	if (*(t_main)->cmd_alone)
+	if (t_main->cmd_alone)
 		free(t_main->cmd_alone);
 	if (t_main->path)
 		free(t_main->path);

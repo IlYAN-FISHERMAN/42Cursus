@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:03:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/10 16:24:59 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/10 17:08:30 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,11 @@ void	pipex(char **av, char **envp, int fd)
 	t_main.in_fd = fd;
 	t_main.out_fd = STDOUT_FILENO;
 	av += 2;
-	for (int d = 0; t_main.env[d]; d++)
-		ft_printf("env[%d] : %s\n", d, t_main.env[d]);
-	while (*av)
+	while (*av && *(av + 1) != NULL)
 	{
 		path_command(*av, &t_main);
-		ft_printf("\npath : %s\n", t_main.path);
 		found_cmd_alone(&t_main, *av);
-		ft_printf("\ncmd_alone : %s\n\n", t_main.cmd_alone);
 		parse_arg(&t_main, *av);
-		if (t_main.arg)
-			for (int d = 0; t_main.env[d]; d++)
-				ft_printf("arg[%d] : %s\n", d, t_main.arg[d]);
 //		fabien(envp, &t_main, t_main.pipes1);
 //		fabien(envp, &t_main, t_main.pipes2);
 		ft_free_char(&t_main, 0);
@@ -105,6 +98,7 @@ int	main(int ac, char **av, char **envp)
 		fd = open(av[1], O_RDONLY);
 		pipex(av, envp, fd);
 		close(fd);
+		ft_printf("\nend\n");
 	}
 	return (0);
 }
