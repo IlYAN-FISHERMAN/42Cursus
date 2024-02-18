@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:01:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/10 17:04:17 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/13 22:22:09 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void	ft_free_char(t_pipe *t_main, int cmd)
 	if (t_main->cmd_alone)
 		free(t_main->cmd_alone);
 	t_main->cmd_alone = NULL;
-	if (t_main->arg)
-		ft_free_tab(t_main->arg);
+	if (t_main->args)
+		ft_free_tab(t_main->args);
+	t_main->args = NULL;
 	t_main->arg = NULL;
 	if (cmd > 0)
 	{
@@ -32,12 +33,6 @@ void	ft_free_char(t_pipe *t_main, int cmd)
 			t_main->env = NULL;
 		}
 	}
-}
-
-void	parse_arg(t_pipe *t_main, char *av)
-{
-	(void)t_main;
-	(void)av;
 }
 
 void	found_cmd_alone(t_pipe *t_main, char *av)
@@ -87,36 +82,4 @@ int	is_tring(char *av, char *str)
 			return (1);
 	}
 	return (0);
-}
-
-char	**new_av(char **av, int ac)
-{
-	char	**tab;
-	int		i;
-	int		j;
-	int		k;
-
-	k = 0;
-	i = 0;
-	j = 0;
-	tab = ft_calloc(ac - 1, sizeof(char **));
-	if (!tab)
-		return (NULL);
-	while (av[j])
-	{
-		if (is_tring(av[j], "here_doc") == 1)
-			j++;
-		tab[k] = ft_calloc(ft_strlen(av[j]), sizeof(char));
-		if (!tab[k])
-			return (NULL);
-		while (av[j][i] != '\0')
-		{
-			tab[k][i] = av[j][i];
-			i++;
-		}
-		i = 0;
-		j++;
-		k++;
-	}
-	return (tab);
 }

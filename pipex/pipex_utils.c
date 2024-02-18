@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:39:09 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/10 03:04:58 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/17 18:24:00 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,76 @@
 #include <stdlib.h>
 #include <sys/fcntl.h>
 #include <unistd.h>
+
+void	repuch_to_args(t_pipe *t_main, t_list *lst)
+{
+	int		i;
+	int		j;
+	t_list	*tmp;
+
+	tmp = lst;
+	i = ft_lstsize(lst);
+	j = -1;
+	t_main->args = ft_calloc(i + 1, sizeof(char **));
+	while (++j < i && tmp != NULL)
+	{
+		(t_main)->args[j] = ft_strdup((char *)tmp->content);
+		tmp = tmp->next;
+	}
+}
+
+void	cpy_tab(char *tab, char **av, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i && av[0][j] != 32)
+	{
+		tab[j] = av[0][j];
+		j++;
+	}
+}
+
+char	*init_tab(char *tab, char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[0][i])
+	{
+		if (av[0][i] == 32)
+		{
+			i++;
+			break ;
+		}
+		i++;
+	}
+	tab = ft_calloc(i + 1, sizeof(char));
+	cpy_tab(tab, av, i);
+	if (i == 0)
+		**av += 1;
+	*av += i;
+	return (tab);
+}
+
+void	parse_arg(t_pipe *t_main, char *av)
+{
+	char	*tab;
+	t_list	*lst;
+
+	t_main->args = NULL;
+	tab = NULL;
+	lst = NULL;
+	while (*av)
+	{
+		tab = init_tab(tab, &av);
+		ft_lstadd_back(&lst, ft_lstnew((char *)ft_strdup(tab)));
+		free(tab);
+		tab = NULL;
+	}
+	repuch_to_args(t_main, lst);
+	ft_lstclear(&lst, free);
+}
 
 int	free_tab(char **tab)
 {
@@ -58,13 +128,6 @@ char	*join_cmd_path(char *av, char *env)
 	return (cmd);
 }
 
-char	**ft_arg(char **tab, char *av)
-{
-	(void)tab;
-	(void)av;
-	return (NULL);
-}
-
 int	ft_count_tab(char *av)
 {
 	int	i;
@@ -92,35 +155,4 @@ int	ft_count_tab(char *av)
 		}
 	}
 	return (j);
-}
-
-char	**ft_cmd_arg(char *av)
-{
-	char	**tab;
-	int		j;
-	int		i;
-	int		k;
-
-	i = 0;
-	j = 0;
-	k = -1;
-	ft_printf("count : %d\n", ft_count_tab(av));
-	tab = ft_calloc(ft_count_tab(av) + 1, sizeof(char **));
-	while (av[i] && av[i] > 32)
-		i++;
-	tab[0] = ft_calloc(i + 1, sizeof(char));
-	while (++k < i)
-		tab[0][k] = av[k];
-	if (av[i] <= 32 && av[i] != '\0')
-		i++;
-	k = i;
-	ft_arg(tab, av);
-	while (av[i])
-		i++;
-	tab[1] = ft_calloc((i - k) + 1, sizeof(char));
-	while (k < i)
-		tab[1][j++] = av[k++];
-	if (j <= 0)
-		tab[1] = NULL;
-	return (tab);
 }

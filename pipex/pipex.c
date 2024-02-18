@@ -6,86 +6,112 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:03:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/10 17:08:30 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/18 00:10:58 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "pipex.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <sys/_types/_null.h>
 #include <sys/_types/_pid_t.h>
 #include <sys/fcntl.h>
 #include <unistd.h>
 
-void	ft_first_child(char *path, char **env, char **cmd, int *pipes)
+int	wait_process(t_list *pid)
 {
-	if (dup2(pipes[1], STDOUT_FILENO) == -1)
-		ft_strerror("dup2 1", 0, NULL, NULL);
-	close(pipes[0]);
-	execve(path, cmd, env);
-	ft_strerror("execve", 0, NULL, NULL);
+	int	status;
+
+	while (pid)
+	{
+		waitpid(*(pid_t *)pid->content, &status, 0);
+		pid = pid->next;
+	}
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	else
+		status = 0;
+	return (status);
 }
 
-void	ft_first_exec(t_pipe *t_pip, int *pipes, int fd)
+void	ft_maria(char **env, t_pipe *t_main, t_list *pid)
 {
-	if (dup2(fd, STDIN_FILENO) == -1)
-		ft_strerror("dup2 1", 0, NULL, NULL);
-	close(fd);
-	if (dup2(pipes[1], STDOUT_FILENO) == -1)
-		ft_strerror("dup2 1", 0, NULL, NULL);
-	close(pipes[0]);
-	execve(t_pip->path, t_pip->arg, t_pip->env);
-	ft_strerror("execve", 0, NULL, NULL);
-}
+	pid_t	pidt;
 
-void	fabien(char **env, t_pipe *t_main, int *pipes)
-{
-	if (pipe(pipes) == -1)
-		ft_strerror("pipe", 0, NULL, t_main);
-	t_main->f_pid = fork();
-	if (t_main->f_pid == -1)
-		ft_strerror("pid", 0, NULL, t_main);
-	if (t_main->f_pid == 0 && t_main->in_fd != -1)
-		ft_first_exec(t_main, pipes, t_main->in_fd);
-	else if (t_main->f_pid == 0 && t_main->in_fd == 0)
-		ft_first_child(t_main->path, env, t_main->arg, pipes);
+	pidt = fork();
+	if (pidt == 0)
+	{
+		dup2(t_main->pipes1[1], STDOUT_FILENO);
+		close(t_main->pipes1[0]);
+		close(t_main->pipes1[1]);
+		execve(t_main->path, t_main->args, env);
+		ft_strerror("Execve error", 0, NULL, t_main);
+	}
 	else
 	{
-		if (dup2(pipes[0], STDIN_FILENO) == -1)
-			ft_strerror("dup2 2", 0, NULL, t_main);
-		close(pipes[1]);
-		waitpid(t_main->f_pid, NULL, 0);
+		ft_lstadd_back(&pid, ft_lstnew(&pidt));
+		dup2(t_main->pipes1[0], t_main->pipes2[1]);
+		close(t_main->pipes1[0]);
+		close(t_main->pipes1[1]);
 	}
 }
 
-void	pipex(char **av, char **envp, int fd)
+void	ft_fabien(char **env, t_pipe *t_main, t_list *pid)
 {
-	t_pipe	t_main;
+	pid_t	pidt;
 
-	init_path(&t_main, envp);
-	t_main.in_fd = fd;
-	t_main.out_fd = STDOUT_FILENO;
-	av += 2;
+	pidt = fork();
+	if (pidt == 0)
+	{
+		if (t_main->last == 1)
+			dup2(t_main->out_fd, STDOUT_FILENO);
+		else
+			dup2(t_main->pipes2[1], STDOUT_FILENO);
+		close(t_main->pipes2[0]);
+		close(t_main->pipes2[1]);
+		execve(t_main->path, t_main->args, env);
+		ft_strerror("Execve error", 0, NULL, t_main);
+	}
+	else
+	{
+		ft_lstadd_back(&pid, ft_lstnew(&pidt));
+		if (t_main->last == 1)
+			dup2(t_main->pipes2[1], STDIN_FILENO);
+		else
+			dup2(t_main->pipes2[0], STDIN_FILENO);
+		close(t_main->pipes2[1]);
+	}
+}
+
+int	pipex(char **av, char **envp, t_pipe *t_main)
+{
+	t_list	*pid;
+
+	pid = NULL;
 	while (*av && *(av + 1) != NULL)
 	{
-		path_command(*av, &t_main);
-		found_cmd_alone(&t_main, *av);
-		parse_arg(&t_main, *av);
-//		fabien(envp, &t_main, t_main.pipes1);
-//		fabien(envp, &t_main, t_main.pipes2);
-		ft_free_char(&t_main, 0);
+		path_command(*av, t_main);
+		found_cmd_alone(t_main, *av);
+		parse_arg(t_main, *av);
+		pipe(t_main->pipes1);
+		ft_maria(envp, t_main, pid);
+		pipe(t_main->pipes2);
+		if (*(av + 2) == NULL)
+			t_main->last = 1;
+		ft_fabien(envp, t_main, pid);
+		ft_free_char(t_main, 0);
 		av++;
 	}
-	return (ft_free_char(&t_main, 1));
+	ft_free_char(t_main, 1);
+	return (wait_process(pid));
 }
 
 int	main(int ac, char **av, char **envp)
 {
-	int		fd;
+	t_pipe	t_main;
+	int		status;
 
-	if (((ac < 5) || (access(av[1], R_OK) != 0)))
+	if ((ac < 5) || (access(av[1], R_OK) != 0))
 	{
 		if (ac < 5)
 			ft_printf("less arg than 5");
@@ -95,10 +121,13 @@ int	main(int ac, char **av, char **envp)
 	}
 	else
 	{
-		fd = open(av[1], O_RDONLY);
-		pipex(av, envp, fd);
-		close(fd);
-		ft_printf("\nend\n");
+		init_path(&t_main, envp);
+		t_main.in_fd = open(av[1], O_RDONLY);
+		dup2(t_main.in_fd, STDIN_FILENO);
+		t_main.out_fd = open(av[ac - 1], O_WRONLY | O_CREAT, O_TRUNC, 0777);
+		av += 2;
+		status = pipex(av, envp, &t_main);
+		close(t_main.in_fd);
 	}
-	return (0);
+	exit (status);
 }

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:53:02 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/10 17:05:37 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/17 17:14:48 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,6 @@ void	ft_check_error(char *file, int *lfile, int *pipes)
 		ft_strerror("pipe", 0, NULL, NULL);
 }
 
-int	last_exec(char *path, char **env, char **cmd, char *file)
-{
-	int		pipes[2];
-	pid_t	f_pid;
-	int		lfile;
-
-	ft_check_error(file, &lfile, pipes);
-	f_pid = fork();
-	if (f_pid == -1)
-		ft_strerror("fork", 0, NULL, NULL);
-	if (f_pid == 0)
-	{
-		if (dup2(lfile, STDOUT_FILENO) == -1)
-			ft_strerror("dup2 1", 0, NULL, NULL);
-		close(pipes[0]);
-		execve(path, cmd, env);
-		ft_strerror("execve last", 0, NULL, NULL);
-	}
-	else
-	{
-		if (dup2(pipes[1], STDIN_FILENO) == -1)
-			ft_strerror("dup2 1", 0, NULL, NULL);
-		close(pipes[1]);
-		waitpid(f_pid, NULL, 0);
-	}
-	return (1);
-}
-
 void	ft_strerror(char *tab, int cmd, char *av, t_pipe *t_main)
 {
 	if (t_main->cmd_alone)
@@ -60,8 +32,8 @@ void	ft_strerror(char *tab, int cmd, char *av, t_pipe *t_main)
 		free(t_main->path);
 	if (t_main->env)
 		ft_free_tab(t_main->env);
-	if (t_main->arg)
-		ft_free_tab(t_main->arg);
+	if (t_main->args)
+		ft_free_tab(t_main->args);
 	if (cmd == 1)
 		ft_printf("'%s' not a real command ", av);
 	else if (tab)
