@@ -6,23 +6,13 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:53:02 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/17 17:14:48 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/19 18:02:51 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include "libft/libft.h"
-
-void	ft_check_error(char *file, int *lfile, int *pipes)
-{
-	unlink(file);
-	*lfile = open(file, O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
-	ft_printf("fd : %d\n");
-	if (*lfile == -1)
-		ft_strerror("open can't be open", 0, NULL, NULL);
-	if (pipe(pipes) == -1)
-		ft_strerror("pipe", 0, NULL, NULL);
-}
+#include <stdio.h>
 
 void	ft_strerror(char *tab, int cmd, char *av, t_pipe *t_main)
 {
@@ -34,11 +24,11 @@ void	ft_strerror(char *tab, int cmd, char *av, t_pipe *t_main)
 		ft_free_tab(t_main->env);
 	if (t_main->args)
 		ft_free_tab(t_main->args);
-	if (cmd == 1)
-		ft_printf("'%s' not a real command ", av);
-	else if (tab)
+	if (cmd >= 1)
+		ft_printf("zsh: command not found: %s\n", av);
+	if (tab)
 		perror(tab);
-	exit(EXIT_FAILURE);
+	exit(127);
 }
 
 void	init_path(t_pipe *t_main, char **env)
@@ -72,4 +62,24 @@ char	*strchr_path_line(char **env)
 		j = 0;
 	}
 	return (0);
+}
+
+int	wait_process(t_list **pid)
+{
+	int		status;
+	t_list	*tmp;
+
+	tmp = *pid;
+	status = 0;
+	while (tmp)
+	{
+		waitpid(*(pid_t *)tmp->content, &status, 0);
+		tmp = tmp->next;
+	}
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	else
+		status = 0;
+	ft_lstclear(pid, free);
+	return (status);
 }

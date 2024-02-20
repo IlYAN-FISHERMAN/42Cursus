@@ -6,12 +6,13 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 19:01:26 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/13 22:22:09 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:40:40 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "pipex.h"
+#include <stdio.h>
 
 void	ft_free_char(t_pipe *t_main, int cmd)
 {
@@ -51,7 +52,7 @@ void	found_cmd_alone(t_pipe *t_main, char *av)
 		t_main->cmd_alone[j] = av[j];
 }
 
-void	path_command(char *av, t_pipe *t_main)
+int	path_command(char *av, t_pipe *t_main)
 {
 	int		i;
 
@@ -60,12 +61,12 @@ void	path_command(char *av, t_pipe *t_main)
 	{
 		t_main->path = join_cmd_path(av, t_main->env[i]);
 		if (access(t_main->path, F_OK) != -1)
-			return ;
+			return (t_main->exit_value = 0);
 		free(t_main->path);
 		t_main->path = NULL;
 		i++;
 	}
-	return (ft_strerror(NULL, 1, av, t_main));
+	return (t_main->exit_value = -1);
 }
 
 int	is_tring(char *av, char *str)
@@ -82,4 +83,11 @@ int	is_tring(char *av, char *str)
 			return (1);
 	}
 	return (0);
+}
+
+void	ft_init_cmd(char **av, t_pipe *t_main)
+{
+	path_command(*av, t_main);
+	found_cmd_alone(t_main, *av);
+	parse_arg(t_main, *av);
 }

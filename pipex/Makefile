@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 12:16:20 by ilyanar           #+#    #+#              #
-#    Updated: 2024/02/08 19:44:15 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/02/20 12:06:33 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,21 +17,29 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 
 NAME = pipex
-#BONUS_NAME= pipex_bonus
+BONUS_NAME = pipex
 
 LIBFT_PATH = ./libft/
-#BONUS_PATH = ./bonus/
+BONUS_PATH = ./bonus/
 
 LIBFT_LIB = $(LIBFT_PATH:%=%libft.a)
 
-#BONUS_FILES = $(BONUS_PATH)checker $(FILES)
+BONUS_FILES = $(BONUS_PATH)pipex_bonus $(BFILES)
 
-#CBONUS_FILES = $(BONUS_FILES:%=%.c)
+CBONUS_FILES = $(BONUS_FILES:%=%.c)
+
+BFILES = pipex \
+		pipex_utils \
+		pipex_utils2 \
+		pipex_utils3 \
+		pipex_utils4
 
 FILES = pipex \
 		pipex_utils \
 		pipex_utils2 \
-		pipex_utils3
+		pipex_utils3 \
+		pipex_utils4 \
+		pipex_main
 
 CFILES = $(FILES:%=%.c)
 
@@ -48,7 +56,7 @@ fclean : clean
 
 re : fclean all
 
-#bonus: $(BONUS_NAME)
+bonus: $(BONUS_NAME)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -65,6 +73,6 @@ $(BONUS_NAME): $(CBONUS_FILES) $(LIBFT_LIB)
 	@printf "\t⏳Compiling bonus :3 $<...⌛️\r"
 	@$(CC) $(CFLAGS) $(CBONUS_FILES) $(LIBFT_LIB) -o $(BONUS_NAME)
 	@printf "\33[2K"
-	@echo "\t$(BONUS_NAME) compiled ✅"
+	@echo "\t$(BONUS_NAME) with bonus compiled ✅"
 
 .PHONY : clean fclean all re

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:39:09 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/17 18:24:00 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:51:14 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	cpy_tab(char *tab, char **av, int i)
 	int	j;
 
 	j = 0;
-	while (j < i && av[0][j] != 32)
+	while (j < i)
 	{
 		tab[j] = av[0][j];
 		j++;
@@ -50,15 +50,22 @@ char	*init_tab(char *tab, char **av)
 {
 	int	i;
 
-	i = 0;
-	while (av[0][i])
+	i = -1;
+	while (av[0][++i])
 	{
+		if (av[0][i] == '}' || av[0][i] == '{' \
+			|| av[0][i] == 39 || av[0][i] == 34)
+		{
+			i++;
+			while (!(av[0][i] == '}' || av[0][i] == '{' \
+				|| av[0][i] == 39 || av[0][i] == 34))
+				i++;
+		}
 		if (av[0][i] == 32)
 		{
 			i++;
 			break ;
 		}
-		i++;
 	}
 	tab = ft_calloc(i + 1, sizeof(char));
 	cpy_tab(tab, av, i);
@@ -101,58 +108,4 @@ int	free_tab(char **tab)
 	}
 	free(tab);
 	return (0);
-}
-
-char	*join_cmd_path(char *av, char *env)
-{
-	int		i;
-	int		k;
-	char	*cmd;
-
-	i = -1;
-	k = ft_strlen(av) + ft_strlen(env) + 2;
-	cmd = ft_calloc(k, sizeof(char));
-	if (!cmd)
-		return (NULL);
-	while (env[++i])
-		cmd[i] = env[i];
-	cmd[i] = '/';
-	k = -1;
-	while (av[++k] && av[k] > 32)
-		cmd[++i] = av[k];
-	if ((k <= 0) || (av[ft_strlen(av) - 1] == 32))
-	{
-		cmd[ft_strlen(env) + 1] = 32;
-		return (cmd);
-	}
-	return (cmd);
-}
-
-int	ft_count_tab(char *av)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (av[++i])
-	{
-		if (av[i] == 32)
-		{
-			while (av[i] == 32)
-				i++;
-			j++;
-		}
-		else if (av[i] == 39)
-		{
-			while (av[++i])
-			{
-				if (av[i] == 39 || av[i] == '\0')
-					j++;
-				if (av[i] == 39 || av[i] == '\0')
-					break ;
-			}
-		}
-	}
-	return (j);
 }
