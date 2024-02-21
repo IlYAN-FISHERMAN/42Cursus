@@ -6,15 +6,13 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:03:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/20 00:21:57 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/21 13:00:17 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "pipex.h"
 #include <stdlib.h>
-#include <sys/_types/_null.h>
-#include <sys/_types/_pid_t.h>
 #include <sys/fcntl.h>
 #include <sys/unistd.h>
 #include <sys/wait.h>

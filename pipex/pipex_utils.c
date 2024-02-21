@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 12:39:09 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/20 11:51:14 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/02/21 15:15:08 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,16 @@ void	repuch_to_args(t_pipe *t_main, t_list *lst)
 void	cpy_tab(char *tab, char **av, int i)
 {
 	int	j;
+	int	k;
 
 	j = 0;
+	k = 0;
 	while (j < i)
 	{
-		tab[j] = av[0][j];
+		if (av[0][k] == 39)
+			k++;
+		tab[j] = av[0][k];
+		k++;
 		j++;
 	}
 }
@@ -49,29 +54,28 @@ void	cpy_tab(char *tab, char **av, int i)
 char	*init_tab(char *tab, char **av)
 {
 	int	i;
+	int	len;
 
 	i = -1;
+	len = 0;
 	while (av[0][++i])
 	{
-		if (av[0][i] == '}' || av[0][i] == '{' \
-			|| av[0][i] == 39 || av[0][i] == 34)
-		{
-			i++;
-			while (!(av[0][i] == '}' || av[0][i] == '{' \
-				|| av[0][i] == 39 || av[0][i] == 34))
-				i++;
-		}
 		if (av[0][i] == 32)
+			len++;
+		if (av[0][i] == 32)
+			break ;
+		if (av[0][i] == 39)
 		{
 			i++;
-			break ;
+			len++;
+			while ((!(av[0][i] == 39)) && av[0][i++])
+				len++;
 		}
+		len++;
 	}
 	tab = ft_calloc(i + 1, sizeof(char));
 	cpy_tab(tab, av, i);
-	if (i == 0)
-		**av += 1;
-	*av += i;
+	*av += len;
 	return (tab);
 }
 
