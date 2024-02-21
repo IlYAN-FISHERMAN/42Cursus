@@ -1,4 +1,0 @@
-count : 0
-path_>/bin/cat
-Command alone_>cat
-arg alone_>(null)
