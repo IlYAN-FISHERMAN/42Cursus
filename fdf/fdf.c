@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:43:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/23 18:51:13 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/05 18:00:04 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 #include "minilibx_macos/mlx.h"
 #include <math.h>
 #include <stdlib.h>
-
-void	ft_error(int *ac, char **av)
-{
-	(void)av;
-	if (*ac != 2)
-		exit(EXIT_FAILURE);
-}
+#include <sys/fcntl.h>
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
@@ -34,38 +28,66 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 int	close_key(int keycode, t_fdf *mlx)
 {
-	(void)keycode;
-	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
-	exit (0);
+	if (keycode == 53)
+	{
+		ft_printf("fdf: the window was closed\n");
+		freexit (mlx);
+	}
+	else
+		ft_printf("key: %d\n", keycode);
+	return (1);
+}
+
+void	ft_strerror(int ac, char **av)
+{
+	if (ac != 2)
+	{
+		ft_printf("fdf: ./fdf <*.fdf>\n");
+		exit(EXIT_FAILURE);
+	}
+	if ((ft_strchr(av[1], '.')) \
+		&& (ft_strncmp(ft_strchr(av[1], '.'), ".fdf", 5) != 0))
+	{
+		ft_printf("fdf: bad format file\nOnly .fdf file accepted\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+int	mouse_hook(int keycode, t_fdf *mlx)
+{
+	(void)mlx;
+	if (keycode == 1)
+		ft_printf("tg :D !\n");
+	if (keycode == 2)
+		ft_printf("tg encore plus :D !\n");
+	if (keycode == 4)
+		ft_printf("raph tg aussi :D !\n");
+	if (keycode == 5)
+		ft_printf("maria je te bolosse a smash mais pas de tg :D !\n");
+	return (1);
+}
+
+void	ft_first_exec(t_fdf *mlx, char **av)
+{
+	mlx->fd = open(av[1], O_RDONLY);
+	if (mlx->fd == -1)
+		freexit(mlx);
+	get_lines_larg_len(mlx);
+	while (mlx->len->map[mlx->len->lon])
+		mlx->len->lon++;
+	mlx_put_image_to_window(mlx->pid, mlx->pid_win, mlx->img->img, 0, 0);
 }
 
 int	main(int ac, char **av)
 {
 	t_fdf	mlx;
 
-	(void)ac;
-	(void)av;
-	ft_bzero(&mlx, sizeof(t_fdf));
-	mlx.img = ft_calloc(1, sizeof(t_img));
-	mlx.pos = ft_calloc(1, sizeof(t_pos));
-	mlx.mlx = mlx_init();
-	mlx.mlx_win = mlx_new_window(mlx.mlx, 1280, 720, "Moi");
-	mlx.img->img = mlx_new_image(mlx.mlx, 1280, 720);
-	mlx.img->addr = mlx_get_data_addr(mlx.img->img, &mlx.img->byte_per_pixel, \
-							&mlx.img->line_length, &mlx.img->endian);
-	while (mlx.pos->y < 720)
-	{
-		while (mlx.pos->x < 1280)
-		{
-			if ((mlx.pos->x > 440 && mlx.pos->x < 840) \
-				&& (mlx.pos->y > 140 && mlx.pos->y < 580))
-				my_mlx_pixel_put(mlx.img, mlx.pos->x, mlx.pos->y, 0x008D00FF);
-			mlx.pos->x += 1;
-		}
-		mlx.pos->x = 0;
-		mlx.pos->y++;
-	}
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.img->img, 0, 0);
-	mlx_hook(mlx.mlx_win, 2, 1L << 0, close_key, &mlx.mlx);
-	mlx_loop(mlx.mlx);
+	ft_strerror(ac, av);
+	conf_win(&mlx);
+	ft_first_exec(&mlx, av);
+	mlx_hook(mlx.pid_win, 17, 0, close_win, &mlx);
+	mlx_hook(mlx.pid_win, 2, 0, close_key, &mlx);
+	mlx_hook(mlx.pid_win, 4, 0, mouse_hook, &mlx);
+	mlx_loop(mlx.pid);
+	close(mlx.fd);
 }

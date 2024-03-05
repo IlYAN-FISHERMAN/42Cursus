@@ -6,25 +6,21 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:58:33 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/02/22 18:25:16 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/05 13:46:44 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+#include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 
-typedef struct s_fdf
-{
-	void			*mlx;
-	void			*mlx_win;
-	struct s_pos	*pos;
-	struct s_img	*img;
-}	t_fdf;
+# define WIDTH 1000
+# define HEIGHT 1000
 
 typedef struct s_img
 {
@@ -37,19 +33,48 @@ typedef struct s_img
 
 typedef struct s_pos
 {
-	int	x;
-	int	y;
+	int			step_x;
+	int			step_y;
+	int			dx;
+	int			dy;
+	int			x;
+	int			xl;
+	int			y;
+	int			yl;
+	int			line_color;
 }	t_pos;
 
-enum
+typedef struct s_len
 {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
+	int		lon;
+	int		larg;
+	char	**map;
+}	t_len;
+
+typedef struct s_color
+{
+	int	t;
+	int	r;
+	int	g;
+	int	b;
+}	t_color;
+
+typedef struct s_fdf
+{
+	int		fd;
+	void	*pid;
+	void	*pid_win;
+	t_pos	*pos;
+	t_img	*img;
+	t_color	*color;
+	t_len	*len;
+}	t_fdf;
+
+int		close_win(t_fdf *mlx);
+int		freexit(t_fdf *mlx);
+int		get_lines_larg_len(t_fdf *mlx);
+
+void	conf_win(t_fdf *mlx);
+void	alloc_all(t_fdf *mlx);
 
 #endif
