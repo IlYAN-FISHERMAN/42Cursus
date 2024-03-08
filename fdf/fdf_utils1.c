@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 13:41:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/05 13:46:32 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/07 16:35:47 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	freexit(t_fdf *mlx)
 		free(mlx->color);
 	if (mlx->pid_win)
 		mlx_destroy_window(mlx->pid, mlx->pid_win);
+	close(mlx->fd);
 	exit(EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:43:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/05 18:00:04 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/08 09:55:00 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/libft.h"
 #include "minilibx_macos/mlx.h"
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/fcntl.h>
 
@@ -73,8 +74,9 @@ void	ft_first_exec(t_fdf *mlx, char **av)
 	if (mlx->fd == -1)
 		freexit(mlx);
 	get_lines_larg_len(mlx);
-	while (mlx->len->map[mlx->len->lon])
-		mlx->len->lon++;
+	mlx->pos->zoom = 20;
+	mlx->pos->line_color = 0xffffff;
+	draw(mlx);
 	mlx_put_image_to_window(mlx->pid, mlx->pid_win, mlx->img->img, 0, 0);
 }
 

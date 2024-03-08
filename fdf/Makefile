@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 15:41:52 by ilyanar           #+#    #+#              #
-#    Updated: 2024/03/05 18:04:01 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/03/07 13:53:33 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ LIBFT_LIB = $(LIBFT_PATH:%=%libft.a)
 MLX = $(MLX_PATH:%=%libmlx.a)
 
 FILES = fdf \
-		fdf_utils1
+		fdf_utils1 \
+		fdf_maths
 
 CFILES = $(FILES:%=%.c)
 
