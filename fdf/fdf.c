@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:43:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/08 09:55:00 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/10 21:22:17 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,28 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x \
-		*(data->byte_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT)
+	{
+		dst = data->addr + (y * data->line_length + x \
+			*(data->byte_per_pixel / 8));
+		*(unsigned int *)dst = color;
+	}
 }
 
-int	close_key(int keycode, t_fdf *mlx)
+int	key_hooks(int keycode, t_fdf *mlx)
 {
 	if (keycode == 53)
 	{
 		ft_printf("fdf: the window was closed\n");
 		freexit (mlx);
+	}
+	else if (keycode == 36)
+	{
+		mlx_destroy_image(mlx->pid, mlx->img->img);
+		mlx->img->img = mlx_new_image(mlx->pid, HEIGHT, WIDTH);
+		mlx->img->addr = mlx_get_data_addr(mlx->img->img, \
+			&mlx->img->byte_per_pixel, &mlx->img->line_length, &mlx->img->endian);
+		draw(mlx);
 	}
 	else
 		ft_printf("key: %d\n", keycode);
@@ -46,8 +57,8 @@ void	ft_strerror(int ac, char **av)
 		ft_printf("fdf: ./fdf <*.fdf>\n");
 		exit(EXIT_FAILURE);
 	}
-	if ((ft_strchr(av[1], '.')) \
-		&& (ft_strncmp(ft_strchr(av[1], '.'), ".fdf", 5) != 0))
+	if ((ft_strchr(av[1], '.') == NULL) \
+		|| (ft_strncmp(ft_strchr(av[1], '.'), ".fdf", 5) != 0))
 	{
 		ft_printf("fdf: bad format file\nOnly .fdf file accepted\n");
 		exit(EXIT_FAILURE);
@@ -74,10 +85,9 @@ void	ft_first_exec(t_fdf *mlx, char **av)
 	if (mlx->fd == -1)
 		freexit(mlx);
 	get_lines_larg_len(mlx);
-	mlx->pos->zoom = 20;
+	mlx->pos->zoom = 10;
 	mlx->pos->line_color = 0xffffff;
 	draw(mlx);
-	mlx_put_image_to_window(mlx->pid, mlx->pid_win, mlx->img->img, 0, 0);
 }
 
 int	main(int ac, char **av)
@@ -88,7 +98,7 @@ int	main(int ac, char **av)
 	conf_win(&mlx);
 	ft_first_exec(&mlx, av);
 	mlx_hook(mlx.pid_win, 17, 0, close_win, &mlx);
-	mlx_hook(mlx.pid_win, 2, 0, close_key, &mlx);
+	mlx_hook(mlx.pid_win, 2, 0, key_hooks, &mlx);
 	mlx_hook(mlx.pid_win, 4, 0, mouse_hook, &mlx);
 	mlx_loop(mlx.pid);
 	close(mlx.fd);

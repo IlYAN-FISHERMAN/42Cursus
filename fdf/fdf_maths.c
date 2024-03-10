@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:52:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/08 09:54:26 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/10 21:28:39 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,28 @@ void	bresenham(t_fdf *mlx)
 
 void	draw(t_fdf *mlx)
 {
-	mlx->pos->y = 0;
-	while (mlx->pos->y < mlx->len->larg)
+	int	x;
+	int	y;
+
+	y = mlx->len->larg;
+	while (y >= 0)
 	{
-		mlx->pos->x = 0;
-		while (mlx->pos->x < mlx->len->lon)
+		x = mlx->len->lon;
+		while (x >= 0)
 		{
-			mlx->pos->xl = mlx->pos->x + 1;
+			ft_printf("calcule\n");
+			mlx->pos->x = rand() % (WIDTH + 1);
+			mlx->pos->y = rand() % (HEIGHT + 1);
+			mlx->pos->xl = rand() % (WIDTH + 1);
+			mlx->pos->yl = rand() % (HEIGHT + 1);
+			printf("x: %f\n", mlx->pos->x);
+			printf("y: %f\n", mlx->pos->y);
+			printf("xl: %f\n", mlx->pos->xl);
+			printf("yl: %f\n", mlx->pos->yl);
 			bresenham(mlx);
-			mlx->pos->xl = mlx->pos->x;
-			mlx->pos->yl = mlx->pos->y + 1;
-			bresenham(mlx);
-			mlx->pos->x++;
+			x--;
 		}
-		mlx->pos->y++;
+		y--;
 	}
+	mlx_put_image_to_window(mlx->pid, mlx->pid_win, mlx->img->img, 0, 0);
 }
