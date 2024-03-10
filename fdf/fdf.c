@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:43:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/10 21:22:17 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/10 23:09:24 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_first_exec(t_fdf *mlx, char **av)
 	if (mlx->fd == -1)
 		freexit(mlx);
 	get_lines_larg_len(mlx);
-	mlx->pos->zoom = 10;
+	mlx->pos->zoom = 1;
 	mlx->pos->line_color = 0xffffff;
 	draw(mlx);
 }
