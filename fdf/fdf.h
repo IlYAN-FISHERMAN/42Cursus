@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:58:33 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/10 21:14:01 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/12 21:30:12 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ typedef struct s_pos
 	float			xl;
 	float			y;
 	float			yl;
-	int				zoom;
 	float			line_color;
+	int				z;
+	int				beg;
+	int				sep;
 }	t_pos;
 
 typedef struct s_len
@@ -48,6 +50,7 @@ typedef struct s_len
 	int		lon;
 	int		larg;
 	char	**map;
+	char	**lat;
 }	t_len;
 
 typedef struct s_color
@@ -75,7 +78,7 @@ int		get_lines_larg_len(t_fdf *mlx);
 
 void	conf_win(t_fdf *mlx);
 void	alloc_all(t_fdf *mlx);
-void	bresenham(t_fdf *mlx);
+void	bresenham(float xl, float yl, t_fdf *mlx);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	draw(t_fdf *mlx);
 
