@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:43:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/12 22:02:04 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/13 02:56:01 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,23 @@ int	key_hooks(int keycode, t_fdf *mlx)
 		ft_printf("fdf: the window was closed\n");
 		freexit (mlx);
 	}
-	else if (keycode == 124 || keycode == 123 || keycode == 4 || keycode == 5)
+	else if (keycode == 124 || keycode == 123 || keycode == 4 || keycode == 5 \
+		|| keycode == 126 || keycode == 125)
 	{
 		ft_printf("key: %d\n", keycode);
-		printf("img: %p\n", mlx->img->img);
 		mlx_destroy_image(mlx->pid, mlx->img->img);
 		mlx->img->img = mlx_new_image(mlx->pid, HEIGHT, WIDTH);
 		mlx->img->addr = mlx_get_data_addr(mlx->img->img, \
 			&mlx->img->byte_per_pixel, \
 				&mlx->img->line_length, &mlx->img->endian);
 		if (keycode == 124 || keycode == 4)
-			mlx->pos->beg += 5;
+			mlx->pos->dify -= 25;
 		if (keycode == 123 || keycode == 5)
-			mlx->pos->beg -= 5;
+			mlx->pos->dify += 25;
+		if (keycode == 125)
+			mlx->pos->difx += 25;
+		if (keycode == 126)
+			mlx->pos->difx -= 25;
 		draw(mlx);
 	}
 	else
@@ -79,11 +83,13 @@ void	ft_first_exec(t_fdf *mlx, char **av)
 		freexit(mlx);
 	get_lines_larg_len(mlx);
 	mlx->pos->beg = 50;
+	mlx->pos->line_color = 0xffffff;
+	mlx->pos->sep = WIDTH / max1(mlx->len->lon, mlx->len->larg);
 	draw(mlx);
 }
 
 int	main(int ac, char **av)
-{
+
 	t_fdf	mlx;
 
 	ft_strerror(ac, av);

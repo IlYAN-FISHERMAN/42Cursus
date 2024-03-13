@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:58:33 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/12 21:30:12 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/13 01:52:02 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <string.h>
 # include <unistd.h>
 
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 1300
+# define HEIGHT 1300
 
 typedef struct s_img
 {
@@ -41,7 +41,10 @@ typedef struct s_pos
 	float			yl;
 	float			line_color;
 	int				z;
+	int				zl;
 	int				beg;
+	int				difx;
+	int				dify;
 	int				sep;
 }	t_pos;
 
@@ -75,6 +78,8 @@ typedef struct s_fdf
 int		close_win(t_fdf *mlx);
 int		freexit(t_fdf *mlx);
 int		get_lines_larg_len(t_fdf *mlx);
+
+float	max1(float a, float b);
 
 void	conf_win(t_fdf *mlx);
 void	alloc_all(t_fdf *mlx);

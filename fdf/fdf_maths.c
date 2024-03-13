@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:52:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/12 21:56:57 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/13 02:53:09 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 #include "libft/libft.h"
 #include "minilibx_macos/mlx.h"
 #include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/fcntl.h>
 
 float	max1(float a, float b)
 {
 	if (a > b)
+		return (a);
+	else
+		return (b);
+}
+
+float	min1(float a, float b)
+{
+	if (a < b)
 		return (a);
 	else
 		return (b);
@@ -34,6 +39,12 @@ float	mod(float i)
 		return (i);
 }
 
+void	isometric(float *x, float *y, int z)
+{
+	*x = (*x - *y) * cos (0.8);
+	*y = (*x + *y) * sin(0.8) - z;
+}
+
 void	bresenham(float xl, float yl, t_fdf *mlx)
 {
 	float	max;
@@ -42,6 +53,8 @@ void	bresenham(float xl, float yl, t_fdf *mlx)
 
 	x = mlx->pos->x;
 	y = mlx->pos->y;
+	isometric(&x, &y, mlx->pos->z);
+	isometric(&xl, &yl, mlx->pos->zl);
 	mlx->pos->x_step = xl - x;
 	mlx->pos->y_step = yl - y;
 	max = max1(mod(mlx->pos->x_step), mod(mlx->pos->y_step));
@@ -56,10 +69,25 @@ void	bresenham(float xl, float yl, t_fdf *mlx)
 	}
 }
 
-void	calcule_z_pos(t_fdf *mlx, int x)
+void	calcule_zl_pos(t_fdf *mlx, int x, int y)
 {
 	char	**tab;
 
+	if ((y + 1) < mlx->len->larg)
+	{
+		tab = ft_split(mlx->len->map[y + 1], ' ');
+		mlx->pos->zl = ft_atoi(tab[x]);
+		ft_free_tab(tab);
+	}
+	else
+		mlx->pos->zl = mlx->pos->z;
+}
+
+void	calcule_z_pos(t_fdf *mlx, int x, int y)
+{
+	char	**tab;
+
+	(void)y;
 	if (ft_strchr(mlx->len->lat[x], ',') != NULL)
 	{
 		tab = ft_split(mlx->len->lat[x], ',');
@@ -77,32 +105,40 @@ void	calcule_z_pos(t_fdf *mlx, int x)
 		else
 			mlx->pos->line_color = 0xffffff;
 	}
+	calcule_zl_pos(mlx, x, y);
 }
 
 void	next_line(t_fdf *mlx, int y, int x)
 {
-	mlx->pos->x = mlx->pos->beg;
-	mlx->pos->y = mlx->pos->x + (mlx->pos->sep * y);
+	(void)x;
+	mlx->pos->x = mlx->pos->beg + mlx->pos->difx;
 	mlx->pos->xl = mlx->pos->x + mlx->pos->sep;
-	mlx->pos->yl = mlx->pos->y;
-	if ((y + 1) == mlx->len->larg)
-	{
-		mlx->pos->x = mlx->pos->beg;
-		mlx->pos->y = mlx->pos->x + (mlx->pos->sep * y);
-		mlx->pos->xl = mlx->pos->x + (mlx->pos->sep * (x - 1));
-		mlx->pos->yl = mlx->pos->y;
-		bresenham(mlx->pos->xl, mlx->pos->yl, mlx);
-	}
+	if (mlx->pos->z <= 0)
+		mlx->pos->y = (mlx->pos->beg + mlx->pos->x + \
+			(mlx->pos->sep * y) + mlx->pos->dify) - mlx->pos->z;
+	else
+		mlx->pos->y = mlx->pos->beg + mlx->pos->x + \
+			(mlx->pos->sep * y) + mlx->pos->dify - mlx->pos->z;
+	if (mlx->pos->zl <= 0)
+		mlx->pos->yl = mlx->pos->y - mlx->pos->zl;
+	else
+		mlx->pos->yl = mlx->pos->y + mlx->pos->zl;
 }
 
 void	init_numbers(t_fdf *mlx)
 {
-	mlx->pos->x = mlx->pos->beg;
-	mlx->pos->xl = mlx->pos->beg + mlx->pos->sep;
-	mlx->pos->y = mlx->pos->beg;
-	mlx->pos->yl = mlx->pos->beg;
-	mlx->pos->line_color = 0xffffff;
-	mlx->pos->sep = WIDTH / (mlx->len->lon + mlx->len->larg);
+	mlx->pos->x = mlx->pos->beg + mlx->pos->difx;
+	mlx->pos->xl = mlx->pos->x + mlx->pos->sep;
+	if (mlx->pos->z < 0)
+		mlx->pos->y = mlx->pos->beg + mlx->pos->x + mlx->pos->sep + \
+			mlx->pos->dify - mlx->pos->z;
+	else
+		mlx->pos->y = mlx->pos->beg + mlx->pos->x + mlx->pos->sep + \
+			mlx->pos->dify + mlx->pos->z;
+	if (mlx->pos->z < 0)
+		mlx->pos->yl = mlx->pos->y - mlx->pos->z;
+	else
+		mlx->pos->yl = mlx->pos->y + mlx->pos->z;
 }
 
 void	draw(t_fdf *mlx)
@@ -115,19 +151,20 @@ void	draw(t_fdf *mlx)
 	while (++y < mlx->len->larg)
 	{
 		x = -1;
+		next_line(mlx, y, x);
 		mlx->len->lat = ft_split(mlx->len->map[y], ' ');
 		while (++x < mlx->len->lon)
 		{
-			calcule_z_pos(mlx, x);
+			calcule_z_pos(mlx, x, y);
 			bresenham(mlx->pos->xl, mlx->pos->yl, mlx);
 			mlx->pos->xl = mlx->pos->x;
 			mlx->pos->yl += mlx->pos->sep;
-			bresenham(mlx->pos->xl, mlx->pos->yl, mlx);
+			if (y + 1 < mlx->len->larg)
+				bresenham(mlx->pos->xl, mlx->pos->yl, mlx);
 			mlx->pos->x += mlx->pos->sep;
 			mlx->pos->yl -= mlx->pos->sep;
 		}
 		ft_free_tab(mlx->len->lat);
-		next_line(mlx, y, x);
 	}
 	mlx_put_image_to_window(mlx->pid, mlx->pid_win, mlx->img->img, 0, 0);
 }

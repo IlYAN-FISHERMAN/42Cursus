@@ -6,14 +6,13 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 13:41:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/07 16:35:47 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/12 22:55:20 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft/libft.h"
 #include "minilibx_macos/mlx.h"
-#include <stdlib.h>
 
 int	close_win(t_fdf *mlx)
 {
