@@ -6,13 +6,14 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 13:41:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/12 22:55:20 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/18 21:16:10 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft/libft.h"
 #include "minilibx_macos/mlx.h"
+#include <stdlib.h>
 
 int	close_win(t_fdf *mlx)
 {
@@ -59,6 +60,9 @@ void	alloc_all(t_fdf *mlx)
 	mlx->len = ft_calloc(1, sizeof(t_len));
 	if (!mlx->len)
 		freexit(mlx);
+	mlx->tree_d = ft_calloc(1, sizeof(t_3d));
+	if (!mlx->tree_d)
+		freexit(mlx);
 	mlx->pid = mlx_init();
 	if (!mlx->pid)
 		freexit(mlx);
@@ -104,6 +108,8 @@ int	get_lines_larg_len(t_fdf *mlx)
 	while (line[count])
 		count++;
 	mlx->len->lon = count;
+	if (buf)
+		free(buf);
 	ft_free_tab(line);
 	return (0);
 }

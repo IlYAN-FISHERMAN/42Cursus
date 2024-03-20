@@ -6,16 +6,14 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/12 20:22:33 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/18 19:11:40 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 64
-# endif
+# define BUFFER_SIZE 1000
 
 # include <stdlib.h>
 # include <string.h>

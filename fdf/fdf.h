@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:58:33 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/13 01:52:02 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/18 21:15:13 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <string.h>
 # include <unistd.h>
 
-# define WIDTH 1300
-# define HEIGHT 1300
+# define WIDTH 1500
+# define HEIGHT 1500
 
 typedef struct s_img
 {
@@ -39,8 +39,14 @@ typedef struct s_pos
 	float			xl;
 	float			y;
 	float			yl;
-	float			line_color;
+	int				line_color;
+	float			iso;
+	float			zom;
+	float			alt;
+	float			agl;
 	int				z;
+	int				ra;
+	int				rb;
 	int				zl;
 	int				beg;
 	int				difx;
@@ -64,6 +70,13 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
+typedef struct s_point3d
+{
+	float	x;
+	float	y;
+	float	z;
+}	t_3d;
+
 typedef struct s_fdf
 {
 	int		fd;
@@ -73,6 +86,7 @@ typedef struct s_fdf
 	t_img	*img;
 	t_color	*color;
 	t_len	*len;
+	t_3d	*tree_d;
 }	t_fdf;
 
 int		close_win(t_fdf *mlx);
@@ -86,5 +100,6 @@ void	alloc_all(t_fdf *mlx);
 void	bresenham(float xl, float yl, t_fdf *mlx);
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	draw(t_fdf *mlx);
+void	ft_first_exec(t_fdf *mlx, char **av);
 
 #endif
