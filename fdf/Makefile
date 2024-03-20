@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 15:41:52 by ilyanar           #+#    #+#              #
-#    Updated: 2024/03/07 13:53:33 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/03/20 17:57:52 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,16 @@ MLX_PATH = ./minilibx_macos/
 LIBFT_LIB = $(LIBFT_PATH:%=%libft.a)
 MLX = $(MLX_PATH:%=%libmlx.a)
 
-FILES = fdf \
-		fdf_utils1 \
-		fdf_maths
+FILES = fdf_main \
+		fdf_color \
+		fdf_maths \
+		fdf_config \
+		fdf_draw_hud \
+		fdf_draw_numbers \
+		fdf_draw_pixel \
+		fdf_keys \
+		fdf_min_max \
+		fdf_parsing
 
 CFILES = $(FILES:%=%.c)
 
