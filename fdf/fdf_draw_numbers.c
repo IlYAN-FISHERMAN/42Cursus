@@ -6,29 +6,13 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:55:21 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/20 17:56:00 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 21:54:31 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibx_macos/mlx.h"
 #include "libft/libft.h"
 #include "fdf.h"
-
-void	draw_numbers3(t_fdf *mlx)
-{
-	char	*tab;
-
-	tab = ft_itoa(mlx->tree_d->x);
-	mlx_string_put(mlx->pid, mlx->pid_win, 1350, 250, mlx->pos->line_color, \
-		"r  : ");
-	mlx_string_put(mlx->pid, mlx->pid_win, 1418, 250, 0xffffff, tab);
-	free(tab);
-	tab = ft_itoa(mlx->tree_d->x);
-	mlx_string_put(mlx->pid, mlx->pid_win, 1350, 270, mlx->pos->line_color, \
-		"g  : ");
-	mlx_string_put(mlx->pid, mlx->pid_win, 1418, 270, 0xffffff, tab);
-	free(tab);
-}
 
 void	draw_numbers2(t_fdf *mlx)
 {
@@ -50,12 +34,10 @@ void	draw_numbers2(t_fdf *mlx)
 	mlx_string_put(mlx->pid, mlx->pid_win, 1350, 210, 0xffffff, "dify  : ");
 	mlx_string_put(mlx->pid, mlx->pid_win, 1418, 210, 0xffffff, tab);
 	free(tab);
-	tab = ft_itoa(mlx->tree_d->x);
-	mlx_string_put(mlx->pid, mlx->pid_win, 1350, 230, mlx->pos->line_color, \
-		"x  : ");
-	mlx_string_put(mlx->pid, mlx->pid_win, 1418, 230, 0xffffff, tab);
+	tab = ft_itoa(mlx->tree_d->angle_x);
+	mlx_string_put(mlx->pid, mlx->pid_win, 1350, 230, 0xffffff, "angle x: ");
+	mlx_string_put(mlx->pid, mlx->pid_win, 1428, 230, 0xffffff, tab);
 	free(tab);
-	draw_numbers3(mlx);
 }
 
 void	draw_numbers(t_fdf *mlx)

@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 15:41:52 by ilyanar           #+#    #+#              #
-#    Updated: 2024/03/20 17:57:52 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/03/21 23:48:05 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,9 @@ fclean : clean
 	@echo "\n [$(NAME)] - Supressions du reste... 🗑️"
 	@rm -f $(NAME)
 
-re : fclean all
+re :
+	@make fclean
+	@make all
 
 debug : $(CFILES) $(LIBFT_LIB) $(MLX)
 	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MLX) $(MLXFLAGS) -o $(NAME)

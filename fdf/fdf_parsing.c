@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:18:12 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/21 08:16:45 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 19:35:24 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	get_lines_larg_len(t_fdf *mlx)
 	char	*tmp;
 	int		count;
 
-	count = 1;
+	mlx->len->larg = 0;
 	buf = get_next_line(mlx->fd);
-	while (1)
+	if (!buf)
+		freexit(mlx);
+	while (++mlx->len->larg)
 	{
 		tmp = get_next_line(mlx->fd);
 		if (tmp == NULL)
 			break ;
 		buf = joint_line(buf, tmp);
 		free(tmp);
-		count++;
 	}
 	mlx->len->map = ft_split(buf, '\n');
-	mlx->len->larg = count;
 	count = 0;
 	line = ft_split(mlx->len->map[0], ' ');
 	while (line[count])

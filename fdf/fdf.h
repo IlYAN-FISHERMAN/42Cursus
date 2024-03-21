@@ -6,14 +6,14 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:58:33 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/21 08:17:05 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 23:44:06 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include "libft/libft.h"
+# include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -39,15 +39,15 @@ typedef struct s_pos
 	float			xl;
 	float			y;
 	float			yl;
-	int				line_color;
+	float			zl;
 	float			iso;
 	float			zom;
 	float			alt;
 	float			agl;
-	int				z;
+	float			z;
+	int				line_color;
 	int				ra;
 	int				rb;
-	int				zl;
 	int				beg;
 	int				difx;
 	int				dify;
@@ -72,10 +72,22 @@ typedef struct s_color
 
 typedef struct s_point3d
 {
-	float	x;
-	float	y;
-	float	z;
+	int		x1;
+	int		x2;
+	int		y1;
+	int		y2;
+	int		center_x;
+	int		center_y;
+	int		z;
+	double	angle_y;
+	double	angle_x;
 }	t_3d;
+
+typedef struct s_p3d
+{
+	int	x;
+	int	y;
+}	t_p3d;
 
 typedef struct s_fdf
 {

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:50:47 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/21 16:38:34 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 21:51:03 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,8 @@ void	ft_strerror(int ac, char **av)
 	}
 }
 
-void	ft_first_exec(t_fdf *mlx, char **av)
+void	configure_numbers(t_fdf *mlx)
 {
-	mlx->fd = open(av[1], O_RDONLY);
-	if (mlx->fd == -1)
-		ft_printf("fdf: %s: No such file or director", av[1]);
-	if (mlx->fd == -1)
-		freexit(mlx);
-	get_lines_larg_len(mlx);
 	mlx->pos->beg = 50;
 	mlx->pos->line_color = 0xffffff;
 	mlx->pos->iso = 0.7;
@@ -51,6 +45,19 @@ void	ft_first_exec(t_fdf *mlx, char **av)
 	mlx->color->r = 250;
 	mlx->color->g = 0;
 	mlx->color->b = 250;
+	mlx->tree_d->angle_y = 0.0;
+	mlx->tree_d->angle_x = 0.0;
+}
+
+void	ft_first_exec(t_fdf *mlx, char **av)
+{
+	mlx->fd = open(av[1], O_RDONLY);
+	if (mlx->fd == -1)
+		ft_printf("fdf: %s: No such file or director", av[1]);
+	if (mlx->fd == -1)
+		freexit(mlx);
+	get_lines_larg_len(mlx);
+	configure_numbers(mlx);
 	draw(mlx);
 	draw_numbers(mlx);
 	mlx_string_put(mlx->pid, mlx->pid_win, 50, 50, 0xffffff, \
@@ -63,7 +70,6 @@ int	main(int ac, char **av)
 {
 	t_fdf	mlx;
 
-	sleep(6);
 	ft_strerror(ac, av);
 	conf_win(&mlx);
 	ft_first_exec(&mlx, av);

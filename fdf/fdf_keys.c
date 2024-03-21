@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:17:02 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/20 18:18:29 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 23:44:46 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,24 @@ void	reset(t_fdf *mlx)
 	mlx->pos->yl = 0;
 	mlx->pos->ra = 0;
 	mlx->pos->rb = 0;
+	mlx->tree_d->center_x = 750;
+	mlx->tree_d->center_y = 750;
+	mlx->tree_d->angle_x = 0.0;
+	mlx->tree_d->angle_y = 0.0;
+}
+
+void	keys2(t_fdf *mlx, int keycode)
+{
+	if (keycode == 37)
+		mlx->tree_d->angle_y += 3;
+	else if (keycode == 41)
+		mlx->tree_d->angle_y -= 3;
+	else if (keycode == 38)
+		mlx->tree_d->angle_x += 3;
+	else if (keycode == 40)
+		mlx->tree_d->angle_x -= 3;
+	else if (keycode == 15)
+		reset(mlx);
 }
 
 void	keys(t_fdf *mlx, int keycode)
@@ -60,18 +78,8 @@ void	keys(t_fdf *mlx, int keycode)
 		mlx->pos->alt -= 0.531415;
 	else if (keycode == 35 && mlx->pos->alt * 10 <= 450)
 		mlx->pos->alt += 0.531415;
-	else if (keycode == 37)
-	{
-		mlx->pos->dify -= 30;
-		mlx->pos->difx += 30;
-	}
-	else if (keycode == 41)
-	{
-		mlx->pos->dify += 30;
-		mlx->pos->difx -= 30;
-	}
-	else if (keycode == 15)
-		reset(mlx);
+	else
+		keys2(mlx, keycode);
 }
 
 int	key_hooks(int keycode, t_fdf *mlx)
