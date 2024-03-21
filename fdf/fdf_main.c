@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:50:47 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/20 17:50:49 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 08:12:36 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	ft_first_exec(t_fdf *mlx, char **av)
 	mlx->pos->dify = -800;
 	mlx->pos->zom = -3;
 	mlx->pos->agl = 1;
+	mlx->color->r = 250;
+	mlx->color->g = 0;
+	mlx->color->b = 250;
 	draw(mlx);
 	draw_numbers(mlx);
 	mlx_string_put(mlx->pid, mlx->pid_win, 50, 50, 0xffffff, \

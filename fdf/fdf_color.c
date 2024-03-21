@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:21:24 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/20 18:39:29 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 11:31:17 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	is_rgb(t_fdf *mlx)
 		mlx->color->r = 250;
 		mlx->color->g = 0;
 		mlx->color->b = 250;
-		if (mlx->pos->alt >= 0 && mlx->color->b > 30)
+		if ((mlx->pos->z > 0 || mlx->pos->zl > 0) && mlx->color->b > 10)
 			mlx->color->b -= max1(mlx->pos->z, mlx->pos->zl) / 2;
-		if (mlx->pos->alt < 0 && mlx->color->b > 30)
-			mlx->color->b -= max1(mlx->pos->z, mlx->pos->zl) / 2;
+		if ((mlx->pos->z < 0 || mlx->pos->zl < 0) && mlx->color->r > 10)
+			mlx->color->r += max1(mlx->pos->z, mlx->pos->zl) / 2;
 		mlx->pos->line_color = ((mlx->color->r << 16) | \
 			(mlx->color->g << 8) | mlx->color->b);
 	}
 	else
-		mlx->pos->line_color = 0xffffff;
+		mlx->pos->line_color = 0xf005c9;
 }
 
 void	z2_color(t_fdf *mlx, char *tmp)

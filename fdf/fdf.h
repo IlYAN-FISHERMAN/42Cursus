@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:58:33 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/20 18:25:02 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 08:17:05 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_fdf
 	t_3d	*tree_d;
 }	t_fdf;
 
+void	get_lines_larg_len(t_fdf *mlx);
 void	ft_strerror(int ac, char **av);
 void	ft_first_exec(t_fdf *mlx, char **av);
 void	is_rgb(t_fdf *mlx);
@@ -110,16 +111,15 @@ void	calcule_z_2(t_fdf *mlx, int x, int y);
 void	calcule_z_1(t_fdf *mlx, int x);
 void	reset(t_fdf *mlx);
 void	keys(t_fdf *mlx, int keycode);
-void	rotate(t_fdf *mlx, int z);
 void	isometric(float *x, float *y, int z, t_fdf *mlx);
 void	bresenham(float xl, float yl, t_fdf *mlx);
+void	rotate(float x, float y, t_fdf *mlx);
 
 char	*joint_line(char *s1, char *s2);
 
 int		freexit(t_fdf *mlx);
 int		close_win(t_fdf *mlx);
 int		key_hooks(int keycode, t_fdf *mlx);
-int		get_lines_larg_len(t_fdf *mlx);
 
 float	max1(float a, float b);
 float	min1(float a, float b);

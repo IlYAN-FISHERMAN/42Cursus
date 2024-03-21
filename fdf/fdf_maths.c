@@ -6,26 +6,25 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:52:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/20 17:32:09 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 11:30:09 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
 
-void	rotate(t_fdf *mlx, int z)
+void	rotate(float x, float y, t_fdf *mlx)
 {
-	float	x_orig;
-	float	z_orig;
-	float	cos_angle;
-	float	sin_angle;
-
-	cos_angle = cos(mlx->pos->iso * M_PI / 90.0);
-	sin_angle = sin(mlx->pos->iso * M_PI / 90.0);
-	x_orig = mlx->pos->x;
-	z_orig = z;
-	mlx->pos->x = x_orig * cos_angle + z_orig * sin_angle;
-	mlx->pos->z = -x_orig * sin_angle + z_orig * cos_angle;
+	x = x - 20;
+	y = y - 20;
+	float angle = atan2(y, x);
+	angle = angle * 180 / M_PI;
+	if (angle < 0)
+		angle += 90.0;
+	else
+		angle -= 90.0;
+	mlx->pos->x += angle;
+	mlx->pos->y -= angle;
 }
 
 void	isometric(float *x, float *y, int z, t_fdf *mlx)
@@ -40,6 +39,7 @@ void	bresenham(float xl, float yl, t_fdf *mlx)
 	float	x;
 	float	y;
 
+	//rotate(mlx->pos->x, mlx->pos->y, mlx);
 	x = mlx->pos->x;
 	y = mlx->pos->y;
 	isometric(&x, &y, mlx->pos->z, mlx);

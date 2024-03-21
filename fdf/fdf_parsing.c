@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:18:12 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/20 17:44:31 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 08:16:45 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*joint_line(char *s1, char *s2)
 	return (s3);
 }
 
-int	get_lines_larg_len(t_fdf *mlx)
+void	get_lines_larg_len(t_fdf *mlx)
 {
 	char	**line;
 	char	*buf;
@@ -53,8 +53,6 @@ int	get_lines_larg_len(t_fdf *mlx)
 	while (line[count])
 		count++;
 	mlx->len->lon = count;
-	if (buf)
-		free(buf);
+	free(buf);
 	ft_free_tab(line);
-	return (0);
 }
