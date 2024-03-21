@@ -6,26 +6,12 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 13:52:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/21 11:30:09 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 17:35:59 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
-
-void	rotate(float x, float y, t_fdf *mlx)
-{
-	x = x - 20;
-	y = y - 20;
-	float angle = atan2(y, x);
-	angle = angle * 180 / M_PI;
-	if (angle < 0)
-		angle += 90.0;
-	else
-		angle -= 90.0;
-	mlx->pos->x += angle;
-	mlx->pos->y -= angle;
-}
 
 void	isometric(float *x, float *y, int z, t_fdf *mlx)
 {
@@ -39,7 +25,6 @@ void	bresenham(float xl, float yl, t_fdf *mlx)
 	float	x;
 	float	y;
 
-	//rotate(mlx->pos->x, mlx->pos->y, mlx);
 	x = mlx->pos->x;
 	y = mlx->pos->y;
 	isometric(&x, &y, mlx->pos->z, mlx);

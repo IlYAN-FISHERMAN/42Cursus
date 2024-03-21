@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:50:47 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/21 08:12:36 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 16:38:34 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int ac, char **av)
 {
 	t_fdf	mlx;
 
+	sleep(6);
 	ft_strerror(ac, av);
 	conf_win(&mlx);
 	ft_first_exec(&mlx, av);

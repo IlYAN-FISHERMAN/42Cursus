@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:21:24 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/21 11:31:17 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 16:55:25 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	is_rgb(t_fdf *mlx)
 			(mlx->color->g << 8) | mlx->color->b);
 	}
 	else
-		mlx->pos->line_color = 0xf005c9;
+		mlx->pos->line_color = 0xffffff;
 }
 
 void	z2_color(t_fdf *mlx, char *tmp)

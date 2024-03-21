@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:33:18 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/20 18:25:26 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/21 17:00:36 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,13 @@ void	calcule_z_1(t_fdf *mlx, int x)
 			zl1_color(mlx, x);
 		else if (x == 0 && ft_strchr(mlx->len->lat[x + 1], ',') != NULL)
 			zl1_color(mlx, x);
-		if (x > 0)
-			mlx->pos->zl = ft_atoi(mlx->len->lat[x - 1]) * mlx->pos->alt;
-		else if (x == 0)
-			mlx->pos->zl = ft_atoi(mlx->len->lat[x + 1]) * mlx->pos->alt;
-		is_rgb(mlx);
+		else
+		{
+			if (x > 0)
+				mlx->pos->zl = ft_atoi(mlx->len->lat[x - 1]) * mlx->pos->alt;
+			else if (x == 0)
+				mlx->pos->zl = ft_atoi(mlx->len->lat[x + 1]) * mlx->pos->alt;
+			is_rgb(mlx);
+		}
 	}
 }
