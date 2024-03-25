@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/24 10:24:55 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/11/15 05:28:03 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/11/22 13:27:52 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-void	ft_putnbr(int nbr, int *n)
+void	ft_putnbr_base(unsigned int nb, char *base)
 {
-	long	nb;
+	unsigned int	len;
 
-	nb = nbr;
-	if (nb < 0)
+	len = ft_strlen(base);
+	if (nb >= len)
 	{
-		write(1, "-", 1);
-		*n += 1;
-		nb = nb * -1;
-	}
-	if (nb > 9)
-	{
-		ft_putnbr(nb / 10, n);
-		ft_putnbr(nb % 10, n);
+		ft_putnbr_base(nb / len, base);
+		ft_putnbr_base(nb % len, base);
 	}
 	else
-		ft_putcharr(nb + '0', n);
+		ft_putchar_fd(base[nb], 1);
 }

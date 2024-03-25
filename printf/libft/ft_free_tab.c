@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/24 10:24:55 by ilyanar          ###   ########.fr       */
+/*   Created: 2024/01/22 16:51:42 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/01/22 16:52:01 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-void	ft_putnbr(int nbr, int *n)
+int	ft_free_tab(char **tab)
 {
-	long	nb;
+	int	i;
 
-	nb = nbr;
-	if (nb < 0)
+	i = 0;
+	while (*(tab + i))
+		i++;
+	while (i >= 0)
 	{
-		write(1, "-", 1);
-		*n += 1;
-		nb = nb * -1;
+		free(*(tab + i));
+		i--;
 	}
-	if (nb > 9)
-	{
-		ft_putnbr(nb / 10, n);
-		ft_putnbr(nb % 10, n);
-	}
-	else
-		ft_putcharr(nb + '0', n);
+	free(tab);
+	return (0);
 }

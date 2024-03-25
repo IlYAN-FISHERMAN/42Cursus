@@ -6,25 +6,36 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:14 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/02 22:58:21 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/01/19 19:56:55 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-size_t	len(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] && s[i] != '\n')
+	while (s[i])
 		i++;
 	return (i);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+char	*gnl_strjoin(char const *s1, char const *s2)
+{
+	char	*s3;
+
+	s3 = (char *)gnl_calloc(gnl_strlen(s1) + gnl_strlen(s2) + 1, sizeof(char));
+	if (!s3)
+		return (NULL);
+	gnl_memcpy(s3, s1, gnl_strlen(s1));
+	gnl_memcpy((s3 + gnl_strlen(s1)), s2, gnl_strlen(s2));
+	free((char *)s1);
+	return (s3);
+}
+
+void	*gnl_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t		i;
 	char		*d;
@@ -33,64 +44,36 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	d = (char *)dst;
 	s = (const char *)src;
 	i = -1;
-	if (!dst || !src)
+	if (!dst && !src)
 		return (NULL);
-	while (i++, i != n && ((char *)src)[i] != '\n')
+	while (i++, i != n)
 		d[i] = s[i];
 	return (dst);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+void	*gnl_calloc(size_t count, size_t size)
 {
-	t_list	*tmp;
+	void	*tab;
+	size_t	i;
 
-	if (!lst)
-		return (NULL);
-	tmp = lst;
-	while (tmp)
-	{
-		if (tmp->next == NULL)
-			return (tmp);
-		else
-			tmp = tmp->next;
-	}
-	return (tmp);
-}
-
-int	have_n(char *tab)
-{
-	int	i;
-
-	i = 0;
+	i = -1;
+	tab = malloc(count * size);
 	if (!tab)
-		return (0);
-	while (tab[i])
-	{
-		if (tab[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
+		return (NULL);
+	while (i++, i < count * size)
+		((char *)tab)[i] = '\0';
+	return (tab);
 }
 
-void	stack_buffer(char *tab, int byte)
+char	*gnl_strchr(const char *s, int c)
 {
-	int	i;
-	int	j;
-
-	j = 0;
-	if (!tab || !byte)
-		return ;
-	i = len(tab) + 1;
-	while (i < byte)
-	{
-		tab[j] = tab[i];
-		i++;
-		j++;
-	}
-	while (j < byte)
-	{
-		tab[j] = '\0';
-		j++;
-	}
+	if (!s)
+		return (NULL);
+	if (!(unsigned char)c)
+		return ((char *)s + gnl_strlen(s));
+	while (*s && *s != (unsigned char)c)
+		s++;
+	if (*s == '\0')
+		return (0);
+	return ((char *)s);
 }

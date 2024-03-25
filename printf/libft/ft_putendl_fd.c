@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/24 10:24:55 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/10/21 14:58:07 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/10/21 15:01:25 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft/libft.h"
+#include <unistd.h>
 
-void	ft_putnbr(int nbr, int *n)
+void	ft_putendl_fd(char *s, int fd)
 {
-	long	nb;
+	int	i;
 
-	nb = nbr;
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		*n += 1;
-		nb = nb * -1;
-	}
-	if (nb > 9)
-	{
-		ft_putnbr(nb / 10, n);
-		ft_putnbr(nb % 10, n);
-	}
-	else
-		ft_putcharr(nb + '0', n);
+	i = -1;
+	while (i++, s[i])
+		write(fd, &s[i], 1);
+	write(fd, "\n", 1);
+	return ;
 }

@@ -6,12 +6,11 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/24 10:24:55 by ilyanar          ###   ########.fr       */
+/*   Updated: 2023/11/22 17:54:22 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 void	ft_putnbr(int nbr, int *n)
 {
@@ -30,5 +29,5 @@ void	ft_putnbr(int nbr, int *n)
 		ft_putnbr(nb % 10, n);
 	}
 	else
-		ft_putcharr(nb + '0', n);
+		ft_putchar(nb + '0', n);
 }

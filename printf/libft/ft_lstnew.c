@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/24 10:24:55 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/10/21 18:00:17 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/10/21 19:21:06 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
+#include <stdio.h>
 
-void	ft_putnbr(int nbr, int *n)
+t_list	*ft_lstnew(void *content)
 {
-	long	nb;
+	t_list	*body;
 
-	nb = nbr;
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		*n += 1;
-		nb = nb * -1;
-	}
-	if (nb > 9)
-	{
-		ft_putnbr(nb / 10, n);
-		ft_putnbr(nb % 10, n);
-	}
-	else
-		ft_putcharr(nb + '0', n);
+	body = malloc(sizeof(t_list));
+	if (!body)
+		return (NULL);
+	body->content = content;
+	body->next = NULL;
+	return (body);
 }
+/*
+int	main(void)
+{
+	char tab[] = "hello";
+	ft_lstnew(tab);
+}
+*/

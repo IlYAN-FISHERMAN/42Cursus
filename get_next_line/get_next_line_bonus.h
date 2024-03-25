@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:07 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/08 22:57:27 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/03/24 09:48:04 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 64
 # endif
 
 # include <unistd.h>
@@ -23,25 +23,17 @@
 # include <stdio.h>
 # include <string.h>
 
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}	t_list;
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strchr(const char *s, int c);
+char		*ft_gnljoin(char *s2);
+char		*get_next_line(int fd);
 
-char	*get_next_line(int fd);
+void		*ft_calloc(size_t count, size_t size);
+void		*ft_memcpy(void *dst, const void *src, size_t n);
+void		ft_bzero(void *s, size_t n);
 
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	ft_cpy_node(t_list **lst, char *tab);
-void	clear_all_node(t_list **lst);
-void	cpy_all_node(t_list **lst, char *buffer);
-void	all_node(t_list **lst, char *buffer);
-void	stack_buffer(char *tab, int byte);
+size_t		ft_strlen(const char *s);
 
-t_list	*ft_lstlast(t_list *lst);
-
-size_t	len(const char *s);
-
-int		have_n(char *tab);
+int			ft_invalid(char **buffer, int fd);
 
 #endif

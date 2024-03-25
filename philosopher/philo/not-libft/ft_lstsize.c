@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 01:58:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/24 10:24:55 by ilyanar          ###   ########.fr       */
+/*   Created: 2023/10/22 23:10:28 by ilyanar           #+#    #+#             */
+/*   Updated: 2023/10/22 23:10:30 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
 
-void	ft_putnbr(int nbr, int *n)
+int	ft_lstsize(t_list *lst)
 {
-	long	nb;
+	int		i;
+	t_list	*tmp;
 
-	nb = nbr;
-	if (nb < 0)
+	i = 1;
+	if (!lst)
+		return (0);
+	tmp = lst->next;
+	while (tmp)
 	{
-		write(1, "-", 1);
-		*n += 1;
-		nb = nb * -1;
+		i++;
+		tmp = tmp->next;
 	}
-	if (nb > 9)
-	{
-		ft_putnbr(nb / 10, n);
-		ft_putnbr(nb % 10, n);
-	}
-	else
-		ft_putcharr(nb + '0', n);
+	return (i);
 }

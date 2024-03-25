@@ -1,12 +1,12 @@
- **************************************************************************** #
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2023/11/26 00:48:01 by ilyanar          ###   ########.fr        #
+#    Created: 2024/03/24 10:01:33 by ilyanar           #+#    #+#              #
+#    Updated: 2024/03/24 19:28:06 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,35 +16,46 @@ CFLAGS = -Wall -Werror -Wextra
 
 RM = rm -rf
 
-NAME = libftprintf.a
+NAME = ft_printf
 
 LIBFT_PATH = ./libft/
 
-LIBFT_FILES = ft_strlen \
-	      ft_strchr
-
-LIBFT_OFILES = $(LIBFT_FILES:%=$(LIBFT_PATH)%.o)
+LIBFT_LIB = $(LIBFT_PATH:%=%libft.a)
 
 CFILES = $(FILES:%=%.c)
 
-OFILES = $(FILES:%=%.o)
+CBFILES = $(BFILES:%=%.c)
 
 FILES = ft_printf \
-	ft_printf_utils
+		ft_printf_utils
+
+BFILES = ft_printf_bonus \
+		 ft_printf_utils_bonus
 
 all : $(NAME)
 
-$(NAME) : $(OFILES) $(LIBFT_PATH)Makefile
-	make -C $(LIBFT_PATH) all
-	ar -rc $@ $(OFILES) $(LIBFT_OFILES)
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\33[2K"
+
+$(NAME) : $(CFILES) $(LIBFT_LIB)
+	@$(CC) $(CFLAGS) $(CFILES) $(LIBFT_LIB) -o $(NAME)
+	@echo " \t$(NAME) compiled ✅"
+
+bonus : $(CBFILES) $(LIBFT_LIB)
+	@$(CC) $(CFLAGS) $(CBFILES) $(LIBFT_LIB) -o $(NAME)
+	@echo " \t$(NAME) compiled with bonus ✅"
 
 clean :
-	$(RM) $(OFILES)
-	make -C $(LIBFT_PATH) fclean
+	@$(RM) $(OFILES)
+	@make -C $(LIBFT_PATH) fclean
 
 fclean : clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+
+$(LIBFT_LIB): $(LIBFT_PATH)Makefile
+	@make -C $(LIBFT_PATH) all
 
 re : fclean all
 
-.PHONY : clean fclean all re
+.PHONY : clean fclean all re bonus
