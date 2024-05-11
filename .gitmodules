@@ -1,3 +1,6 @@
 [submodule "my-42-minishell"]
 	path = my-42-minishell
 	url = git@github.com:IlYAN-FISHERMAN/42-minishell.git
+[submodule "42-minishell"]
+	path = 42-minishell
+	url = git@github.com:RPDJF/42-minishell.git
