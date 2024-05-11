@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2024/03/12 21:58:34 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/04/15 13:11:07 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,8 @@ FILES = ft_strlen \
 	ft_lstiter \
 	ft_lstmap \
 	ft_free_tab \
+	ft_joint_all \
+	ft_strr_realloc \
 	ft_atoi_base
 
 all : $(NAME)

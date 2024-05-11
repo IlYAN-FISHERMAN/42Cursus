@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   ft_joint_all.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:51:42 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/05/10 23:08:12 by ilyanar          ###   ########.fr       */
+/*   Created: 2024/04/13 23:13:59 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/04/13 23:14:52 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_free_tab(char **tab)
+char	*ft_joint_all(char **str)
 {
-	int	i;
+	int		i;
+	char	*tmp1;
+	char	*tmp2;
 
-	i = 0;
-	if (!tab)
-		return (1);
-	while (*(tab + i))
+	i = 1;
+	if (!str)
+		return (NULL);
+	if (str && str[0])
+		tmp1 = ft_strdup(str[0]);
+	while (str[i])
+	{
+		tmp2 = ft_strjoin(tmp1, str[i]);
+		free(tmp1);
 		i++;
-	i++;
-	while (--i >= 0)
-		free(*(tab + i));
-	free(tab);
-	return (0);
+		if (!str[i])
+			return (tmp2);
+		tmp1 = ft_strjoin(tmp2, str[i]);
+		free(tmp2);
+		i++;
+		if (!str[i])
+			return (tmp1);
+	}
+	return (tmp1);
 }

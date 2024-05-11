@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:47:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/24 10:31:24 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/09 16:10:04 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,7 @@ int	ft_printf(const char *str, ...)
 
 #include <stdio.h>
 
-int	main(int ac, char **av)
+int	main(void)
 {
-	(void)ac;
-	printf("byte_read ->_%d\n\n", printf("V: %s\n", av[1]));
-	ft_printf("byte_read ->_%d\n", ft_printf("M: %s\n", av[1]));
+	ft_printf("%x\n", 2147483648);
 }

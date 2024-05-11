@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/21 19:04:30 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/04/15 13:11:36 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
+	struct s_list	*previous;
 }	t_list;
 
 //libft
@@ -63,6 +64,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
 
 char	**ft_split(char const *s, char c);
+char	**ft_strr_realloc(char **str, char *neww);
+char	*ft_joint_all(char **str);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -74,14 +77,14 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strchr(const char *s, int c);
 
 t_list	*ft_lstnew(void *content);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstadd_front(t_list **lst, t_list *neww);
 int		ft_lstsize(t_list *lst);
-t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *neww);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 //printf.h
 void	printf_base_addr(unsigned long long int nb, char *base, int *n);

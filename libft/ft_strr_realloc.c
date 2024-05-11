@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_tab.c                                      :+:      :+:    :+:   */
+/*   ft_strr_realloc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:51:42 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/05/10 23:08:12 by ilyanar          ###   ########.fr       */
+/*   Created: 2024/04/15 13:09:18 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/05/10 23:07:01 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_free_tab(char **tab)
+char	**ft_strr_realloc(char **str, char *neww)
 {
-	int	i;
+	char	**tab;
+	int		i;
+	int		j;
 
 	i = 0;
-	if (!tab)
-		return (1);
-	while (*(tab + i))
+	j = -1;
+	if (!str || !neww)
+		return (NULL);
+	while (str[i] != NULL)
 		i++;
-	i++;
-	while (--i >= 0)
-		free(*(tab + i));
-	free(tab);
-	return (0);
+	tab = ft_calloc(i + 2, sizeof(char *));
+	if (!tab)
+		return (NULL);
+	while (++j < i && i > 0)
+		tab[j] = ft_strdup(str[j]);
+	tab[j] = ft_strdup(neww);
+	if (str && *str)
+		ft_free_tab(str);
+	return (tab);
 }

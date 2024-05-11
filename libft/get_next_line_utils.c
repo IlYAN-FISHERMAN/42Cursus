@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:57:14 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/19 19:56:55 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/10 23:10:02 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*gnl_memcpy(void *dst, const void *src, size_t n)
 	i = -1;
 	if (!dst && !src)
 		return (NULL);
-	while (i++, i != n)
+	while (++i != n)
 		d[i] = s[i];
 	return (dst);
 }
@@ -60,7 +60,7 @@ void	*gnl_calloc(size_t count, size_t size)
 	tab = malloc(count * size);
 	if (!tab)
 		return (NULL);
-	while (i++, i < count * size)
+	while (++i < count * size)
 		((char *)tab)[i] = '\0';
 	return (tab);
 }
