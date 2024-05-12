@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2024/04/15 13:11:07 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/05/12 14:46:34 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,8 +106,11 @@ clean :
 
 fclean : clean
 	@echo "\n [$(NAME)] - supressions du reste... 🗑️"
+	@echo "\n"
 	@$(RM) $(NAME)
 
-re : fclean all
+re :
+	@make fclean
+	@make all
 
 .PHONY : clean fclean all re
