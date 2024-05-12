@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2024/05/12 14:46:34 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/05/12 22:34:58 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,8 @@ FILES = ft_strlen \
 	ft_free_tab \
 	ft_joint_all \
 	ft_strr_realloc \
-	ft_atoi_base
+	ft_atoi_base \
+	ft_count_char
 
 all : $(NAME)
 
@@ -106,7 +107,7 @@ clean :
 
 fclean : clean
 	@echo "\n [$(NAME)] - supressions du reste... 🗑️"
-	@echo "\n"
+	@echo ""
 	@$(RM) $(NAME)
 
 re :

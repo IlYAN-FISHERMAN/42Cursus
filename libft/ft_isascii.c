@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:41:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/10 16:52:12 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:02:23 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,3 @@ int	ft_isascii(int c)
 		return (1);
 	return (0);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	int c = 250;
-	printf("%d", ft_isascii(c));
-}
-*/

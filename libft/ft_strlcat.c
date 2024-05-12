@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:14:27 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/17 22:28:36 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:04:41 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		return (j + k);
 	return (dstsize + k);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-int	main(void)
-{
-	char dst[19] = "Hello ";
-	char src[] = "wolrd!";
-
-	printf("- Mon test : %zu\n", ft_strlcat(dst, src, 7));
-	printf("%s\n", dst);
-	//printf("- Vrais fonction : %zu\n", strlcat(dst, src, 7));
-	//printf("%s\n", dst);
-}
-*/

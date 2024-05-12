@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 18:57:45 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/20 03:33:09 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:05:46 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_memcpy(tab, (s + start), len);
 	return (tab);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	char	tab[] = "FULL DAWDSAWDS";
-	printf("%s", ft_substr(tab, 400, 20));
-}
-*/

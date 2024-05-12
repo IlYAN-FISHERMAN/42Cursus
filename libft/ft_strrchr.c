@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:40:53 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/18 13:02:35 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:05:31 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,3 @@ char	*ft_strrchr(const char *s, int c)
 		return (0);
 	return (p);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-int	main(void)
-{
-	char *tab = "electric_alloc";
-
-	printf("M_FONCTION : %s\n", ft_strrchr(tab, 10));
-	printf("V_FONCTION : %s\n", strrchr(tab, 10));
-}
-*/

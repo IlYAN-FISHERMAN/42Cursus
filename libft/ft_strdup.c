@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 18:34:58 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/19 18:53:31 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:04:29 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,3 @@ char	*ft_strdup(const char *s)
 	ft_memcpy(tab, s, ft_strlen(s));
 	return (tab);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	char tab[] = "hello";
-
-	printf("%s\n", ft_strdup(tab));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:16:29 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/13 17:27:46 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:06:04 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,3 @@ int	ft_toupper(int c)
 		c -= 32;
 	return (c);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	int a = 'b';
-	printf("%c", ft_toupper(a));
-
-}
-*/

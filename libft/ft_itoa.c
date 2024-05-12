@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:23:44 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/22 17:55:53 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:02:40 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,3 @@ char	*ft_itoa(int n)
 	ft_rev_tab(tab);
 	return (tab);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	int	i;
-
-	i = -2147483648;
-	printf("%s", ft_itoa(i));
-}
-*/

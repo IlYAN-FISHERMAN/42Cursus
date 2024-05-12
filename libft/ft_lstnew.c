@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:00:17 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/21 19:21:06 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:03:01 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,3 @@ t_list	*ft_lstnew(void *content)
 	body->next = NULL;
 	return (body);
 }
-/*
-int	main(void)
-{
-	char tab[] = "hello";
-	ft_lstnew(tab);
-}
-*/

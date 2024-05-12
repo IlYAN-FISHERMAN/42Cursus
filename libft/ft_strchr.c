@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:34:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/13 18:30:43 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:04:23 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,3 @@ char	*ft_strchr(const char *s, int c)
 		return (0);
 	return ((char *)s);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	const char tab[] = "hello";
-	printf("%s", ft_strchr(tab, 'h'));
-}
-*/

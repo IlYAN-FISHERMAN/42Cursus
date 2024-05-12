@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 22:33:55 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/17 23:19:33 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:05:05 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-int	main()
-{
-	printf("%d\n", ft_strncmp("test\200", "test\0", 6));
-	printf("%d\n", strncmp("test\200", "test\0", 6));
-}
-*/

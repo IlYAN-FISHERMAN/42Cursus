@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:49:28 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/21 14:53:02 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:04:10 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,3 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, &s[i], 1);
 	return ;
 }
-/*
-int	main(void)
-{
-	char tab[] = "hello";
-	ft_putstr_fd(tab, 1);
-}
-*/

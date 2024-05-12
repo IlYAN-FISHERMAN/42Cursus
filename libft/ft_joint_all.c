@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 23:13:59 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/04/13 23:14:52 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:44:47 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_joint_all(char **str)
 	i = 1;
 	if (!str)
 		return (NULL);
-	if (str && str[0])
+	if (str[0])
 		tmp1 = ft_strdup(str[0]);
 	while (str[i])
 	{

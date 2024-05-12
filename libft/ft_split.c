@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 04:45:25 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/20 16:22:18 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:04:18 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,3 @@ char	**ft_split(char const *s, char c)
 	}
 	return (tab);
 }
-/*
-#include <unistd.h>
-int	main()
-{
-	char tab[] = "lorem ips Sed non risus. Suspendisse";
-	char c = ' ';
-	ft_split(tab, c);
-}
-*/

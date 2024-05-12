@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:13:20 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/18 01:48:06 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:04:46 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		i++;
 	return (i);
 }
-/*
-#include <string.h>
-#include <stdio.h>
-
-int	main(void)
-{
-	char dst[] = "";
-
-	printf("%zu\n", ft_strlcpy(dst, "lorem ipsum dolor sit amet", 0));
-	printf("%s", dst);
-	//printf("%lu\n", strlcpy(dst, "lorem ipsum dolor sit amet", 0));
-	//printf("%s", dst);
-}
-*/

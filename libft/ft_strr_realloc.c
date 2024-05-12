@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:09:18 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/05/10 23:07:01 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 22:18:50 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,17 @@ char	**ft_strr_realloc(char **str, char *neww)
 	int		j;
 
 	i = 0;
-	j = -1;
-	if (!str || !neww)
-		return (NULL);
-	while (str[i] != NULL)
-		i++;
+	j = 0;
+	if (str)
+		while (str[i] != NULL)
+			i++;
 	tab = ft_calloc(i + 2, sizeof(char *));
-	if (!tab)
-		return (NULL);
-	while (++j < i && i > 0)
+	while (i > 0 && j < i)
+	{
 		tab[j] = ft_strdup(str[j]);
-	tab[j] = ft_strdup(neww);
-	if (str && *str)
-		ft_free_tab(str);
+		j++;
+	}
+	tab[j] = neww;
+	ft_free_tab(&str);
 	return (tab);
 }

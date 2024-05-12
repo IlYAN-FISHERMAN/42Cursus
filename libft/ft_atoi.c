@@ -6,11 +6,11 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:39:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/11/09 17:58:40 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 20:51:03 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
@@ -35,14 +35,3 @@ int	ft_atoi(const char *str)
 	}
 	return (nb * i);
 }
-/*
-#include <stdio.h>
-#include <stdlib.h>
-int	main()
-{
-	char tab[] = "-152";
-
-	printf("M_fonction : %d\n", ft_atoi(tab));
-	printf("V_fonction : %d\n", atoi(tab));
-}
-*/

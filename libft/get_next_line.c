@@ -6,13 +6,13 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:56:56 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/19 19:53:14 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:07:01 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_invalid(char **buffer, int fd)
+static int	ft_invalid(char **buffer, int fd)
 {
 	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) == -1)
 	{
@@ -23,7 +23,7 @@ int	ft_invalid(char **buffer, int fd)
 	return (0);
 }
 
-char	*ft_gnljoin(char *s2)
+static char	*ft_gnljoin(char *s2)
 {
 	char	*s3;
 	int		i;
@@ -49,7 +49,7 @@ char	*ft_gnljoin(char *s2)
 	return (s3);
 }
 
-char	*next_funct(char *next_line)
+static char	*next_funct(char *next_line)
 {
 	char	*buffer;
 	int		i;
@@ -75,7 +75,7 @@ char	*next_funct(char *next_line)
 	return (buffer);
 }
 
-char	*get_nline(char *buffer, char *next_line, int *fd)
+static char	*get_nline(char *buffer, char *next_line, int *fd)
 {
 	int		byte;
 

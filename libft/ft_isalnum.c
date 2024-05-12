@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 16:22:36 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/10 17:11:30 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:02:16 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,3 @@ int	ft_isalnum(int c)
 		return (1);
 	return (0);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	int	c = '\n';
-	printf("%d", ft_isalnum(c));
-}
-*/

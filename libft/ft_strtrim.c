@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 00:49:08 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/20 04:14:04 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:05:41 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	ft_memcpy(s2, s1, i + 1);
 	return (s2);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	char tab[] = "pprrphelloprprp";
-	char set[] = "pr";
-
-	printf("%s", ft_strtrim(tab, set));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:16 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/11 15:35:03 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:04:51 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,3 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	char tab[] = "jhbefvbj jem";
-	printf("%zu", ft_strlen(tab));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:38:13 by ilyanar           #+#    #+#             */
-/*   Updated: 2023/10/10 17:34:16 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/12 21:02:29 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,3 @@ int	ft_isdigit(int c)
 		return (1);
 	return (0);
 }
-/*
-#include <stdio.h>
-int	main()
-{
-	int	c = 'w';
-	printf("%d", ft_isdigit(c));
-}
-*/
