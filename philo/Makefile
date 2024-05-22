@@ -6,59 +6,53 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 15:41:52 by ilyanar           #+#    #+#              #
-#    Updated: 2024/05/10 17:47:08 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/05/21 18:02:48 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -Ofast
-
-MLXFLAGS = -framework OpenGL -framework AppKit
+CFLAGS = -lpthread -Wall -Werror -Wextra
 
 RM = rm -rf
 
 NAME = philo
 
-LIBFT_PATH = ./libft/
+DOCNAME = src/
 
-LIBFT_LIB = $(LIBFT_PATH:%=%libft.a)
-
-FILES = philo \
+FILES = $(DOCNAME)philo \
+		$(DOCNAME)philo_utils
 
 CFILES = $(FILES:%=%.c)
 
 all : $(NAME)
 
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\33[2K"
+
+$(NAME): $(CFILES)
+	@$(CC) $(CFLAGS) $(CFILES) -o $(NAME)
+	@echo " \t$(NAME) compiled ✅"
+
 clean :
 	@echo "\n [$(NAME)] - Nettoyage fichier residuels... ♻️ "
-	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@$(MAKE) -C $(MLX_PATH) clean
 
 fclean : clean
 	@echo "\n [$(NAME)] - Supressions du reste... 🗑️"
 	@rm -f $(NAME)
+	@echo ""
 
 re :
 	@make fclean
 	@make all
 
-debug : $(CFILES) $(LIBFT_LIB) $(MLX)
-	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address $(LIBFT_LIB) $(MLX) $(MLXFLAGS) -o $(NAME)
-	@echo " \t$(NAME) compiled ✅"
+debug_t : $(CFILES)
+	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=thread -o $(NAME)
+	@echo " \t$(NAME) compiled with thread debug ✅"
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "\33[2K"
-
-$(NAME): $(CFILES) $(LIBFT_LIB) $(MLX)
-	@$(CC) $(CFLAGS) $(CFILES) $(LIBFT_LIB) $(MLX) $(MLXFLAGS) -o $(NAME)
-	@echo " \t$(NAME) compiled ✅"
-
-$(MLX): $(MLX_PATH)Makefile
-	@make -C $(MLX_PATH) all
-
-$(LIBFT_LIB): $(LIBFT_PATH)Makefile
-	@make -C $(LIBFT_PATH) all
+debug_f : $(CFILES)
+	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address -o $(NAME)
+	@echo " \t$(NAME) compiled with address debug ✅"
 
 .PHONY : clean fclean all debug re
