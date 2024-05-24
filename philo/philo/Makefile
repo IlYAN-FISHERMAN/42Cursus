@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 15:41:52 by ilyanar           #+#    #+#              #
-#    Updated: 2024/05/21 18:02:48 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/05/23 10:51:37 by ilyanar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,8 @@ RM = rm -rf
 
 NAME = philo
 
-DOCNAME = src/
-
-FILES = $(DOCNAME)philo \
-		$(DOCNAME)philo_utils
+FILES = philo \
+		philo_utils
 
 CFILES = $(FILES:%=%.c)
 

@@ -6,11 +6,12 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:08:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/05/21 17:50:31 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/05/23 21:32:22 by ilyanar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <sys/_types/_u_int64_t.h>
 
 int	ft_atof(const char *str)
 {
@@ -114,4 +115,23 @@ int	check_format(char **av, int ac)
 				return (0);
 	}
 	return (1);
+}
+
+size_t	get_current_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "gettimeofday() error\n", 22);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+int	ft_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
+		usleep(500);
+	return (0);
 }
