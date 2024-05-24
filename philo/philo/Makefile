@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 15:41:52 by ilyanar           #+#    #+#              #
-#    Updated: 2024/05/23 10:51:37 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/05/24 19:40:43 by ilyanar          ###   LAUSANNE.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,10 @@ debug_t : $(CFILES)
 
 debug_f : $(CFILES)
 	@$(CC) $(CFLAGS) $(CFILES) -g3 -fsanitize=address -o $(NAME)
+	@echo " \t$(NAME) compiled with address debug ✅"
+
+debug_v : $(CFILES)
+	@$(CC) $(CFLAGS) $(CFILES) -g3 -o $(NAME)
 	@echo " \t$(NAME) compiled with address debug ✅"
 
 .PHONY : clean fclean all debug re
