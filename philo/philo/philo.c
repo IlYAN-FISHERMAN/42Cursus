@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:02:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/05/24 23:25:42 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/04 13:37:15 by fclivaz          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,98 +14,67 @@
 #include <pthread.h>
 #include <stdio.h>
 
-int	wait_all(t_data *data)
+void	death_checker(t_data *data)
 {
-	static int	i;
-	
-	i = -1;
-	while (++i < data->philo_nb)
+	(void)data;
+}
+
+void	philo_eat(t_philo *philo)
+{
+	t_data *data;
+
+	data = philo->data;
+	pthread_mutex_lock(&(philo->fork));
+	print_act(data, data->philo_nb, "has taken a fork");
+	pthread_mutex_lock((philo->r_fork));
+	print_act(data, data->philo_nb, "has taken a fork");
+	pthread_mutex_lock(&(data->value));
+	print_act(data, data->philo_nb, "is eating");
+	philo->t_last_meal = timestamp();
+	pthread_mutex_unlock(&(data->value));
+	ft_usleep(data->t_eat, data);
+	pthread_mutex_unlock(&(philo->fork));
+	pthread_mutex_unlock((philo->r_fork));
+}
+
+void	*philo_routine(void *arg)
+{
+	t_philo	*phil;
+	t_data	*data;
+
+	phil = arg;
+	data = phil->data;
+	if (data->philo_nb % 2)
+		ft_usleep(15000, data);
+	pthread_mutex_unlock(&data->value);
+	while(!data->all_eat)
 	{
-		if (pthread_join(data->pthreads[i], NULL))
-			return (0);
+		philo_eat(phil);
+		if (data->all_eat)
+			break ;
+		print_act(data, data->philo_nb, "is sleeping");
+		ft_usleep(data->t_sleep, data);
+		print_act(data, data->philo_nb, "is thinking");
 	}
-	return (1);
+	return (NULL);
 }
 
-void	init_mutexx(t_data *data)
-{
-	int		i;
-	t_philo	*tmp;
-
-	i = -1;
-	while (++i < data->philo_nb)
-	{
-		tmp = &data->philos[i];
-		pthread_mutex_init(&tmp->fork, NULL);
-	}
-	pthread_mutex_init(&data->print, NULL);
-	pthread_mutex_init(&data->dead, NULL);
-}
-
-int	initialize_philo(t_data *data, char **av)
-{
-	ft_bzero(data, sizeof(t_data));
-	data->philo_nb = ft_atoi(av[1]);
-	data->t_die = ft_atoi(av[2]);
-	data->t_eat = ft_atoi(av[3]);
-	data->t_sleep = ft_atoi(av[4]);
-	if (av[5])
-		data->t_nb_eat = ft_atoi(av[5]);
-	else
-		data->t_nb_eat = 0;
-	if (data->t_nb_eat < 0)
-		return (0);
-	data->pthreads = ft_calloc(data->philo_nb, sizeof(pthread_t));
-	if (!data->pthreads)
-		return (0);
-	data->philos = ft_calloc(data->philo_nb, sizeof(t_philo));
-	if (!data->philos)
-		return (0);
-	init_mutexx(data);
-	return (1);
-}
-
-void	destroy_mutex(t_data *data)
-{
-	int		i;
-	t_philo	*tmp;
-
-	i = -1;
-	while (++i < data->philo_nb)
-	{
-		tmp = &data->philos[i];
-		pthread_mutex_destroy(&tmp->fork);
-	}
-	pthread_mutex_destroy(&data->print);
-	pthread_mutex_destroy(&data->dead);
-	free(data->philos);
-	free(data->pthreads);
-}
-
-int	init_philo(t_data *data)
+int	hypervisor(t_data *data)
 {
 	int	i;
 
 	i = -1;
+	data->first_time = timestamp();
 	while (++i < data->philo_nb)
-		if (pthread_create(&data.visor, \
-			NULL, &hypervisor, (void *)&data) && printf("error of thread\n"))
-			return (1);
-}
-
-void	*hypervisor(void *arg)
-{
-	t_data	*data;
-	int		i;
-
-	i = -1;
-	data = (t_data *)arg;
-	if (!init_philo(data))
-		return (NULL);
-	while (true)
 	{
+		if (pthread_create(&data->pthreads[i], \
+			NULL, philo_routine, (void *)&data) && printf("error of thread\n"))
+			return (0);
+		data->philos->t_last_meal = timestamp();
 	}
-	return (NULL);
+	death_checker(data);
+	wait_all(data);
+	return (1);
 }
 
 int	main(int ac, char **av)
@@ -114,11 +83,7 @@ int	main(int ac, char **av)
 
 	if (!check_format(av, ac) || !initialize_philo(&data, av))
 		return (0);
-	if (pthread_create(&data.visor, \
-		NULL, &hypervisor, (void *)&data) && printf("error of thread\n"))
+	if (!hypervisor(&data))
 		return (1);
-	if (pthread_join(data.visor, NULL)
-		&& printf("error join thread\n"))
-		return (0);
 	destroy_mutex(&data);
 }

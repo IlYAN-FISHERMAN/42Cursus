@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 15:41:52 by ilyanar           #+#    #+#              #
-#    Updated: 2024/05/24 19:40:43 by ilyanar          ###   LAUSANNE.ch        #
+#    Updated: 2024/05/25 19:32:24 by fclivaz          ###   LAUSANNE.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ RM = rm -rf
 NAME = philo
 
 FILES = philo \
-		philo_utils
+		philo_utils \
+		philo_init
 
 CFILES = $(FILES:%=%.c)
 

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:08:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/05/24 23:29:31 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/03 15:00:36 by fclivaz          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	check_format(char **av, int ac)
 	return (1);
 }
 
-long	get_timestamp(void)
+long	timestamp(void)
 {
 	struct timeval	time;
 
@@ -101,12 +101,12 @@ long	get_timestamp(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void	ft_usleep(long time_in_ms)
+void	ft_usleep(long time_in_ms, t_data *data)
 {
 	long int		time;
 
-	time = get_timestamp();
-	while (get_timestamp() - time < time_in_ms)
+	time = timestamp();
+	while (!data->death && timestamp() - time < time_in_ms)
 		usleep(time_in_ms / 10);
 }
 
@@ -119,4 +119,28 @@ long	actual_time(void)
 	gettimeofday(&current_time, NULL);
 	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	return (time);
+}
+
+int	wait_all(t_data *data)
+{
+	static int	i;
+	
+	i = -1;
+	while (++i < data->philo_nb)
+		if (pthread_join(data->pthreads[i], NULL))
+			return (0);
+	return (1);
+}
+
+void		print_act(t_data *print, int id, char *string)
+{
+	pthread_mutex_lock(&(print->print));
+	if (!(print->death))
+	{
+		printf("%lli ", timestamp() - print->first_time);
+		printf("%i ", id + 1);
+		printf("%s\n", string);
+	}
+	pthread_mutex_unlock(&(print->print));
+	return ;
 }
