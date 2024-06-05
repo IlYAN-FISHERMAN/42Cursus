@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 00:38:32 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/06/03 15:05:12 by fclivaz          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/05 00:55:26 by fclivaz          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,33 @@
 
 typedef struct s_philo
 {
-	long 			t_last_meal;
+	long			t_last_meal;
+	int				id;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-	struct s_data *data;
+	struct s_data	*data;
 }	t_philo;
 
 typedef struct s_data
 {
-	pthread_t		*pthreads;
-	t_philo			*philos;
-	pthread_t		visor;
-	pthread_mutex_t	value;
-	pthread_mutex_t	print;
-	pthread_mutex_t	dead;
 	int				philo_nb;
-	long			t_nb_eat;
+	int				nb;
+	int				i;
+	int				time;
+	bool			death;
+	bool			all_eat;
 	size_t			t_die;
 	size_t			t_eat;
 	size_t			t_sleep;
-	int				nb;
-	int				i;
-	bool			death;
+	long			t_nb_eat;
 	long long		first_time;
-	int				time;
-	bool			all_eat;
+	pthread_mutex_t	value;
+	pthread_mutex_t	print;
+	pthread_mutex_t	dead;
+	pthread_t		visor;
+	t_philo			*philos;
+	pthread_t		*pthreads;
 }	t_data;
 
 // functions

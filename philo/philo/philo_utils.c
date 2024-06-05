@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:08:54 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/06/03 15:00:36 by fclivaz          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/05 00:54:07 by fclivaz          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ long	actual_time(void)
 int	wait_all(t_data *data)
 {
 	static int	i;
-	
+
 	i = -1;
 	while (++i < data->philo_nb)
 		if (pthread_join(data->pthreads[i], NULL))
@@ -132,7 +132,7 @@ int	wait_all(t_data *data)
 	return (1);
 }
 
-void		print_act(t_data *print, int id, char *string)
+void	print_act(t_data *print, int id, char *string)
 {
 	pthread_mutex_lock(&(print->print));
 	if (!(print->death))

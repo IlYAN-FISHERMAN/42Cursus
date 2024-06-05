@@ -6,11 +6,38 @@
 /*   By: fclivaz <fclivaz@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:26:59 by fclivaz           #+#    #+#             */
-/*   Updated: 2024/06/04 13:55:04 by fclivaz          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/05 02:04:59 by fclivaz          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	init_forks(t_data *data)
+{
+	int		i;
+	t_philo	*tmp1;
+	t_philo	*tmp2;
+
+	i = -1;
+	while (++i < data->philo_nb)
+	{
+		tmp1 = &data->philos[i];
+		if (i - 1 >= 0)
+		{
+			tmp2 = &data->philos[i - 1];
+			tmp1->l_fork = &tmp2->fork;
+		}
+		if (i + 1 < data->philo_nb)
+		{
+			tmp2 = &data->philos[i + 1];
+			tmp1->r_fork = &tmp2->fork;
+		}
+	}
+	if (data->philo_nb > 1)
+		data->philos[0].l_fork = &data->philos[data->philo_nb - 1].fork;
+	if (data->philo_nb > 1)
+		data->philos[data->philo_nb - 1].r_fork = &data->philos[0].fork;
+}
 
 void	init_mutexx(t_data *data)
 {
@@ -22,28 +49,11 @@ void	init_mutexx(t_data *data)
 	while (++i < data->philo_nb)
 	{
 		tmp = &data->philos[i];
+		tmp->id = i;
 		pthread_mutex_init(&tmp->fork, NULL);
-		tmp->r_fork = NULL;
-		tmp->l_fork = NULL;
 		tmp->data = data;
 	}
-	i = 0;
-	while (i < data->philo_nb)
-	{
-		if (i + 1 < data->philo_nb)
-		{
-			printf("philo_fork: %p\n", &tmp[i].fork);
-			printf("philo_l_fork: %p\n", tmp[i].l_fork);
-			printf("philo_r_fork: %p\n\n", tmp[i].r_fork);
-		}
-		i++;
-	}
-	// for (int d = 0; d < data->philo_nb; d++)
-	// {
-	// 	printf("philo_fork: %p\n", &tmp[d].fork);
-	// 	printf("philo_l_fork: %p\n", tmp[d].l_fork);
-	// 	printf("philo_r_fork: %p\n\n", tmp[d].r_fork);
-	// }
+	init_forks(data);
 	pthread_mutex_init(&data->value, NULL);
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->dead, NULL);
@@ -59,7 +69,7 @@ int	initialize_philo(t_data *data, char **av)
 	if (av[5])
 		data->t_nb_eat = ft_atoi(av[5]);
 	else
-	 	data->t_nb_eat = -1;
+		data->t_nb_eat = -1;
 	data->pthreads = ft_calloc(data->philo_nb, sizeof(pthread_t));
 	if (!data->pthreads)
 		return (0);
