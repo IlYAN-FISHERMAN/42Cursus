@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fclivaz <fclivaz@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/25 19:26:59 by fclivaz           #+#    #+#             */
-/*   Updated: 2024/06/05 02:04:59 by fclivaz          ###   LAUSANNE.ch       */
+/*   Created: 2024/06/05 14:26:33 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/06/08 02:57:06 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,15 @@ void	init_mutexx(t_data *data)
 		tmp = &data->philos[i];
 		tmp->id = i;
 		pthread_mutex_init(&tmp->fork, NULL);
+		pthread_mutex_init(&tmp->l_meal, NULL);
 		tmp->data = data;
 	}
 	init_forks(data);
 	pthread_mutex_init(&data->value, NULL);
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->dead, NULL);
+	pthread_mutex_init(&data->did_he_eat, NULL);
+	pthread_mutex_init(&data->all_et, NULL);
 }
 
 int	initialize_philo(t_data *data, char **av)
@@ -90,10 +93,13 @@ void	destroy_mutex(t_data *data)
 	{
 		tmp = &data->philos[i];
 		pthread_mutex_destroy(&tmp->fork);
+		pthread_mutex_destroy(&tmp->l_meal);
 	}
 	pthread_mutex_destroy(&data->value);
 	pthread_mutex_destroy(&data->print);
 	pthread_mutex_destroy(&data->dead);
+	pthread_mutex_destroy(&data->did_he_eat);
+	pthread_mutex_destroy(&data->all_et);
 	free(data->philos);
 	free(data->pthreads);
 }
