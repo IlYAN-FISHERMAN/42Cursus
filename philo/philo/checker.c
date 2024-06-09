@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c.c                                        :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:07:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/06/08 20:08:02 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/09 12:29:49 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	death_checker(t_data *data, t_philo *phil)
 			}
 			pthread_mutex_unlock(&(data->value));
 			pthread_mutex_unlock(&data->did_he_eat);
-			ft_usleep(100, data);
+			ft_usleep(4, data);
 		}
 		if (is_dead(data, phil))
 			break ;

@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 20:11:15 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/06/08 20:11:38 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/09 11:41:49 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_nbr_format(char **av)
 		&& printf("philo: Error number of philo. (1 to 200)\n"))
 		return (0);
 	else if ((ft_atoi(av[1]) == 1)
-		&& printf("0 1 died\n"))
+		&& printf("0 1 has taken a fork\n%ld 1 died\n", ft_atoi(av[2])))
 		return (0);
 	if ((ft_atoi(av[2]) < 0 || ft_atoi(av[3]) < 0
 			|| ft_atoi(av[4]) < 0)
