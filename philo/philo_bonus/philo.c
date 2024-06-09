@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:02:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/06/08 20:13:58 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/08 22:23:53 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	hypervisor(t_data *data)
 		data->philos[i].t_last_meal = timestamp();
 		pthread_mutex_unlock(&(data->value));
 	}
-	death_checker(data, data->philos);
+	it_is_death(data, data->philos);
 	wait_all(data);
 	return (1);
 }

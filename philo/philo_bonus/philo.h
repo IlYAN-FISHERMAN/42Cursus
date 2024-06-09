@@ -6,14 +6,14 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 00:38:32 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/06/08 20:17:11 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/06/08 22:24:08 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <pthread.h>
+# include <semaphore.h>
 # include <stdio.h> 
 # include <stdbool.h>
 # include <sys/_pthread/_pthread_mutex_t.h>
@@ -66,7 +66,7 @@ int		hypervisor(t_data *data);
 int		check_eat(t_data *data);
 int		check_death(t_data *data);
 int		is_dead(t_data *data, t_philo *phil);
-void	death_checker(t_data *data, t_philo *phil);
+void	it_is_dead(t_data *data, t_philo *phil);
 int		check_nbr_format(char **av);
 int		check_format(char **av, int ac);
 void	init_forks(t_data *data);
