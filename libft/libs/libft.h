@@ -6,7 +6,7 @@
 /*   By: ilyanar <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:33:48 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/09/24 11:54:52 by ilyanar          ###   LAUSANNE.ch       */
+/*   Updated: 2024/09/24 16:04:43 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <stdarg.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <time.h>
+# include <sys/fcntl.h>
+# include <math.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
@@ -143,5 +147,34 @@ void	*gnl_calloc(size_t count, size_t size);
 void	*gnl_memcpy(void *dst, const void *src, size_t n);
 
 size_t	gnl_strlen(const char *s);
+int		correct_gnl_nl(char *gnl);
+float	max(float a, float b);
+float	min(float a, float b);
+int		only_digit(char *str);
+int		only_float(char *str);
+int		only_digit_xyz(char *split);
+int		only_float_xyz(char *split);
+
+int		rt_generator(char *height, char *width, bool bonus);
+
+int		gener_sp(int fd);
+int		gener_cy(int fd);
+int		gener_pl(int fd);
+int		gener_obj(int fd);
+int		gener_int(int min, int max);
+int		gener_amb(int fd);
+int		gener_lig(int fd, bool	bonus);
+int		gener_win(char *height, char *width, int fd);
+int		gener_cam(int fd);
+
+int		ran_int(int min, int max, int fd);
+int		ran_float(int min, int max, int fd);
+
+int		put_xyz_int(int fd, int min, int max);
+int		put_xyz_float(int fd, int min, int max);
+
+int		exit_generator(int fd, const char *name);
+int		ft_strlen_tab(char **str);
+float	ft_atof(char *str);
 
 #endif

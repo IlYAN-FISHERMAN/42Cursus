@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2024/09/24 14:41:22 by ilyanar          ###   LAUSANNE.ch        #
+#    Updated: 2024/09/24 16:04:53 by ilyanar          ###   LAUSANNE.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ FT_IS = src/ft_is/
 GNL = src/gnl/
 PRINTF = src/printf/
 LST = src/lst/
+MATH = src/math/
+RT_GEN = src/rt_generator/
 
 CFILES = $(FILES:%=%.c)
 
@@ -35,7 +37,15 @@ ALLCFILES = $(ALLFILES:%=%.c)
 
 ALLOFILES = $(ALLFILES:%=%.o)
 
-FILES = $(STR_U)ft_strlen \
+FILES = $(MATH)min \
+		$(MATH)max
+
+FILES += $(RT_GEN)rt_generate_nbr \
+		 $(RT_GEN)rt_generate_scene \
+		 $(RT_GEN)rt_generator \
+		 $(RT_GEN)rt_generator_obj
+
+FILES += $(STR_U)ft_strlen \
 	$(STR_U)ft_strlcpy \
 	$(STR_U)ft_strlcat \
 	$(STR_U)ft_strchr \
@@ -49,6 +59,11 @@ FILES = $(STR_U)ft_strlen \
 	$(STR_U)ft_count_char \
 	$(STR_U)ft_strcmp \
 	$(STR_U)ft_striteri \
+	$(STR_U)ft_onlystr_digit \
+	$(STR_U)ft_onlystr_float \
+	$(STR_U)ft_onlystr_digit_xyz \
+	$(STR_U)ft_onlystr_float_xyz \
+	$(STR_U)ft_strlen_tab \
 	$(STR_U)ft_free_tab
 
 FILES += $(STR_A)ft_bzero \
@@ -70,6 +85,7 @@ FILES += $(MEMO)ft_memcpy \
 
 FILES += $(CONV)ft_putnbr_fd \
 	$(CONV)ft_atoi \
+	$(CONV)ft_atof \
 	$(CONV)ft_itoa \
 	$(CONV)ft_putnbr_base \
 	$(CONV)ft_atoi_base
@@ -83,7 +99,8 @@ FILES += $(FT_IS)ft_isalpha \
 	$(FT_IS)ft_tolower
 
 FILES += $(GNL)get_next_line \
-	$(GNL)get_next_line_utils
+	$(GNL)get_next_line_utils \
+	$(GNL)correct_gnl_nl
 
 FILES += $(PRINTF)ft_printf \
 	$(PRINTF)ft_printf_utils
