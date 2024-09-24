@@ -67,7 +67,7 @@ Les contributions sont les bienvenues ! Pour contribuer :
 
 ## Auteurs
 
-- **Nom de l'auteur** - [Votre profil GitHub](https://github.com/votre_profil)
+- **IlYAN-FISHERMAN** - [https://github.com/IlYAN-FISHERMAN/42Cursus]
 
 ## License
 
