@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 17:33:18 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/03/21 17:00:36 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/09/20 14:19:57 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT)
 	{
 		dst = data->addr + (y * data->line_length + x \
-			*(data->byte_per_pixel / 8));
+			*(data->byte_per_pixel >> 3));
 		*(unsigned int *)dst = color;
 	}
 }

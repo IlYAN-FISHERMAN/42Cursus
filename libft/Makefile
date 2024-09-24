@@ -6,7 +6,7 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 17:53:51 by ilyanar           #+#    #+#              #
-#    Updated: 2024/05/12 22:34:58 by ilyanar          ###   ########.fr        #
+#    Updated: 2024/09/24 14:41:22 by ilyanar          ###   LAUSANNE.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,14 @@ RM = rm -rf
 
 NAME = libft.a
 
+STR_U = src/str/utils/
+STR_A = src/str/allocation/
+MEMO = src/memory/
+CONV = src/convert/
+FT_IS = src/ft_is/
+GNL = src/gnl/
+PRINTF = src/printf/
+LST = src/lst/
 
 CFILES = $(FILES:%=%.c)
 
@@ -27,66 +35,68 @@ ALLCFILES = $(ALLFILES:%=%.c)
 
 ALLOFILES = $(ALLFILES:%=%.o)
 
-ALLFILES = $(FILES) $(BONUSFILES)
+FILES = $(STR_U)ft_strlen \
+	$(STR_U)ft_strlcpy \
+	$(STR_U)ft_strlcat \
+	$(STR_U)ft_strchr \
+	$(STR_U)ft_strrchr \
+	$(STR_U)ft_strncmp \
+	$(STR_U)ft_strnstr \
+	$(STR_U)ft_putchar_fd \
+	$(STR_U)ft_putstr_fd \
+	$(STR_U)ft_putendl_fd \
+	$(STR_U)ft_rev_tab \
+	$(STR_U)ft_count_char \
+	$(STR_U)ft_strcmp \
+	$(STR_U)ft_striteri \
+	$(STR_U)ft_free_tab
 
+FILES += $(STR_A)ft_bzero \
+	$(STR_A)ft_calloc \
+	$(STR_A)ft_joint_all \
+	$(STR_A)ft_strr_realloc \
+	$(STR_A)ft_split \
+	$(STR_A)ft_strdup \
+	$(STR_A)ft_strjoin \
+	$(STR_A)ft_strtrim \
+	$(STR_A)ft_strmapi \
+	$(STR_A)ft_substr
 
+FILES += $(MEMO)ft_memcpy \
+	$(MEMO)ft_memmove \
+	$(MEMO)ft_memset \
+	$(MEMO)ft_memchr \
+	$(MEMO)ft_memcmp
 
-FILES = ft_strlen \
-	ft_memmove \
-	ft_memcpy \
-	ft_strlcpy \
-	ft_strlcat \
-	ft_isalpha \
-	ft_isdigit \
-	ft_isalnum \
-	ft_isascii \
-	ft_isprint \
-	ft_memset \
-	ft_bzero \
-	ft_toupper \
-	ft_tolower \
-	ft_strchr \
-	ft_strrchr \
-	ft_strncmp \
-	ft_memchr \
-	ft_memcmp \
-	ft_strnstr \
-	ft_atoi \
-	ft_calloc \
-	ft_strdup \
-	ft_substr \
-	ft_strjoin \
-	ft_strtrim \
-	ft_split \
-	ft_itoa \
-	ft_strmapi \
-	ft_striteri \
-	ft_putchar_fd \
-	ft_putstr_fd \
-	ft_putendl_fd \
-	ft_putnbr_fd \
-	ft_putnbr_base \
-	ft_printf \
-	ft_printf_utils \
-	ft_rev_tab \
-	get_next_line \
-	get_next_line_utils \
-	ft_printf \
-	ft_printf_utils \
-	ft_lstnew \
-    ft_lstadd_front \
-	ft_lstsize \
-	ft_lstlast \
-	ft_lstadd_back \
-	ft_lstdelone \
-	ft_lstclear \
-	ft_lstiter \
-	ft_lstmap \
-	ft_free_tab \
-	ft_joint_all \
-	ft_strr_realloc \
-	ft_atoi_base \
-	ft_count_char
+FILES += $(CONV)ft_putnbr_fd \
+	$(CONV)ft_atoi \
+	$(CONV)ft_itoa \
+	$(CONV)ft_putnbr_base \
+	$(CONV)ft_atoi_base
+
+FILES += $(FT_IS)ft_isalpha \
+	$(FT_IS)ft_isdigit \
+	$(FT_IS)ft_isalnum \
+	$(FT_IS)ft_isascii \
+	$(FT_IS)ft_isprint \
+	$(FT_IS)ft_toupper \
+	$(FT_IS)ft_tolower
+
+FILES += $(GNL)get_next_line \
+	$(GNL)get_next_line_utils
+
+FILES += $(PRINTF)ft_printf \
+	$(PRINTF)ft_printf_utils
+
+FILES += $(LST)ft_lstnew \
+    $(LST)ft_lstadd_front \
+	$(LST)ft_lstsize \
+	$(LST)ft_lstlast \
+	$(LST)ft_lstadd_back \
+	$(LST)ft_lstdelone \
+	$(LST)ft_lstclear \
+	$(LST)ft_lstiter \
+	$(LST)ft_lstmap
 
 all : $(NAME)
 
