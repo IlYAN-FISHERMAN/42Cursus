@@ -5,91 +5,62 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 23:44:12 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/10/28 23:44:13 by ilyanar          ###   LAUSANNE.ch       */
+/*   Created: 2024/07/22 15:10:49 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/09/24 15:56:37 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_print.h"
-#include "rt_generate.h"
+#include "../../libs/libft.h"
 
 int	gener_sp(int fd)
 {
 	ft_putstr_fd("sp    ", fd);
-	if (!put_xyz_double(fd, -10, 10))
+	if (!put_xyz_float(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(1, 10, fd))
+	if (!ran_float(0, 20, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!put_xyz_int(fd, 0, 255))
+	if (!put_xyz_int(fd, 0, 256))
 		return (0);
+	ft_putstr_fd("\n", fd);
 	return (1);
 }
 
 int	gener_cy(int fd)
 {
 	ft_putstr_fd("cy    ", fd);
-	if (!put_xyz_double(fd, -10, 10))
+	if (!put_xyz_float(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!put_xyz_double(fd, -1, 1))
+	if (!put_xyz_float(fd, -1, 1))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(1, 20, fd))
+	if (!ran_float(0, 30, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(1, 20, fd))
+	if (!ran_float(0, 30, fd))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!put_xyz_int(fd, 0, 255))
+	if (!put_xyz_int(fd, 0, 256))
 		return (0);
+	ft_putstr_fd("\n", fd);
 	return (1);
 }
 
-int	gener_co(int fd)
+int	gener_pl(int fd)
 {
-	ft_putstr_fd("co    ", fd);
-	if (!put_xyz_double(fd, -10, 10))
+	ft_putstr_fd("pl    ", fd);
+	if (!put_xyz_float(fd, -10, 10))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!put_xyz_double(fd, -1, 1))
+	if (!put_xyz_float(fd, -1, 1))
 		return (0);
 	ft_putstr_fd("     ", fd);
-	if (!ran_double(1, 20, fd))
+	if (!put_xyz_int(fd, 0, 256))
 		return (0);
-	ft_putstr_fd("     ", fd);
-	if (!ran_double(1, 20, fd))
-		return (0);
-	ft_putstr_fd("     ", fd);
-	if (!put_xyz_int(fd, 0, 255))
-		return (0);
+	ft_putstr_fd("\n", fd);
 	return (1);
-}
-
-static void	gener_mat(int fd)
-{
-	int	gen;
-
-	gen = gener_int(0, 9);
-	if (gen == 0 || gen == 9)
-		ft_putstr_fd("\n", fd);
-	if (gen == 1)
-		ft_putstr_fd(" metal\n", fd);
-	if (gen == 2)
-		ft_putstr_fd(" plastic\n", fd);
-	if (gen == 3)
-		ft_putstr_fd(" mirror\n", fd);
-	if (gen == 4)
-		ft_putstr_fd(" glass\n", fd);
-	if (gen == 5)
-		ft_putstr_fd(" wood\n", fd);
-	if (gen == 6)
-		ft_putstr_fd(" mat\n", fd);
-	if (gen == 7)
-		ft_putstr_fd(" bricks\n", fd);
-	if (gen == 8)
-		ft_putstr_fd(" checkerboard\n", fd);
 }
 
 int	gener_obj(int fd)
@@ -98,22 +69,20 @@ int	gener_obj(int fd)
 	int	enu;
 
 	enu = 0;
-	obj_nb = gener_int(3, 10);
+	obj_nb = gener_int(1, 10);
 	ft_putstr_fd("\n", fd);
-	ft_putstr_fd("pl 0,-15,0 0,1,0 255,255,255\n", fd);
 	while (obj_nb > 0)
 	{
 		enu = gener_int(1, 3);
 		if (enu == 1)
-			if (!gener_sp(fd))
+			if (!gener_pl(fd))
 				return (0);
 		if (enu == 2)
-			if (!gener_cy(fd))
+			if (!gener_sp(fd))
 				return (0);
 		if (enu == 3)
-			if (!gener_co(fd))
+			if (!gener_cy(fd))
 				return (0);
-		gener_mat(fd);
 		obj_nb--;
 	}
 	return (1);

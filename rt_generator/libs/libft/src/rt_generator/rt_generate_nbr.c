@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 23:44:05 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/10/28 23:44:06 by ilyanar          ###   LAUSANNE.ch       */
+/*   Created: 2024/07/22 15:17:27 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/09/24 15:56:19 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt_generate.h"
+#include "../../libs/libft.h"
 
 int	ran_int(int min, int max, int fd)
 {
@@ -29,7 +29,7 @@ int	gener_int(int min, int max)
 	return (min + rand() % (max - min + 1));
 }
 
-int	ran_double(int min, int max, int fd)
+int	ran_float(int min, int max, int fd)
 {
 	char	*str;
 	int		nb;

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   rt_generate.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/18 14:52:13 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/09/24 15:39:43 by ilyanar          ###   LAUSANNE.ch       */
+/*   Created: 2024/10/28 23:43:59 by ilyanar           #+#    #+#             */
+/*   Updated: 2024/10/29 20:36:31 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_GENERATE_H
 # define RT_GENERATE_H
 
-# include "../libs/libft/betterft.h"
+# include "libft/libs/libft.h"
 # include <time.h>
 # include <sys/fcntl.h>
 # include <math.h>
@@ -34,10 +34,10 @@ int	gener_win(char *height, char *width, int fd);
 int	gener_cam(int fd);
 
 int	ran_int(int min, int max, int fd);
-int	ran_float(int min, int max, int fd);
+int	ran_double(int min, int max, int fd);
 
 int	put_xyz_int(int fd, int min, int max);
-int	put_xyz_float(int fd, int min, int max);
+int	put_xyz_double(int fd, int min, int max);
 
 int	exit_generator(int fd, const char *name);
 
