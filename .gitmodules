@@ -7,3 +7,6 @@
 [submodule "miniRT-42"]
 	path = miniRT-42
 	url = git@github.com:IlYAN-FISHERMAN/miniRT-42.git
+[submodule "rt_generator"]
+	path = rt_generator
+	url = git@github.com:IlYAN-FISHERMAN/rt_generator.git
