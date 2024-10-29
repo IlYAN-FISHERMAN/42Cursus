@@ -10,3 +10,6 @@
 [submodule "rt_generator"]
 	path = rt_generator
 	url = git@github.com:IlYAN-FISHERMAN/rt_generator.git
+[submodule "cpp-modules"]
+	path = cpp-modules
+	url = git@github.com:IlYAN-FISHERMAN/cpp-modules.git
