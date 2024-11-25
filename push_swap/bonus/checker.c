@@ -6,7 +6,7 @@
 /*   By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 13:01:39 by ilyanar           #+#    #+#             */
-/*   Updated: 2024/01/07 00:09:34 by ilyanar          ###   ########.fr       */
+/*   Updated: 2024/11/25 16:38:19 by ilyanar          ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int	main(int ac, char **av)
 	}
 	if (tab)
 		free(tab);
-	ft_ok_ko(&a, &b);
+	print_test(&a, &b, 1);
 	return (ft_clear(&a, &b) + 1);
 }
-/*
+
 void	print_test(t_listp **a_stack, t_listp **b_stack, int check)
 {
 	t_listp	*tmp;
@@ -116,4 +116,3 @@ void	print_test(t_listp **a_stack, t_listp **b_stack, int check)
 		}
 	}
 }
-*/
