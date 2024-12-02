@@ -5,3 +5,9 @@
 [submodule "miniRT-42"]
 	path = miniRT-42
 	url = git@github.com:IlYAN-FISHERMAN/miniRT-42.git
+[submodule "42-minishell"]
+	path = 42-minishell
+	url = git@github.com:RPDJF/42-minishell
+[submodule "cpp-modules"]
+	path = cpp-modules
+	url = git@github.com:IlYAN-FISHERMAN/cpp-modules
