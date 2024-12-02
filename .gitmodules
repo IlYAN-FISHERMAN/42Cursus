@@ -12,7 +12,3 @@
 	branch = main
 [submodule "main"]
 	branch = origin
-[submodule "miniRT-42"]
-	path = miniRT-42
-	url = git@github.com:IlYAN-FISHERMAN/miniRT-42.git
-	branch = main
