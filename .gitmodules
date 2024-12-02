@@ -1,14 +1,4 @@
-[submodule "42-minishell"]
-	path = 42-minishell
-	url = git@github.com:RPDJF/42-minishell.git
-	branch = main
 [submodule "rt_generator"]
 	path = rt_generator
 	url = git@github.com:IlYAN-FISHERMAN/rt_generator.git
 	branch = main
-[submodule "cpp-modules"]
-	path = cpp-modules
-	url = git@github.com:IlYAN-FISHERMAN/cpp-modules.git
-	branch = main
-[submodule "main"]
-	branch = origin
