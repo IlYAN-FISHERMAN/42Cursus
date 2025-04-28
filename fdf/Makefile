@@ -6,13 +6,13 @@
 #    By: ilyanar <ilyanar@student.42lausanne.ch>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/21 15:41:52 by ilyanar           #+#    #+#              #
-#    Updated: 2024/03/21 23:48:05 by ilyanar          ###   ########.fr        #
+#    Updated: 2025/04/10 17:01:57 by ilyanar          ###   LAUSANNE.ch        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -Ofast
+CFLAGS = -Wall -Werror -Wextra
 
 MLXFLAGS = -framework OpenGL -framework AppKit
 
