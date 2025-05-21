@@ -9,7 +9,7 @@ services:
         - ./requirements/mariadb/conf/mariadb.conf:/etc/my.cnf.d/mariadb-server.cnf
       networks:
         - inception-network
-      restart: on-failure
+      restart: no
     nginx:
       container_name: nginx
       build: ./requirements/nginx
@@ -20,7 +20,7 @@ services:
         - ./requirements/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
       networks:
         - inception-network
-      restart: on-failure
+      restart: no
     wordpress:
       container_name: wordpress
       build: ./requirements/wordpress
@@ -32,7 +32,7 @@ services:
         - ./requirements/wordpress/conf/wp-config.php:/var/www/wordpress/wp-config.php
       networks:
         - inception-network
-      restart: on-failure
+      restart: no
 
 networks:
   inception-network:
