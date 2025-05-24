@@ -85,6 +85,7 @@ int main() {
 	std::string test;
 
 	signal(SIGINT, handleSigint);
+	signal(SIGPIPE, SIG_IGN);
 	_inputFile.open("data.txt");
 	if (_inputFile.is_open())
 		getData(database, _inputFile);
@@ -100,15 +101,8 @@ int main() {
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(PORT);
 
-    if (bind(server_fd, (struct sockaddr*)&address, sizeof(address)) < 0) {
-        perror("bind");
+    if (bind(server_fd, (struct sockaddr*)&address, sizeof(address)) < 0 || listen(server_fd, 5) < 0)
         return 1;
-    }
-
-    if (listen(server_fd, 5) < 0) {
-        perror("listen");
-        return 1;
-    }
 
 	std::vector<pollfd> fds;
     fds.push_back(pollfd{server_fd, POLLIN, 0});  // On surveille le serveur pour les nouvelles connexions
@@ -124,25 +118,24 @@ int main() {
 			if (fds[i].revents & POLLIN)
 			{
 				if (fds[i].fd == server_fd){
-					std::cout << "newclient\n";
 					sockaddr_in newClient{};
                     socklen_t clientLent = sizeof(newClient);
 					int client_fd = accept(server_fd, (sockaddr*)&newClient, &clientLent);
                     if (client_fd >= 0)
-						fds.push_back({server_fd, POLLIN, 0});
+						fds.push_back({client_fd, POLLIN, 0});
                 }
 				else {
-					std::cout << "read\n";
                     char buffer[BUFFER_SIZE];
 					ssize_t n = read(fds[i].fd, buffer, sizeof(buffer));
 					if (n <= 0){
 						close(fds[i].fd);
 						fds.erase(fds.begin() + i);
-						// i--;
+						if (i > 0)
+							i--;
                     }else {
-						std::cout << "parse\n";
+						buffer[n] = '\0';
                         std::string reply = parsBody(buffer, database) + "\n";
-                        send(fds[i].fd, reply.c_str(), reply.size(), 0);
+						send(fds[i].fd, reply.c_str(), reply.size(), 0);
                     }
                 }
             }
