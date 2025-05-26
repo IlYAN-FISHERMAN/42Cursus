@@ -21,7 +21,6 @@ void getData(std::map<std::string, std::string> &database, std::ifstream &_input
 	std::string key;
 	std::string value;
 
-	std::cout << "Get data\n";
 	while (_inputFile >> key >> value)
 		database.insert(std::make_pair(key, value));
 	_inputFile.close();
@@ -29,12 +28,11 @@ void getData(std::map<std::string, std::string> &database, std::ifstream &_input
 
 void handleSigint(int sig){
 	std::cout << "SIGINT\n";
-	sigHandler = true;
 	(void)sig;
+	sigHandler = true;
 }
 
 void copyData(std::map<std::string, std::string> &database){
-	std::cout << "Copy data\n";
 	if (!database.empty()){
 		std::ofstream outfile("data.txt");
 		for (std::map<std::string, std::string>::iterator i = database.begin(); i != database.end(); i++)
@@ -44,8 +42,19 @@ void copyData(std::map<std::string, std::string> &database){
 	std::exit(2);
 }
 
-std::string parsBody(const char *buffer, std::map<std::string, std::string> &data){
-	std::stringstream ss(buffer);
+void parsBody(std::string &msg, std::map<std::string, std::string> &data, int fd){
+	
+	size_t find = 0;
+
+	while (find != std::string::npos){
+		find = msg.find(0, msg.size(), '\n');
+		std::cout << "find at: " << find << std::endl;
+		if (find == std::string::npos)
+			break ;
+		msg.at(find) = ' ';
+	}
+
+	std::stringstream ss(msg);
 	std::vector<std::string> body;
 	std::string tmp;
 	while (ss >> tmp)
@@ -54,36 +63,49 @@ std::string parsBody(const char *buffer, std::map<std::string, std::string> &dat
 		if (*it == "POST"){
 			it++;
 			data.insert(std::make_pair(*it, *(++it)));
-			return ("0");
+			send(fd, "0\n", 2, 0);
+			it++;
 		}
 		else if (*it == "GET"){
 			it++;
 			std::string lol = data[*it];
 			if (lol.empty())
-				return "1";
-			else
-				return ("0 " + lol);
+				send(fd, "1\n", 2, 0);
+			else{
+				lol = "0" + lol + "\n";
+				send(fd, lol.c_str(), lol.size(), 0);
+			}
+			it++;
 		}
 		else if (*it == "DELETE"){
 			it++;
 			if (data[*it].empty())
-				return ("1");
+				send(fd, "1\n", 2, 0);
 			else{
 				data.erase(*it);
-				return ("0");
+				send(fd, "0\n", 2, 0);
 			}
+			it++;
 		}
-		else
-			return "2";
+		else{
+			std::cout << *it << std::endl;
+			send(fd, "2\n", 2, 0);
+			while (*it != "GET" && *it != "POST" && *it != "DELETE" && it != body.end())
+				it++;
+		}
 	}
-	return ("3");
+	std::cout << "test2\n";
 }
 
-int main() {
+int main(int ac, char **av) {
 	std::ifstream _inputFile;
 	std::map<std::string, std::string> database;
 	std::string test;
 
+	if (ac != 2){
+		std::cerr << "Error: no port specified" << std::endl;
+		return (1);
+	}
 	signal(SIGINT, handleSigint);
 	signal(SIGPIPE, SIG_IGN);
 	_inputFile.open("data.txt");
@@ -99,7 +121,7 @@ int main() {
     sockaddr_in address;
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(PORT);
+    address.sin_port = htons(atoi(av[1]));
 
     if (bind(server_fd, (struct sockaddr*)&address, sizeof(address)) < 0 || listen(server_fd, 5) < 0)
         return 1;
@@ -108,6 +130,7 @@ int main() {
     fds.push_back(pollfd{server_fd, POLLIN, 0});  // On surveille le serveur pour les nouvelles connexions
 
     std::cout << "ready" << std::endl;
+	std::string msg;
     while (!sigHandler)
 	{
 		int rtn = poll(fds.data(), fds.size(), -1);
@@ -125,18 +148,19 @@ int main() {
 						fds.push_back({client_fd, POLLIN, 0});
                 }
 				else {
-                    char buffer[BUFFER_SIZE];
+					char buffer[BUFFER_SIZE];
 					ssize_t n = read(fds[i].fd, buffer, sizeof(buffer));
 					if (n <= 0){
 						close(fds[i].fd);
 						fds.erase(fds.begin() + i);
 						if (i > 0)
 							i--;
-                    }else {
+						msg.clear();
+					}else {
 						buffer[n] = '\0';
-                        std::string reply = parsBody(buffer, database) + "\n";
-						send(fds[i].fd, reply.c_str(), reply.size(), 0);
-                    }
+						msg += buffer;
+						parsBody(msg, database, fds[i].fd);
+					}
                 }
             }
         }
