@@ -36,7 +36,8 @@ void copyData(std::map<std::string, std::string> &database){
 	if (!database.empty()){
 		std::ofstream outfile("data.txt");
 		for (std::map<std::string, std::string>::iterator i = database.begin(); i != database.end(); i++)
-			outfile << i->first << " " << i->second << " ";
+			if (!i->second.empty())
+				outfile << i->first << " " << i->second << " ";
 		outfile.close();
 	}
 	std::exit(2);
@@ -44,22 +45,14 @@ void copyData(std::map<std::string, std::string> &database){
 
 void parsBody(std::string &msg, std::map<std::string, std::string> &data, int fd){
 	
-	size_t find = 0;
-
-	while (find != std::string::npos){
-		find = msg.find(0, msg.size(), '\n');
-		std::cout << "find at: " << find << std::endl;
-		if (find == std::string::npos)
-			break ;
-		msg.at(find) = ' ';
-	}
-
-	std::stringstream ss(msg);
 	std::vector<std::string> body;
 	std::string tmp;
+	for (size_t ite = msg.find("\\n"); ite < msg.size(); ite = msg.find("\\n"))
+		msg.at(ite) = ' ';
+	std::stringstream ss(msg);
 	while (ss >> tmp)
 		body.push_back(tmp);
-	for (std::vector<std::string>::iterator it = body.begin(); it != body.end();){
+	for (std::vector<std::string>::iterator it = body.begin(); it != body.end() && it < body.end() && it >= body.begin();){
 		if (*it == "POST"){
 			it++;
 			data.insert(std::make_pair(*it, *(++it)));
@@ -72,7 +65,7 @@ void parsBody(std::string &msg, std::map<std::string, std::string> &data, int fd
 			if (lol.empty())
 				send(fd, "1\n", 2, 0);
 			else{
-				lol = "0" + lol + "\n";
+				lol = "0 " + lol + "\n";
 				send(fd, lol.c_str(), lol.size(), 0);
 			}
 			it++;
@@ -88,13 +81,12 @@ void parsBody(std::string &msg, std::map<std::string, std::string> &data, int fd
 			it++;
 		}
 		else{
-			std::cout << *it << std::endl;
 			send(fd, "2\n", 2, 0);
-			while (*it != "GET" && *it != "POST" && *it != "DELETE" && it != body.end())
+			std::cout << *it << std::endl;
+			while (*it != "GET" && *it != "POST" && *it != "DELETE" && it < body.end())
 				it++;
 		}
 	}
-	std::cout << "test2\n";
 }
 
 int main(int ac, char **av) {
@@ -148,8 +140,8 @@ int main(int ac, char **av) {
 						fds.push_back({client_fd, POLLIN, 0});
                 }
 				else {
-					char buffer[BUFFER_SIZE];
-					ssize_t n = read(fds[i].fd, buffer, sizeof(buffer));
+					char buffer[BUFFER_SIZE]{};
+					ssize_t n = read(fds[i].fd, buffer, sizeof(buffer)-1);
 					if (n <= 0){
 						close(fds[i].fd);
 						fds.erase(fds.begin() + i);
@@ -157,9 +149,9 @@ int main(int ac, char **av) {
 							i--;
 						msg.clear();
 					}else {
-						buffer[n] = '\0';
 						msg += buffer;
-						parsBody(msg, database, fds[i].fd);
+						if (n < BUFFER_SIZE - 1)
+							parsBody(msg, database, fds[i].fd);
 					}
                 }
             }
