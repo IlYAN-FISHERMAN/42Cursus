@@ -82,9 +82,7 @@ void parsBody(std::string &msg, std::map<std::string, std::string> &data, int fd
 		}
 		else{
 			send(fd, "2\n", 2, 0);
-			std::cout << *it << std::endl;
-			while (*it != "GET" && *it != "POST" && *it != "DELETE" && it < body.end())
-				it++;
+			it++;
 		}
 	}
 }
@@ -119,7 +117,7 @@ int main(int ac, char **av) {
         return 1;
 
 	std::vector<pollfd> fds;
-    fds.push_back(pollfd{server_fd, POLLIN, 0});  // On surveille le serveur pour les nouvelles connexions
+    fds.push_back(pollfd{server_fd, POLLIN | POLLOUT, 0});  // On surveille le serveur pour les nouvelles connexions
 
     std::cout << "ready" << std::endl;
 	std::string msg;
@@ -137,7 +135,7 @@ int main(int ac, char **av) {
                     socklen_t clientLent = sizeof(newClient);
 					int client_fd = accept(server_fd, (sockaddr*)&newClient, &clientLent);
                     if (client_fd >= 0)
-						fds.push_back({client_fd, POLLIN, 0});
+						fds.push_back({client_fd, POLLIN | POLLOUT, 0});
                 }
 				else {
 					char buffer[BUFFER_SIZE]{};
@@ -150,11 +148,13 @@ int main(int ac, char **av) {
 						msg.clear();
 					}else {
 						msg += buffer;
-						if (n < BUFFER_SIZE - 1)
-							parsBody(msg, database, fds[i].fd);
 					}
                 }
             }
+			else if (fds[i].revents & POLLOUT){
+				parsBody(msg, database, fds[i].fd);
+				msg.clear();
+			}
         }
     }
 	if (sigHandler == true)
