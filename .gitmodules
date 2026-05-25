@@ -23,3 +23,6 @@
 [submodule "ft_transcendance"]
 	path = ft_transcendance
 	url = git@github.com:ilyan-fisherman/ft_transcendance.git
+[submodule "hello_worlds"]
+	path = hello_worlds
+	url = git@github.com:IlYAN-FISHERMAN/hello_worlds.git
