@@ -11,3 +11,6 @@
 [submodule "cpp-modules"]
 	path = cpp-modules
 	url = git@github.com:IlYAN-FISHERMAN/cpp-modules
+[submodule "libftpp"]
+	path = libftpp
+	url = git@github.com:ilyan-fisherman/libftpp.git
