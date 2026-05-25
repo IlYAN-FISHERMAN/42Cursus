@@ -1,6 +1,6 @@
 [submodule "rt_generator"]
 	path = rt_generator
-	url = git@github.com:IlYAN-FISHERMAN/rt_generator.git
+	url = git@github.com:ilyan-fisherman/rt_generator.git
 	branch = main
 [submodule "miniRT-42"]
 	path = miniRT-42
@@ -10,7 +10,16 @@
 	url = git@github.com:RPDJF/42-minishell
 [submodule "cpp-modules"]
 	path = cpp-modules
-	url = git@github.com:IlYAN-FISHERMAN/cpp-modules
+	url = git@github.com:ilyan-fisherman/cpp-modules.git
 [submodule "libftpp"]
 	path = libftpp
 	url = git@github.com:ilyan-fisherman/libftpp.git
+[submodule "minirt-42"]
+	path = minirt-42
+	url = git@github.com:ilyan-fisherman/minirt-42.git
+[submodule "woody_woodpacker"]
+	path = woody_woodpacker
+	url = git@github.com:ilyan-fisherman/woody_woodpacker.git
+[submodule "ft_transcendance"]
+	path = ft_transcendance
+	url = git@github.com:ilyan-fisherman/ft_transcendance.git
